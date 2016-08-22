@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RVWeekView.h"
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet RVWeekView *weekView;
 
 @end
 

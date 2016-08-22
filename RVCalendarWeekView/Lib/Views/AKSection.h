@@ -11,6 +11,6 @@
 @interface AKSection : NSObject
 
 @property (nonatomic, assign) int sectionId;
-@property (nonatomic, strong) NSMutableArray<AKEvent *> *eventsArr;
+@property (nonatomic, strong) NSMutableArray<AKEvent *> *events;
 @property (nonatomic, strong) NSString *title;
 @end

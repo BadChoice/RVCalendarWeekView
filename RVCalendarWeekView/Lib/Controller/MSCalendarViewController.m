@@ -109,21 +109,15 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
     
     NSDate *dt = [NSDate date];
     AKEvent * event1 = [AKEvent new];
-    [event1 setRemoteID:@(0)];
     [event1 setStart:dt];
     [event1 setTitle:@"Help me"];
     [event1 setLocation:@"Great example"];
-    [event1 setTimeToBeDecided:@(2)];
-    [event1 setDateToBeDecided:@(3)];
-    
+   
     
     AKEvent * event2 = [AKEvent new];
-    [event2 setRemoteID:@(0)];
     [event2 setStart:[dt addMinutes:10]];
     [event2 setTitle:@"Help me"];
     [event2 setLocation:@"Great example"];
-    [event2 setTimeToBeDecided:@(2)];
-    [event2 setDateToBeDecided:@(3)];
     
     NSMutableArray<AKEvent *> *events1 = [[NSMutableArray alloc] init];
     [events1 addObject:event1];
@@ -131,7 +125,7 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
     
     AKSection *section = [AKSection new];
     [section setTitle:@"Court 1"];
-    [section setEventsArr:events1];
+    [section setEvents:events1];
     self.sectionsArr = [[NSMutableArray alloc]init];
     [self.sectionsArr addObject:section];
 }
@@ -163,13 +157,13 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return [self.sectionsArr count];
+    return self.sectionsArr.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     AKSection *sect = [self.sectionsArr objectAtIndex:section];
-    return [sect.eventsArr count];
+    return sect.events.count;
 
 }
 
@@ -178,7 +172,7 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
     MSEventCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
     
     AKSection *sect = [self.sectionsArr objectAtIndex:indexPath.section];
-    AKEvent *ev = [sect.eventsArr objectAtIndex:indexPath.row];
+    AKEvent *ev = [sect.events objectAtIndex:indexPath.row];
     cell.akEvent = ev;
 
     return cell;
@@ -208,25 +202,24 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
 }
 
 #pragma mark - MSCollectionViewCalendarLayout
-
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section
 {
     AKSection *sect = [self.sectionsArr objectAtIndex:section];
-    AKEvent *ev = [sect.eventsArr firstObject];
+    AKEvent *ev     = [sect.events firstObject];
     return ev.day;
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AKSection *sect = [self.sectionsArr objectAtIndex:indexPath.section];
-    AKEvent *ev = [sect.eventsArr objectAtIndex:indexPath.row];
+    AKEvent *ev     = [sect.events objectAtIndex:indexPath.row];
     return ev.start;
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AKSection *sect = [self.sectionsArr objectAtIndex:indexPath.section];
-    AKEvent *ev = [sect.eventsArr objectAtIndex:indexPath.row];
+    AKEvent *ev     = [sect.events objectAtIndex:indexPath.row];
     return [ev.start dateByAddingTimeInterval:(60 * 60 * 3)];
     return nil;
 
@@ -234,7 +227,7 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
 
 - (NSDate *)currentTimeComponentsForCollectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout
 {
-    return [NSDate date];
+    return NSDate.date;
 }
 
 @end
