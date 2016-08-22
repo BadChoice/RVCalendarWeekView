@@ -1,7 +1,7 @@
 # RVCalendarWeekView
 Simple but powerful Calendar Week View for iOS 
 
-Following the work from (MSCollectionView) [https://github.com/erichoracek/MSCollectionViewCalendarLayout]
+Following the work from [MSCollectionView](https://github.com/erichoracek/MSCollectionViewCalendarLayout)
 I created this library simplifing its usage
 
 you can now use storyboard to create a simple UIView extending the RVCalendarView and then just do this:

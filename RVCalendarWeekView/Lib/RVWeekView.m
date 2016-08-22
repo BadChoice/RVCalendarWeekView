@@ -10,6 +10,7 @@
 
 #import "NSDate+Easy.h"
 #import "RVCollection.h"
+#import "NSString+EasyDate.h"
 
 // Collection View Reusable Views
 #import "MSGridline.h"
@@ -73,14 +74,12 @@
     [self.weekFlowLayout registerClass:MSGridline.class forDecorationViewOfKind:MSCollectionElementKindHorizontalGridline];
     [self.weekFlowLayout registerClass:MSTimeRowHeaderBackground.class forDecorationViewOfKind:MSCollectionElementKindTimeRowHeaderBackground];
     [self.weekFlowLayout registerClass:MSDayColumnHeaderBackground.class forDecorationViewOfKind:MSCollectionElementKindDayColumnHeaderBackground];
-    
-    
-    //[self loadData];
 }
 
 - (CGFloat)layoutSectionWidth
 {
     // Default to 254 on iPad.
+    //TODO: Days to show
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         return 254.0;
     }
@@ -104,27 +103,21 @@
 #pragma mark - CollectionView Datasource
 //================================================
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
+{   
     return mDays.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    //AKSection *sect = [self.days objectAtIndex:section];
-    //return sect.events.count;
     NSString* day = [mDays.allKeys.sort objectAtIndex:section];
     return [mDays[day] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MSEventCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
-    
-    /*AKSection *sect = [self.days objectAtIndex:indexPath.section];
-    AKEvent *ev = [sect.events objectAtIndex:indexPath.row];*/
-    NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
-    cell.akEvent    = [mDays[day] objectAtIndex:indexPath.row];
-    
+    MSEventCell *cell   = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
+    NSString* day       = [mDays.allKeys.sort objectAtIndex:indexPath.section];
+    cell.akEvent        = [mDays[day] objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -133,14 +126,14 @@
     UICollectionReusableView *view;
     if (kind == MSCollectionElementKindDayColumnHeader) {
         MSDayColumnHeader *dayColumnHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:MSDayColumnHeaderReuseIdentifier forIndexPath:indexPath];
-        NSDate *day = [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:indexPath];
-        NSDate *currentDay = [self currentTimeComponentsForCollectionView:self.collectionView layout:self.weekFlowLayout];
+        NSDate *day                 = [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:indexPath];
+        NSDate *currentDay          = [self currentTimeComponentsForCollectionView:self.collectionView layout:self.weekFlowLayout];
         
-        NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:day];
-        NSDate *startOfCurrentDay = [[NSCalendar currentCalendar] startOfDayForDate:currentDay];
+        NSDate *startOfDay          = [[NSCalendar currentCalendar] startOfDayForDate:day];
+        NSDate *startOfCurrentDay   = [[NSCalendar currentCalendar] startOfDayForDate:currentDay];
         
-        dayColumnHeader.day = day;
-        dayColumnHeader.currentDay = [startOfDay isEqualToDate:startOfCurrentDay];
+        dayColumnHeader.day         = day;
+        dayColumnHeader.currentDay  = [startOfDay isEqualToDate:startOfCurrentDay];
         
         view = dayColumnHeader;
     } else if (kind == MSCollectionElementKindTimeRowHeader) {

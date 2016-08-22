@@ -28,17 +28,17 @@
 
 #import "MSCollectionViewCalendarLayout.h"
 
-NSString * const MSCollectionElementKindTimeRowHeader = @"MSCollectionElementKindTimeRow";
-NSString * const MSCollectionElementKindDayColumnHeader = @"MSCollectionElementKindDayHeader";
-NSString * const MSCollectionElementKindTimeRowHeaderBackground = @"MSCollectionElementKindTimeRowHeaderBackground";
-NSString * const MSCollectionElementKindDayColumnHeaderBackground = @"MSCollectionElementKindDayColumnHeaderBackground";
-NSString * const MSCollectionElementKindCurrentTimeIndicator = @"MSCollectionElementKindCurrentTimeIndicator";
+NSString * const MSCollectionElementKindTimeRowHeader               = @"MSCollectionElementKindTimeRow";
+NSString * const MSCollectionElementKindDayColumnHeader             = @"MSCollectionElementKindDayHeader";
+NSString * const MSCollectionElementKindTimeRowHeaderBackground     = @"MSCollectionElementKindTimeRowHeaderBackground";
+NSString * const MSCollectionElementKindDayColumnHeaderBackground   = @"MSCollectionElementKindDayColumnHeaderBackground";
+NSString * const MSCollectionElementKindCurrentTimeIndicator        = @"MSCollectionElementKindCurrentTimeIndicator";
 NSString * const MSCollectionElementKindCurrentTimeHorizontalGridline = @"MSCollectionElementKindCurrentTimeHorizontalGridline";
-NSString * const MSCollectionElementKindVerticalGridline = @"MSCollectionElementKindVerticalGridline";
-NSString * const MSCollectionElementKindHorizontalGridline = @"MSCollectionElementKindHorizontalGridline";
+NSString * const MSCollectionElementKindVerticalGridline            = @"MSCollectionElementKindVerticalGridline";
+NSString * const MSCollectionElementKindHorizontalGridline          = @"MSCollectionElementKindHorizontalGridline";
 
-NSUInteger const MSCollectionMinOverlayZ = 1000.0; // Allows for 900 items in a section without z overlap issues
-NSUInteger const MSCollectionMinCellZ = 100.0;  // Allows for 100 items in a section's background
+NSUInteger const MSCollectionMinOverlayZ    = 1000.0; // Allows for 900 items in a section without z overlap issues
+NSUInteger const MSCollectionMinCellZ       = 100.0;  // Allows for 100 items in a section's background
 NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 
@@ -363,7 +363,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
                 
                 CGFloat endHourY;
                 if (itemEndTime.day != itemStartTime.day) {
-                    endHourY = (([[NSCalendar currentCalendar] maximumRangeOfUnit:NSCalendarUnitHour].length - earliestHour) * self.hourHeight) + (itemEndTime.hour * self.hourHeight);
+                    endHourY = (([NSCalendar.currentCalendar maximumRangeOfUnit:NSCalendarUnitHour].length - earliestHour) * self.hourHeight) + (itemEndTime.hour * self.hourHeight);
                 } else {
                     endHourY = ((itemEndTime.hour - earliestHour) * self.hourHeight);
                 }
@@ -498,7 +498,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
                 
                 CGFloat endHourY;
                 if (itemEndTime.day != itemStartTime.day) {
-                    endHourY = (([[NSCalendar currentCalendar] maximumRangeOfUnit:NSCalendarUnitHour].length - earliestHour) * self.hourHeight) + ((itemEndTime.hour) * self.hourHeight);
+                    endHourY = (([NSCalendar.currentCalendar maximumRangeOfUnit:NSCalendarUnitHour].length - earliestHour) * self.hourHeight) + ((itemEndTime.hour) * self.hourHeight);
                 } else {
                     endHourY = ((itemEndTime.hour - earliestHour) * self.hourHeight);
                 }
@@ -749,10 +749,14 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     self.sectionLayoutType = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? MSSectionLayoutTypeHorizontalTile : MSSectionLayoutTypeVerticalTile);
     self.headerLayoutType = MSHeaderLayoutTypeDayColumnAboveTimeRow;
     
+    [self initializeMinuteTick];
+}
+
+-(void)initializeMinuteTick{
     // Invalidate layout on minute ticks (to update the position of the current time indicator)
-    NSDate *oneMinuteInFuture = [[NSDate date] dateByAddingTimeInterval:60];
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:oneMinuteInFuture];
-    NSDate *nextMinuteBoundary = [[NSCalendar currentCalendar] dateFromComponents:components];
+    NSDate *oneMinuteInFuture = [NSDate.date dateByAddingTimeInterval:60];
+    NSDateComponents *components = [NSCalendar.currentCalendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:oneMinuteInFuture];
+    NSDate *nextMinuteBoundary = [NSCalendar.currentCalendar dateFromComponents:components];
     
     // This needs to be a weak reference, otherwise we get a retain cycle
     MSTimerWeakTarget *timerWeakTarget = [[MSTimerWeakTarget alloc] initWithTarget:self selector:@selector(minuteTick:)];
@@ -761,7 +765,6 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 }
 
 #pragma mark Minute Updates
-
 - (void)minuteTick:(id)sender
 {
     // Invalidate cached current date componets (since the minute's changed!)
@@ -770,7 +773,6 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 }
 
 #pragma mark - Layout
-
 - (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewAtIndexPath:(NSIndexPath *)indexPath ofKind:(NSString *)kind withItemCache:(NSMutableDictionary *)itemCache
 {
     UICollectionViewLayoutAttributes *layoutAttributes;
@@ -806,32 +808,31 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     self.needsToPopulateAttributesForAllSections = YES;
     
     // Invalidate cached Components
-    [self.cachedDayDateComponents removeAllObjects];
-    [self.cachedStartTimeDateComponents removeAllObjects];
-    [self.cachedEndTimeDateComponents removeAllObjects];
-    [self.cachedCurrentDateComponents removeAllObjects];
+    [self.cachedDayDateComponents               removeAllObjects];
+    [self.cachedStartTimeDateComponents         removeAllObjects];
+    [self.cachedEndTimeDateComponents           removeAllObjects];
+    [self.cachedCurrentDateComponents           removeAllObjects];
     
     // Invalidate cached interface sizing values
-    self.cachedEarliestHour = NSIntegerMax;
-    self.cachedLatestHour = NSIntegerMin;
-    self.cachedMaxColumnHeight = CGFLOAT_MIN;
-    [self.cachedColumnHeights removeAllObjects];
-    [self.cachedEarliestHours removeAllObjects];
-    [self.cachedLatestHours removeAllObjects];
+    self.cachedEarliestHour     = NSIntegerMax;
+    self.cachedLatestHour       = NSIntegerMin;
+    self.cachedMaxColumnHeight  = CGFLOAT_MIN;
+    [self.cachedColumnHeights                   removeAllObjects];
+    [self.cachedEarliestHours                   removeAllObjects];
+    [self.cachedLatestHours                     removeAllObjects];
     
     // Invalidate cached item attributes
-    [self.itemAttributes removeAllObjects];
-    [self.verticalGridlineAttributes removeAllObjects];
-    [self.horizontalGridlineAttributes removeAllObjects];
-    [self.dayColumnHeaderAttributes removeAllObjects];
-    [self.dayColumnHeaderBackgroundAttributes removeAllObjects];
-    [self.timeRowHeaderAttributes removeAllObjects];
-    [self.timeRowHeaderBackgroundAttributes removeAllObjects];
-    [self.allAttributes removeAllObjects];
+    [self.itemAttributes                        removeAllObjects];
+    [self.verticalGridlineAttributes            removeAllObjects];
+    [self.horizontalGridlineAttributes          removeAllObjects];
+    [self.dayColumnHeaderAttributes             removeAllObjects];
+    [self.dayColumnHeaderBackgroundAttributes   removeAllObjects];
+    [self.timeRowHeaderAttributes               removeAllObjects];
+    [self.timeRowHeaderBackgroundAttributes     removeAllObjects];
+    [self.allAttributes                         removeAllObjects];
 }
 
 #pragma mark Dates
-
 - (NSDate *)dateForTimeRowHeaderAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger earliestHour;
@@ -845,17 +846,16 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
     NSDateComponents *dateComponents = [self dayForSection:indexPath.section];
     dateComponents.hour = (earliestHour + indexPath.item);
-    return [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+    return [NSCalendar.currentCalendar dateFromComponents:dateComponents];
 }
 
 - (NSDate *)dateForDayColumnHeaderAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDate *day = [self.delegate collectionView:self.collectionView layout:self dayForSection:indexPath.section];
-    return [[NSCalendar currentCalendar] startOfDayForDate:day];
+    return [NSCalendar.currentCalendar startOfDayForDate:day];
 }
 
 #pragma mark Scrolling
-
 - (void)scrollCollectionViewToClosetSectionToCurrentTimeAnimated:(BOOL)animated
 {
     if (self.collectionView.numberOfSections != 0) {
@@ -900,7 +900,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 - (NSInteger)closestSectionToCurrentTime
 {
     NSDate *currentTime = [self.delegate currentTimeComponentsForCollectionView:self.collectionView layout:self];
-    NSDate *startOfCurrentDay = [[NSCalendar currentCalendar] startOfDayForDate:currentTime];
+    NSDate *startOfCurrentDay = [NSCalendar.currentCalendar startOfDayForDate:currentTime];
 
     NSTimeInterval minTimeInterval = CGFLOAT_MAX;
     NSInteger closestSection = NSIntegerMax;
@@ -1099,6 +1099,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)earliestHour
 {
+    
     if (self.cachedEarliestHour != NSIntegerMax) {
         return self.cachedEarliestHour;
     }
@@ -1119,6 +1120,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)latestHour
 {
+
     if (self.cachedLatestHour != NSIntegerMin) {
         return self.cachedLatestHour;
     }
@@ -1171,7 +1173,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         if ([self dayForSection:section].day == itemEndTime.day) {
             itemEndTimeHour = (itemEndTime.hour + ((itemEndTime.minute > 0) ? 1 : 0));
         } else {
-            itemEndTimeHour = [[NSCalendar currentCalendar] maximumRangeOfUnit:NSCalendarUnitHour].length + (itemEndTime.hour + ((itemEndTime.minute > 0) ? 1 : 0));;
+            itemEndTimeHour = [NSCalendar.currentCalendar maximumRangeOfUnit:NSCalendarUnitHour].length + (itemEndTime.hour + ((itemEndTime.minute > 0) ? 1 : 0));;
         }
         if (itemEndTimeHour > latestHour) {
             latestHour = itemEndTimeHour;
@@ -1194,9 +1196,9 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
 
     NSDate *day = [self.delegate collectionView:self.collectionView layout:self dayForSection:section];
-    NSDate *startOfDay = [[NSCalendar currentCalendar] startOfDayForDate:day];
+    NSDate *startOfDay = [NSCalendar.currentCalendar startOfDayForDate:day];
 
-    NSDateComponents *dayDateComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra) fromDate:startOfDay];
+    NSDateComponents *dayDateComponents = [NSCalendar.currentCalendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra) fromDate:startOfDay];
     
     [self.cachedDayDateComponents setObject:dayDateComponents forKey:@(section)];
     return dayDateComponents;
@@ -1209,7 +1211,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
     
     NSDate *date = [self.delegate collectionView:self.collectionView layout:self startTimeForItemAtIndexPath:indexPath];
-    NSDateComponents *itemStartTimeDateComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+    NSDateComponents *itemStartTimeDateComponents = [NSCalendar.currentCalendar components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
     
     [self.cachedStartTimeDateComponents setObject:itemStartTimeDateComponents forKey:indexPath];
     return itemStartTimeDateComponents;
@@ -1222,7 +1224,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
     
     NSDate *date = [self.delegate collectionView:self.collectionView layout:self endTimeForItemAtIndexPath:indexPath];
-    NSDateComponents *itemEndTime = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+    NSDateComponents *itemEndTime = [NSCalendar.currentCalendar components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
     
     [self.cachedEndTimeDateComponents setObject:itemEndTime forKey:indexPath];
     return itemEndTime;
@@ -1235,7 +1237,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
     
     NSDate *date = [self.delegate currentTimeComponentsForCollectionView:self.collectionView layout:self];
-    NSDateComponents *currentTime = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+    NSDateComponents *currentTime = [NSCalendar.currentCalendar components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
     
     [self.cachedCurrentDateComponents setObject:currentTime forKey:@(0)];
     return currentTime;
