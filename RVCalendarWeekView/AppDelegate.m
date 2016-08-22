@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MSCalendarViewController.h"
 
 @interface AppDelegate ()
 

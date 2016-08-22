@@ -23,27 +23,28 @@
 
 - (void)setupWeekData{
     
-    NSDate *dt = [NSDate date];
-    AKEvent * event1 = [AKEvent new];
-    [event1 setStart:dt];
-    [event1 setTitle:@"Help me"];
-    [event1 setLocation:@"Great example"];
+    
+    AKEvent* event1 = [AKEvent make:NSDate.now
+                              title:@"Title"
+                           location:@"Central perk"];
+    
+    AKEvent* event2 = [AKEvent make:[NSDate.now addMinutes:10]
+                           duration:60*3
+                              title:@"Title 2"
+                           location:@"Central perk"];
+    
+    AKEvent* event3 = [AKEvent make:[NSDate.tomorrow addMinutes:10]
+                           duration:60*3
+                              title:@"Title 3"
+                           location:@"Central perk"];
+    
+    AKEvent* event4 = [AKEvent make:[NSDate.nextWeek addHours:7]
+                           duration:60*3
+                              title:@"Title 4"
+                           location:@"Central perk"];
+    
 
-        
-    AKEvent * event2 = [AKEvent new];
-    [event2 setStart:[dt addMinutes:10]];
-    [event2 setTitle:@"Help me"];
-    [event2 setLocation:@"Great example"];
-    
-    NSMutableArray<AKEvent *> *events1 = [[NSMutableArray alloc] init];
-    [events1 addObject:event1];
-    [events1 addObject:event2];
-    
-    AKSection *section = [AKSection new];
-    [section setTitle:@"Court 1"];
-    [section setEvents:events1];
-    _weekView.days = [[NSMutableArray alloc]init];
-    [_weekView.days addObject:section];
+    _weekView.events = @[event1,event2,event3,event4];
 }
 
 @end

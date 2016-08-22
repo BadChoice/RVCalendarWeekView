@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "MSCollectionViewCalendarLayout.h"
-#import "AKSection.h"
 
 @interface RVWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>
+{
+    NSDictionary* mDays;
+}
 
 @property(strong,nonatomic) UICollectionView* collectionView;
 @property(strong,nonatomic) MSCollectionViewCalendarLayout* weekFlowLayout;
 
-@property(strong,nonatomic) NSMutableArray* days;
+@property(strong,nonatomic) NSArray* events;
 
 @end

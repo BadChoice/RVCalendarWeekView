@@ -8,6 +8,9 @@
 
 #import "RVWeekView.h"
 
+#import "NSDate+Easy.h"
+#import "RVCollection.h"
+
 // Collection View Reusable Views
 #import "MSGridline.h"
 #import "MSTimeRowHeaderBackground.h"
@@ -46,7 +49,10 @@
     self.weekFlowLayout = [[MSCollectionViewCalendarLayout alloc] init];
     self.weekFlowLayout.delegate = self;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.weekFlowLayout];
-    self.collectionView.dataSource = self;
+    self.collectionView.dataSource                      = self;
+    self.collectionView.directionalLockEnabled          = YES;
+    self.collectionView.showsVerticalScrollIndicator    = NO;
+    self.collectionView.showsHorizontalScrollIndicator  = NO;
     [self addSubview:self.collectionView];
     
         
@@ -87,28 +93,37 @@
     return (width - timeRowHeaderWidth - rightMargin);
 }
 
+//================================================
+#pragma mark - Set Events
+//================================================
+-(void)setEvents:(NSArray *)events{
+    mDays = [events groupBy:@"StartDate.toDateString"];
+}
 
 //================================================
 #pragma mark - CollectionView Datasource
 //================================================
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.days.count;
+    return mDays.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    AKSection *sect = [self.days objectAtIndex:section];
-    return sect.events.count;
+    //AKSection *sect = [self.days objectAtIndex:section];
+    //return sect.events.count;
+    NSString* day = [mDays.allKeys.sort objectAtIndex:section];
+    return [mDays[day] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MSEventCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
     
-    AKSection *sect = [self.days objectAtIndex:indexPath.section];
-    AKEvent *ev = [sect.events objectAtIndex:indexPath.row];
-    cell.akEvent = ev;
+    /*AKSection *sect = [self.days objectAtIndex:indexPath.section];
+    AKEvent *ev = [sect.events objectAtIndex:indexPath.row];*/
+    NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
+    cell.akEvent    = [mDays[day] objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -142,24 +157,26 @@
 //================================================
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section
 {
-    AKSection *sect = [self.days objectAtIndex:section];
-    AKEvent *ev     = [sect.events firstObject];
+    NSString* day   = [mDays.allKeys.sort objectAtIndex:section];
+    AKEvent* ev     = [mDays[day] firstObject];
     return ev.day;
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AKSection *sect = [self.days objectAtIndex:indexPath.section];
-    AKEvent *ev     = [sect.events objectAtIndex:indexPath.row];
-    return ev.start;
+   
+    NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
+    AKEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
+    
+    return ev.StartDate;
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AKSection *sect = [self.days objectAtIndex:indexPath.section];
-    AKEvent *ev     = [sect.events objectAtIndex:indexPath.row];
-    return [ev.start dateByAddingTimeInterval:(60 * 60 * 3)];
-    return nil;
+    
+    NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
+    AKEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
+    return ev.EndDate;
     
 }
 
@@ -177,7 +194,7 @@
     self.collectionView             = nil;
     self.weekFlowLayout.delegate    = nil;
     self.weekFlowLayout             = nil;
-    self.days                       = nil;
+    mDays                           = nil;
 }
 
 @end
