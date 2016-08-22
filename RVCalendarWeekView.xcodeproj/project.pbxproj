@@ -14,6 +14,20 @@
 		76276EC21D6B81D4002C1D39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76276EC11D6B81D4002C1D39 /* Assets.xcassets */; };
 		76276EC51D6B81D4002C1D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76276EC31D6B81D4002C1D39 /* LaunchScreen.storyboard */; };
 		76276ED01D6B81D4002C1D39 /* RVCalendarWeekViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276ECF1D6B81D4002C1D39 /* RVCalendarWeekViewTests.m */; };
+		76276EF41D6B826B002C1D39 /* MSCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EDD1D6B826B002C1D39 /* MSCalendarViewController.m */; };
+		76276EF51D6B826B002C1D39 /* MSCollectionViewCalendarLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE01D6B826B002C1D39 /* MSCollectionViewCalendarLayout.m */; };
+		76276EF61D6B826B002C1D39 /* MSCurrentTimeGridline.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE31D6B826B002C1D39 /* MSCurrentTimeGridline.m */; };
+		76276EF71D6B826B002C1D39 /* MSCurrentTimeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE51D6B826B002C1D39 /* MSCurrentTimeIndicator.m */; };
+		76276EF81D6B826B002C1D39 /* MSDayColumnHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE71D6B826B002C1D39 /* MSDayColumnHeader.m */; };
+		76276EF91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m */; };
+		76276EFA1D6B826B002C1D39 /* MSEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EEB1D6B826B002C1D39 /* MSEvent.m */; };
+		76276EFB1D6B826B002C1D39 /* MSEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EED1D6B826B002C1D39 /* MSEventCell.m */; };
+		76276EFC1D6B826B002C1D39 /* MSGridline.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EEF1D6B826B002C1D39 /* MSGridline.m */; };
+		76276EFD1D6B826B002C1D39 /* MSTimeRowHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EF11D6B826B002C1D39 /* MSTimeRowHeader.m */; };
+		76276EFE1D6B826B002C1D39 /* MSTimeRowHeaderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EF31D6B826B002C1D39 /* MSTimeRowHeaderBackground.m */; };
+		76276F051D6B8759002C1D39 /* AKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276F041D6B8759002C1D39 /* AKEvent.m */; };
+		76276F081D6B879A002C1D39 /* AKSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276F071D6B879A002C1D39 /* AKSection.m */; };
+		E24E9C4DAB2DA2174E77B5AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0AB32BB77DBD1AD335BF12 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +54,35 @@
 		76276ECB1D6B81D4002C1D39 /* RVCalendarWeekViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVCalendarWeekViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76276ECF1D6B81D4002C1D39 /* RVCalendarWeekViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RVCalendarWeekViewTests.m; sourceTree = "<group>"; };
 		76276ED11D6B81D4002C1D39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76276EDC1D6B826B002C1D39 /* MSCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCalendarViewController.h; sourceTree = "<group>"; };
+		76276EDD1D6B826B002C1D39 /* MSCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCalendarViewController.m; sourceTree = "<group>"; };
+		76276EDF1D6B826B002C1D39 /* MSCollectionViewCalendarLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCollectionViewCalendarLayout.h; sourceTree = "<group>"; };
+		76276EE01D6B826B002C1D39 /* MSCollectionViewCalendarLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCollectionViewCalendarLayout.m; sourceTree = "<group>"; };
+		76276EE21D6B826B002C1D39 /* MSCurrentTimeGridline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCurrentTimeGridline.h; sourceTree = "<group>"; };
+		76276EE31D6B826B002C1D39 /* MSCurrentTimeGridline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCurrentTimeGridline.m; sourceTree = "<group>"; };
+		76276EE41D6B826B002C1D39 /* MSCurrentTimeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCurrentTimeIndicator.h; sourceTree = "<group>"; };
+		76276EE51D6B826B002C1D39 /* MSCurrentTimeIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCurrentTimeIndicator.m; sourceTree = "<group>"; };
+		76276EE61D6B826B002C1D39 /* MSDayColumnHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDayColumnHeader.h; sourceTree = "<group>"; };
+		76276EE71D6B826B002C1D39 /* MSDayColumnHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDayColumnHeader.m; sourceTree = "<group>"; };
+		76276EE81D6B826B002C1D39 /* MSDayColumnHeaderBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDayColumnHeaderBackground.h; sourceTree = "<group>"; };
+		76276EE91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDayColumnHeaderBackground.m; sourceTree = "<group>"; };
+		76276EEA1D6B826B002C1D39 /* MSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSEvent.h; path = Lib/Views/MSEvent.h; sourceTree = "<group>"; };
+		76276EEB1D6B826B002C1D39 /* MSEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSEvent.m; path = Lib/Views/MSEvent.m; sourceTree = "<group>"; };
+		76276EEC1D6B826B002C1D39 /* MSEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSEventCell.h; sourceTree = "<group>"; };
+		76276EED1D6B826B002C1D39 /* MSEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSEventCell.m; sourceTree = "<group>"; };
+		76276EEE1D6B826B002C1D39 /* MSGridline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGridline.h; sourceTree = "<group>"; };
+		76276EEF1D6B826B002C1D39 /* MSGridline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGridline.m; sourceTree = "<group>"; };
+		76276EF01D6B826B002C1D39 /* MSTimeRowHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTimeRowHeader.h; sourceTree = "<group>"; };
+		76276EF11D6B826B002C1D39 /* MSTimeRowHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTimeRowHeader.m; sourceTree = "<group>"; };
+		76276EF21D6B826B002C1D39 /* MSTimeRowHeaderBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTimeRowHeaderBackground.h; sourceTree = "<group>"; };
+		76276EF31D6B826B002C1D39 /* MSTimeRowHeaderBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTimeRowHeaderBackground.m; sourceTree = "<group>"; };
+		76276F031D6B8759002C1D39 /* AKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKEvent.h; path = Lib/Views/AKEvent.h; sourceTree = "<group>"; };
+		76276F041D6B8759002C1D39 /* AKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKEvent.m; path = Lib/Views/AKEvent.m; sourceTree = "<group>"; };
+		76276F061D6B879A002C1D39 /* AKSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKSection.h; path = Lib/Views/AKSection.h; sourceTree = "<group>"; };
+		76276F071D6B879A002C1D39 /* AKSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKSection.m; path = Lib/Views/AKSection.m; sourceTree = "<group>"; };
+		AB0AB32BB77DBD1AD335BF12 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F4E93530877B5C9152F5F2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D7874432796CEC126EFC1600 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E24E9C4DAB2DA2174E77B5AA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +104,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14E411DFB2C5FD82B72F4C1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB0AB32BB77DBD1AD335BF12 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		23670F3FE91453B62F6DA52A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7874432796CEC126EFC1600 /* Pods.debug.xcconfig */,
+				C5F4E93530877B5C9152F5F2 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		76276EA91D6B81D4002C1D39 = {
 			isa = PBXGroup;
 			children = (
 				76276EB41D6B81D4002C1D39 /* RVCalendarWeekView */,
 				76276ECE1D6B81D4002C1D39 /* RVCalendarWeekViewTests */,
 				76276EB31D6B81D4002C1D39 /* Products */,
+				23670F3FE91453B62F6DA52A /* Pods */,
+				14E411DFB2C5FD82B72F4C1C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,14 +144,12 @@
 		76276EB41D6B81D4002C1D39 /* RVCalendarWeekView */ = {
 			isa = PBXGroup;
 			children = (
+				76276EBE1D6B81D4002C1D39 /* Main.storyboard */,
 				76276EB81D6B81D4002C1D39 /* AppDelegate.h */,
 				76276EB91D6B81D4002C1D39 /* AppDelegate.m */,
 				76276EBB1D6B81D4002C1D39 /* ViewController.h */,
 				76276EBC1D6B81D4002C1D39 /* ViewController.m */,
-				76276EBE1D6B81D4002C1D39 /* Main.storyboard */,
-				76276EC11D6B81D4002C1D39 /* Assets.xcassets */,
-				76276EC31D6B81D4002C1D39 /* LaunchScreen.storyboard */,
-				76276EC61D6B81D4002C1D39 /* Info.plist */,
+				76276EDA1D6B81D9002C1D39 /* lib */,
 				76276EB51D6B81D4002C1D39 /* Supporting Files */,
 			);
 			path = RVCalendarWeekView;
@@ -97,6 +158,9 @@
 		76276EB51D6B81D4002C1D39 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				76276EC11D6B81D4002C1D39 /* Assets.xcassets */,
+				76276EC31D6B81D4002C1D39 /* LaunchScreen.storyboard */,
+				76276EC61D6B81D4002C1D39 /* Info.plist */,
 				76276EB61D6B81D4002C1D39 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -111,6 +175,98 @@
 			path = RVCalendarWeekViewTests;
 			sourceTree = "<group>";
 		};
+		76276EDA1D6B81D9002C1D39 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				76276EFF1D6B8637002C1D39 /* Event */,
+				76276EDB1D6B826B002C1D39 /* Controller */,
+				76276EDE1D6B826B002C1D39 /* FlowLayout */,
+				76276EE11D6B826B002C1D39 /* Views */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		76276EDB1D6B826B002C1D39 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				76276EDC1D6B826B002C1D39 /* MSCalendarViewController.h */,
+				76276EDD1D6B826B002C1D39 /* MSCalendarViewController.m */,
+			);
+			name = Controller;
+			path = Lib/Controller;
+			sourceTree = "<group>";
+		};
+		76276EDE1D6B826B002C1D39 /* FlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				76276EDF1D6B826B002C1D39 /* MSCollectionViewCalendarLayout.h */,
+				76276EE01D6B826B002C1D39 /* MSCollectionViewCalendarLayout.m */,
+			);
+			name = FlowLayout;
+			path = Lib/MSCollectionViewCalendarLayout;
+			sourceTree = "<group>";
+		};
+		76276EE11D6B826B002C1D39 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				76276F001D6B8649002C1D39 /* Decorations */,
+				76276F021D6B867E002C1D39 /* Grid */,
+				76276F011D6B8675002C1D39 /* Event */,
+			);
+			name = Views;
+			path = Lib/Views;
+			sourceTree = "<group>";
+		};
+		76276EFF1D6B8637002C1D39 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				76276EEA1D6B826B002C1D39 /* MSEvent.h */,
+				76276EEB1D6B826B002C1D39 /* MSEvent.m */,
+				76276F031D6B8759002C1D39 /* AKEvent.h */,
+				76276F041D6B8759002C1D39 /* AKEvent.m */,
+				76276F061D6B879A002C1D39 /* AKSection.h */,
+				76276F071D6B879A002C1D39 /* AKSection.m */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		76276F001D6B8649002C1D39 /* Decorations */ = {
+			isa = PBXGroup;
+			children = (
+				76276EE61D6B826B002C1D39 /* MSDayColumnHeader.h */,
+				76276EE71D6B826B002C1D39 /* MSDayColumnHeader.m */,
+				76276EE81D6B826B002C1D39 /* MSDayColumnHeaderBackground.h */,
+				76276EE91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m */,
+				76276EF01D6B826B002C1D39 /* MSTimeRowHeader.h */,
+				76276EF11D6B826B002C1D39 /* MSTimeRowHeader.m */,
+				76276EF21D6B826B002C1D39 /* MSTimeRowHeaderBackground.h */,
+				76276EF31D6B826B002C1D39 /* MSTimeRowHeaderBackground.m */,
+			);
+			name = Decorations;
+			sourceTree = "<group>";
+		};
+		76276F011D6B8675002C1D39 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				76276EEC1D6B826B002C1D39 /* MSEventCell.h */,
+				76276EED1D6B826B002C1D39 /* MSEventCell.m */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		76276F021D6B867E002C1D39 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				76276EE21D6B826B002C1D39 /* MSCurrentTimeGridline.h */,
+				76276EE31D6B826B002C1D39 /* MSCurrentTimeGridline.m */,
+				76276EE41D6B826B002C1D39 /* MSCurrentTimeIndicator.h */,
+				76276EE51D6B826B002C1D39 /* MSCurrentTimeIndicator.m */,
+				76276EEE1D6B826B002C1D39 /* MSGridline.h */,
+				76276EEF1D6B826B002C1D39 /* MSGridline.m */,
+			);
+			name = Grid;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -118,9 +274,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76276ED41D6B81D4002C1D39 /* Build configuration list for PBXNativeTarget "RVCalendarWeekView" */;
 			buildPhases = (
+				4BAE94422382362C5588883B /* Check Pods Manifest.lock */,
 				76276EAE1D6B81D4002C1D39 /* Sources */,
 				76276EAF1D6B81D4002C1D39 /* Frameworks */,
 				76276EB01D6B81D4002C1D39 /* Resources */,
+				B37B02960A988B7715A8901E /* Embed Pods Frameworks */,
+				7A23FC11CD052AE1C44C387C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,14 +365,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4BAE94422382362C5588883B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7A23FC11CD052AE1C44C387C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B37B02960A988B7715A8901E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		76276EAE1D6B81D4002C1D39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76276EF51D6B826B002C1D39 /* MSCollectionViewCalendarLayout.m in Sources */,
+				76276F051D6B8759002C1D39 /* AKEvent.m in Sources */,
+				76276EFB1D6B826B002C1D39 /* MSEventCell.m in Sources */,
 				76276EBD1D6B81D4002C1D39 /* ViewController.m in Sources */,
+				76276EFA1D6B826B002C1D39 /* MSEvent.m in Sources */,
+				76276EFD1D6B826B002C1D39 /* MSTimeRowHeader.m in Sources */,
+				76276EF71D6B826B002C1D39 /* MSCurrentTimeIndicator.m in Sources */,
+				76276F081D6B879A002C1D39 /* AKSection.m in Sources */,
+				76276EF81D6B826B002C1D39 /* MSDayColumnHeader.m in Sources */,
 				76276EBA1D6B81D4002C1D39 /* AppDelegate.m in Sources */,
+				76276EF41D6B826B002C1D39 /* MSCalendarViewController.m in Sources */,
+				76276EF61D6B826B002C1D39 /* MSCurrentTimeGridline.m in Sources */,
+				76276EFC1D6B826B002C1D39 /* MSGridline.m in Sources */,
 				76276EB71D6B81D4002C1D39 /* main.m in Sources */,
+				76276EFE1D6B826B002C1D39 /* MSTimeRowHeaderBackground.m in Sources */,
+				76276EF91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +561,7 @@
 		};
 		76276ED51D6B81D4002C1D39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7874432796CEC126EFC1600 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RVCalendarWeekView/Info.plist;
@@ -352,6 +573,7 @@
 		};
 		76276ED61D6B81D4002C1D39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5F4E93530877B5C9152F5F2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RVCalendarWeekView/Info.plist;
@@ -404,6 +626,7 @@
 				76276ED61D6B81D4002C1D39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76276ED71D6B81D4002C1D39 /* Build configuration list for PBXNativeTarget "RVCalendarWeekViewTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +635,7 @@
 				76276ED91D6B81D4002C1D39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
