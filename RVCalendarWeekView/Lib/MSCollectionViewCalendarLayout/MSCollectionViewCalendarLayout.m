@@ -142,7 +142,6 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 @implementation MSCollectionViewCalendarLayout
 
 #pragma mark - NSObject
-
 - (void)dealloc
 {
     [self.minuteTimer invalidate];
@@ -168,7 +167,6 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 }
 
 #pragma mark - UICollectionViewLayout
-
 - (void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
     [self invalidateLayoutCache];
@@ -211,15 +209,15 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     
     BOOL needsToPopulateAllAttribtues = (self.allAttributes.count == 0);
     if (needsToPopulateAllAttribtues) {
-        [self.allAttributes addObjectsFromArray:[self.dayColumnHeaderAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.dayColumnHeaderBackgroundAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.timeRowHeaderAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.timeRowHeaderBackgroundAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.verticalGridlineAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.horizontalGridlineAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.itemAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.currentTimeIndicatorAttributes allValues]];
-        [self.allAttributes addObjectsFromArray:[self.currentTimeHorizontalGridlineAttributes allValues]];
+        [self.allAttributes addObjectsFromArray:self.dayColumnHeaderAttributes              .allValues];
+        [self.allAttributes addObjectsFromArray:self.dayColumnHeaderBackgroundAttributes    .allValues];
+        [self.allAttributes addObjectsFromArray:self.timeRowHeaderAttributes                .allValues];
+        [self.allAttributes addObjectsFromArray:self.timeRowHeaderBackgroundAttributes      .allValues];
+        [self.allAttributes addObjectsFromArray:self.verticalGridlineAttributes             .allValues];
+        [self.allAttributes addObjectsFromArray:self.horizontalGridlineAttributes           .allValues];
+        [self.allAttributes addObjectsFromArray:self.itemAttributes                         .allValues];
+        [self.allAttributes addObjectsFromArray:self.currentTimeIndicatorAttributes         .allValues];
+        [self.allAttributes addObjectsFromArray:self.currentTimeHorizontalGridlineAttributes.allValues];
     }
 }
 
@@ -708,6 +706,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (void)initialize
 {
+    self.show24Hours = NO;
     self.needsToPopulateAttributesForAllSections = YES;
     self.cachedDayDateComponents = [NSCache new];
     self.cachedStartTimeDateComponents = [NSCache new];
@@ -1100,6 +1099,8 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 - (NSInteger)earliestHour
 {
     
+    if(self.show24Hours) return 0;
+    
     if (self.cachedEarliestHour != NSIntegerMax) {
         return self.cachedEarliestHour;
     }
@@ -1120,7 +1121,8 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)latestHour
 {
-
+    if(self.show24Hours) return 24;
+    
     if (self.cachedLatestHour != NSIntegerMin) {
         return self.cachedLatestHour;
     }
@@ -1141,6 +1143,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)earliestHourForSection:(NSInteger)section
 {
+    if(self.show24Hours) return 0;
     if (self.cachedEarliestHours[@(section)]) {
         return [self.cachedEarliestHours[@(section)] integerValue];
     }
@@ -1162,6 +1165,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)latestHourForSection:(NSInteger)section
 {
+    if(self.show24Hours) return 24;
     if (self.cachedLatestHours[@(section)]) {
         return [self.cachedLatestHours[@(section)] integerValue];
     }
@@ -1188,7 +1192,6 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 }
 
 #pragma mark Delegate Wrappers
-
 - (NSDateComponents *)dayForSection:(NSInteger)section
 {
     if ([self.cachedDayDateComponents objectForKey:@(section)]) {
@@ -1242,5 +1245,5 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     [self.cachedCurrentDateComponents setObject:currentTime forKey:@(0)];
     return currentTime;
 }
-
+//Original file: 1242
 @end
