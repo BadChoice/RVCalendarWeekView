@@ -8,7 +8,6 @@
 
 #import "MSCalendarViewController.h"
 #import "MSCollectionViewCalendarLayout.h"
-#import "MSEvent.h"
 #import "AKSection.h"
 #import "AKEvent.h"
 // Collection View Reusable Views
@@ -102,10 +101,6 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
     }];
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
 
 #pragma mark - MSCalendarViewController
 

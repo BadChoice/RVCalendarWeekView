@@ -7,7 +7,6 @@
 //
 
 #import "MSEventCell.h"
-#import "MSEvent.h"
 
 #define MAS_SHORTHAND
 #import "Masonry.h"
@@ -102,15 +101,8 @@
 
 #pragma mark - MSEventCell
 
-- (void)setEvent:(MSEvent *)event
-{
-    _event = event;
-    self.title.attributedText = [[NSAttributedString alloc] initWithString:event.title attributes:[self titleAttributesHighlighted:self.selected]];
-    self.location.attributedText = [[NSAttributedString alloc] initWithString:event.location attributes:[self subtitleAttributesHighlighted:self.selected]];;
-}
 
-
-- (void)setAKEvent:(AKEvent *)event
+- (void)setAkEvent:(AKEvent *)event
 {
     _akEvent = event;
     self.title.attributedText = [[NSAttributedString alloc] initWithString:_akEvent.title attributes:[self titleAttributesHighlighted:self.selected]];

@@ -20,7 +20,6 @@
 		76276EF71D6B826B002C1D39 /* MSCurrentTimeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE51D6B826B002C1D39 /* MSCurrentTimeIndicator.m */; };
 		76276EF81D6B826B002C1D39 /* MSDayColumnHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE71D6B826B002C1D39 /* MSDayColumnHeader.m */; };
 		76276EF91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EE91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m */; };
-		76276EFA1D6B826B002C1D39 /* MSEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EEB1D6B826B002C1D39 /* MSEvent.m */; };
 		76276EFB1D6B826B002C1D39 /* MSEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EED1D6B826B002C1D39 /* MSEventCell.m */; };
 		76276EFC1D6B826B002C1D39 /* MSGridline.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EEF1D6B826B002C1D39 /* MSGridline.m */; };
 		76276EFD1D6B826B002C1D39 /* MSTimeRowHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EF11D6B826B002C1D39 /* MSTimeRowHeader.m */; };
@@ -66,8 +65,6 @@
 		76276EE71D6B826B002C1D39 /* MSDayColumnHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDayColumnHeader.m; sourceTree = "<group>"; };
 		76276EE81D6B826B002C1D39 /* MSDayColumnHeaderBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDayColumnHeaderBackground.h; sourceTree = "<group>"; };
 		76276EE91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDayColumnHeaderBackground.m; sourceTree = "<group>"; };
-		76276EEA1D6B826B002C1D39 /* MSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSEvent.h; path = Lib/Views/MSEvent.h; sourceTree = "<group>"; };
-		76276EEB1D6B826B002C1D39 /* MSEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSEvent.m; path = Lib/Views/MSEvent.m; sourceTree = "<group>"; };
 		76276EEC1D6B826B002C1D39 /* MSEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSEventCell.h; sourceTree = "<group>"; };
 		76276EED1D6B826B002C1D39 /* MSEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSEventCell.m; sourceTree = "<group>"; };
 		76276EEE1D6B826B002C1D39 /* MSGridline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGridline.h; sourceTree = "<group>"; };
@@ -220,8 +217,6 @@
 		76276EFF1D6B8637002C1D39 /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				76276EEA1D6B826B002C1D39 /* MSEvent.h */,
-				76276EEB1D6B826B002C1D39 /* MSEvent.m */,
 				76276F031D6B8759002C1D39 /* AKEvent.h */,
 				76276F041D6B8759002C1D39 /* AKEvent.m */,
 				76276F061D6B879A002C1D39 /* AKSection.h */,
@@ -422,7 +417,6 @@
 				76276F051D6B8759002C1D39 /* AKEvent.m in Sources */,
 				76276EFB1D6B826B002C1D39 /* MSEventCell.m in Sources */,
 				76276EBD1D6B81D4002C1D39 /* ViewController.m in Sources */,
-				76276EFA1D6B826B002C1D39 /* MSEvent.m in Sources */,
 				76276EFD1D6B826B002C1D39 /* MSTimeRowHeader.m in Sources */,
 				76276EF71D6B826B002C1D39 /* MSCurrentTimeIndicator.m in Sources */,
 				76276F081D6B879A002C1D39 /* AKSection.m in Sources */,
