@@ -22,6 +22,8 @@
 #import "MSCurrentTimeGridline.h"
 #import <CoreData/CoreData.h>
 
+#import "NSDate+Easy.h"
+
 NSString * const MSEventCellReuseIdentifier = @"MSEventCellReuseIdentifier";
 NSString * const MSDayColumnHeaderReuseIdentifier = @"MSDayColumnHeaderReuseIdentifier";
 NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifier";
@@ -36,6 +38,13 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
 @end
 
 @implementation MSCalendarViewController
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self.collectionViewCalendarLayout = [[MSCollectionViewCalendarLayout alloc] init];
+    self.collectionViewCalendarLayout.delegate = self;
+    self = [super initWithCollectionViewLayout:self.collectionViewCalendarLayout];
+    return self;
+}
 
 - (id)init
 {
@@ -115,7 +124,7 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
     
     AKEvent * event2 = [AKEvent new];
     [event2 setRemoteID:@(0)];
-    [event2 setStart:dt];
+    [event2 setStart:[dt addMinutes:10]];
     [event2 setTitle:@"Help me"];
     [event2 setLocation:@"Great example"];
     [event2 setTimeToBeDecided:@(2)];
@@ -124,6 +133,7 @@ NSString * const MSTimeRowHeaderReuseIdentifier = @"MSTimeRowHeaderReuseIdentifi
     NSMutableArray<AKEvent *> *events1 = [[NSMutableArray alloc] init];
     [events1 addObject:event1];
     [events1 addObject:event2];
+    
     AKSection *section = [AKSection new];
     [section setTitle:@"Court 1"];
     [section setEventsArr:events1];
