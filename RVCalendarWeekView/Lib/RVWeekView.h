@@ -20,6 +20,7 @@
 @property(strong,nonatomic) UICollectionView* collectionView;
 @property(strong,nonatomic) MSCollectionViewCalendarLayout* weekFlowLayout;
 
+@property(nonatomic) int daysToShowOnScreen;
 @property(strong,nonatomic) NSArray* events;
 
 -(void)forceReload;

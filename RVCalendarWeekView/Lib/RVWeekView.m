@@ -49,6 +49,7 @@
 
 -(void)setup{
     
+    self.daysToShowOnScreen = 6;
     self.weekFlowLayout = [[MSCollectionViewCalendarLayout alloc] init];
     self.weekFlowLayout.delegate = self;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.weekFlowLayout];
@@ -56,7 +57,7 @@
     self.collectionView.delegate                        = self;
     self.collectionView.directionalLockEnabled          = YES;
     self.collectionView.showsVerticalScrollIndicator    = NO;
-    self.collectionView.showsHorizontalScrollIndicator  = NO;
+    self.collectionView.showsHorizontalScrollIndicator  = NO;    
     
     [self addSubview:self.collectionView];
     [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
@@ -75,8 +76,6 @@
     [self.collectionView registerClass:MSDayColumnHeader.class forSupplementaryViewOfKind:MSCollectionElementKindDayColumnHeader withReuseIdentifier:MSDayColumnHeaderReuseIdentifier];
     [self.collectionView registerClass:MSTimeRowHeader.class forSupplementaryViewOfKind:MSCollectionElementKindTimeRowHeader withReuseIdentifier:MSTimeRowHeaderReuseIdentifier];
     
-    self.weekFlowLayout.sectionWidth = self.layoutSectionWidth;
-    
     // These are optional. If you don't want any of the decoration views, just don't register a class for them.
     [self.weekFlowLayout registerClass:MSCurrentTimeIndicator.class forDecorationViewOfKind:MSCollectionElementKindCurrentTimeIndicator];
     [self.weekFlowLayout registerClass:MSCurrentTimeGridline.class forDecorationViewOfKind:MSCollectionElementKindCurrentTimeHorizontalGridline];
@@ -84,6 +83,11 @@
     [self.weekFlowLayout registerClass:MSGridline.class forDecorationViewOfKind:MSCollectionElementKindHorizontalGridline];
     [self.weekFlowLayout registerClass:MSTimeRowHeaderBackground.class forDecorationViewOfKind:MSCollectionElementKindTimeRowHeaderBackground];
     [self.weekFlowLayout registerClass:MSDayColumnHeaderBackground.class forDecorationViewOfKind:MSCollectionElementKindDayColumnHeaderBackground];
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    self.weekFlowLayout.sectionWidth = self.layoutSectionWidth;
 }
 
 -(void)forceReload{
@@ -95,9 +99,10 @@
 - (CGFloat)layoutSectionWidth
 {
     // Default to 254 on iPad.
-    //TODO: Days to show
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        return 254.0;
+        NSLog(@"Width : %f",self.frame.size.height);
+        return (self.frame.size.width - 50) / self.daysToShowOnScreen;
+        //return 254.0;
     }
     
     // Otherwise, on iPhone, fit-to-width.
@@ -188,7 +193,6 @@
 {
     NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
     AKEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
-    
     return ev.StartDate;
 }
 
