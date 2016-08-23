@@ -70,7 +70,9 @@
         CGPoint cp = [gestureRecognizer locationInView:self.superview];
         
         
-        [mDragableEvent setCenter:CGPointMake([self round:cp.x toNearest:self.weekFlowLayout.sectionWidth], cp.y)];
+        //[mDragableEvent setCenter:CGPointMake([self round:cp.x + self.collectionView.contentOffset.x toNearest:self.weekFlowLayout.sectionWidth], cp.y)];
+        
+        [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
         
         int hour        = [self getHourForDragable];
         int minute      = [self getMinuteForDragable];
@@ -90,9 +92,15 @@
 
 -(void)onDragEnded:(MSEventCell*)eventCell{
     
-    int hoursDiff = [self getHoursDiff:eventCell.akEvent newHour:[self getHourForDragable]];
+    int hoursDiff = [self getHoursDiff:eventCell.akEvent newHour    :[self getHourForDragable]];
     int daysDiff  = [self getDaysDiff:eventCell.akEvent  newDayIndex:[self getDayIndexForDragable]];
     int minute    = [self getMinuteForDragable];
+    
+    /*NSLog(@"------------");
+    NSLog(@"Date: %@", eventCell.akEvent.StartDate);
+    NSLog(@"Days diff: %d",daysDiff);
+    NSLog(@"HoursDiff: %d",hoursDiff);
+    NSLog(@"Minute: %d",minute);*/
     
     NSDate* newStartDate = [[[eventCell.akEvent.StartDate addHours:hoursDiff] addDays:daysDiff] withMinute:minute];
     NSDate* newEndDate   = [[[eventCell.akEvent.EndDate   addHours:hoursDiff] addDays:daysDiff] withMinute:minute];

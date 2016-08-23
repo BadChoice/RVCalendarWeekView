@@ -100,7 +100,6 @@
 {
     // Default to 254 on iPad.
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        NSLog(@"Width : %f",self.frame.size.height);
         return (self.frame.size.width - 50) / self.daysToShowOnScreen;
         //return 254.0;
     }
@@ -122,12 +121,12 @@
 }
 
 -(void)groupEventsByDays{
-    mDays = [mEvents groupBy:@"StartDate.toDateString"].mutableCopy;
+    mDays = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
     NSDate* date = NSDate.today;
     for(int i = 0; i< self.daysToShow; i++){
-        if(![mDays.allKeys containsObject:date.toDateString]){
-            [mDays setObject:@[] forKey:date.toDateString];
+        if(![mDays.allKeys containsObject:date.toDeviceTimezoneDateString]){
+            [mDays setObject:@[] forKey:date.toDeviceTimezoneDateString];
         }
         date = [date addDay];
     }    
