@@ -1,5 +1,5 @@
 # RVCalendarWeekView
-Simple but powerful Calendar Week View for iOS 
+Simple but powerful Calendar Week View for iOS With dragable events
 
 Following the work from [MSCollectionView](https://github.com/erichoracek/MSCollectionViewCalendarLayout)
 I created this library simplifing its usage
@@ -26,7 +26,7 @@ Easy right?
 
 You can get a dragable events calendar using `RVWeekViewDragable` instead.
 
-it will fire the two functions on your delegate
+it will fire the following functions on your `dragDelegate`
 
 ``` 
 -(BOOL)RVWeekView:(RVWeekView*)weekView canMoveEvent:(AKEvent*)event to:(NSDate*)date;

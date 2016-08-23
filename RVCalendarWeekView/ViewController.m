@@ -44,6 +44,7 @@
                            location:@"Central perk"];
     
     _weekView.dragDelegate = self;
+    _weekView.weekFlowLayout.show24Hours = YES;
     _weekView.events = @[event1,event2,event3,event4];
 }
 

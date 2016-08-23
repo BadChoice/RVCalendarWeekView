@@ -57,11 +57,14 @@
         
         NSLog(@"Long press began: %@",eventCell.akEvent.title);
         
-        CGPoint offset = self.collectionView.contentOffset;
-        CGRect  newFrame = CGRectMake(eventCell.frame.origin.x - offset.x, eventCell.frame.origin.y - offset.y, eventCell.frame.size.width, eventCell.frame.size.height);
+        CGPoint offset   = self.collectionView.contentOffset;
+        CGRect  newFrame = CGRectMake(eventCell.frame.origin.x - offset.x,
+                                      eventCell.frame.origin.y - offset.y,
+                                      eventCell.frame.size.width, eventCell.frame.size.height);
         
         mDragableEvent = [[MSDragableEvent alloc] initWithFrame:newFrame];
-        mDragableEvent.backgroundColor = UIColor.greenColor;
+        mDragableEvent.backgroundColor = [eventCell backgroundColorHighlighted:YES];
+        
         [self.superview.superview addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
@@ -80,7 +83,7 @@
     int daysDiff  = [self getDaysDiff:eventCell.akEvent  newDayIndex:[self getDayIndexForDragable]];
     
     NSDate* newStartDate = [[eventCell.akEvent.StartDate addHours:hoursDiff] addDays:daysDiff];
-    NSDate* newEndDate = [[eventCell.akEvent.EndDate   addHours:hoursDiff] addDays:daysDiff];
+    NSDate* newEndDate = [[eventCell.akEvent.EndDate     addHours:hoursDiff] addDays:daysDiff];
     
     if([self canMoveToNewDate:eventCell.akEvent newDate:newStartDate]){
         eventCell.akEvent.StartDate = newStartDate;

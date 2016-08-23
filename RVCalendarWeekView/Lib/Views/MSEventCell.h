@@ -20,4 +20,6 @@
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UILabel *location;
 
+- (UIColor *)backgroundColorHighlighted:(BOOL)selected;
+
 @end
