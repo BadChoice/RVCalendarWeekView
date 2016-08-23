@@ -50,14 +50,15 @@
 -(void)setup{
     
     self.daysToShowOnScreen = 6;
-    self.weekFlowLayout = [[MSCollectionViewCalendarLayout alloc] init];
+    self.daysToShow         = 30;
+    self.weekFlowLayout     = [[MSCollectionViewCalendarLayout alloc] init];
     self.weekFlowLayout.delegate = self;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.weekFlowLayout];
     self.collectionView.dataSource                      = self;
     self.collectionView.delegate                        = self;
     self.collectionView.directionalLockEnabled          = YES;
     self.collectionView.showsVerticalScrollIndicator    = NO;
-    self.collectionView.showsHorizontalScrollIndicator  = NO;    
+    self.collectionView.showsHorizontalScrollIndicator  = NO;
     
     [self addSubview:self.collectionView];
     [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
@@ -67,7 +68,6 @@
         make.top.equalTo(self.top);
     }];
     
-        
     self.weekFlowLayout.sectionLayoutType = MSSectionLayoutTypeHorizontalTile;
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -124,8 +124,8 @@
 -(void)groupEventsByDays{
     mDays = [mEvents groupBy:@"StartDate.toDateString"].mutableCopy;
     
-    NSDate* date = NSDate.yesterday;
-    for(int i = 0; i<30; i++){
+    NSDate* date = NSDate.today;
+    for(int i = 0; i< self.daysToShow; i++){
         if(![mDays.allKeys containsObject:date.toDateString]){
             [mDays setObject:@[] forKey:date.toDateString];
         }

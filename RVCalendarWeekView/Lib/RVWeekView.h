@@ -21,6 +21,7 @@
 @property(strong,nonatomic) MSCollectionViewCalendarLayout* weekFlowLayout;
 
 @property(nonatomic) int daysToShowOnScreen;
+@property(nonatomic) int daysToShow;
 @property(strong,nonatomic) NSArray* events;
 
 -(void)forceReload;
