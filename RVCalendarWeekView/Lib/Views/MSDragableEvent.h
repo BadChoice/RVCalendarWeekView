@@ -13,5 +13,6 @@
     CGPoint _touchOffset;
 }
 
+@property (strong,nonatomic) UILabel* timeLabel;
 
 @end

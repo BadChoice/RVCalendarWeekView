@@ -68,7 +68,15 @@
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
         CGPoint cp = [gestureRecognizer locationInView:self.superview];
-        [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
+        
+        
+        [mDragableEvent setCenter:CGPointMake([self round:cp.x toNearest:self.weekFlowLayout.sectionWidth], cp.y)];
+        
+        int hour        = [self getHourForDragable];
+        int minute      = [self getMinuteForDragable];
+        NSDate* date    = [[NSDate.today withHour:hour] withMinute:minute];
+        mDragableEvent.timeLabel.text = [date format:@"HH:mm"];
+        
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateEnded){
         //NSLog(@"Long press ended: %@",eventCell.akEvent.title);
@@ -76,13 +84,18 @@
     }
 }
 
+-(CGFloat)round:(float)number toNearest:(float)pivot{
+    return pivot * floor((number/pivot)+0.5);
+}
+
 -(void)onDragEnded:(MSEventCell*)eventCell{
     
     int hoursDiff = [self getHoursDiff:eventCell.akEvent newHour:[self getHourForDragable]];
     int daysDiff  = [self getDaysDiff:eventCell.akEvent  newDayIndex:[self getDayIndexForDragable]];
+    int minute    = [self getMinuteForDragable];
     
-    NSDate* newStartDate = [[eventCell.akEvent.StartDate addHours:hoursDiff] addDays:daysDiff];
-    NSDate* newEndDate = [[eventCell.akEvent.EndDate     addHours:hoursDiff] addDays:daysDiff];
+    NSDate* newStartDate = [[[eventCell.akEvent.StartDate addHours:hoursDiff] addDays:daysDiff] withMinute:minute];
+    NSDate* newEndDate   = [[[eventCell.akEvent.EndDate   addHours:hoursDiff] addDays:daysDiff] withMinute:minute];
     
     if([self canMoveToNewDate:eventCell.akEvent newDate:newStartDate]){
         eventCell.akEvent.StartDate = newStartDate;
@@ -98,10 +111,16 @@
 }
 
 -(int)getHourForDragable{
-    int y               = mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y;
+    int y               = mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - 40;
     int earliestHour    = self.weekFlowLayout.earliestHour;
     int hour            = y/self.weekFlowLayout.hourHeight - 1;
     return hour + earliestHour;
+}
+
+-(int)getMinuteForDragable{
+    int y              = mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - 40;
+    int hours          = (y / self.weekFlowLayout.hourHeight);
+    return (y / self.weekFlowLayout.hourHeight - hours ) * 60;
 }
 
 -(int)getDayIndexForDragable{
