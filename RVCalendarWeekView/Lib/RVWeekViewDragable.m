@@ -55,8 +55,7 @@
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         
-        NSLog(@"Long press began: %@",eventCell.akEvent.title);
-        
+        //NSLog(@"Long press began: %@",eventCell.akEvent.title);
         CGPoint offset   = self.collectionView.contentOffset;
         CGRect  newFrame = CGRectMake(eventCell.frame.origin.x - offset.x,
                                       eventCell.frame.origin.y - offset.y,
@@ -72,7 +71,7 @@
         [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateEnded){
-        NSLog(@"Long press began: %@",eventCell.akEvent.title);
+        //NSLog(@"Long press ended: %@",eventCell.akEvent.title);
         [self onDragEnded:eventCell];
     }
 }
@@ -128,8 +127,7 @@
 
 -(BOOL)canMoveToNewDate:(AKEvent*)event newDate:(NSDate*)newDate{
     if (! self.dragDelegate) return true;
-    return [self.dragDelegate RVWeekView:self canMoveEvent:event to:newDate];
-    
+    return [self.dragDelegate RVWeekView:self canMoveEvent:event to:newDate];    
 }
 
 

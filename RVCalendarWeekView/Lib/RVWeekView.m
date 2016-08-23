@@ -186,7 +186,7 @@
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section
 {
     NSString* day   = [mDays.allKeys.sort objectAtIndex:section];
-    return [NSDate parse:[day append:@" 00:00:00"]];
+    return [NSDate parse:day];
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -213,8 +213,10 @@
 #pragma mark - Collection view delegate
 //================================================
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    NSLog(@"Event selected: %@ / %@ ", cell.akEvent.title, cell.akEvent.StartDate);
+    if(self.delegate){
+        MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        [self.delegate RVWeekView:self eventSelected:cell.akEvent];
+    }
 }
 
 //================================================

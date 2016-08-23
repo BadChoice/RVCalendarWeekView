@@ -43,10 +43,18 @@
                               title:@"Title 4"
                            location:@"Central perk"];
     
+    _weekView.delegate                      = self;
     _weekView.dragDelegate                  = self;
     _weekView.weekFlowLayout.show24Hours    = YES;
     _weekView.daysToShowOnScreen            = 7;
     _weekView.events = @[event1,event2,event3,event4];
+}
+
+//=========================================
+#pragma mark - Week View delegate
+//=========================================
+-(void)RVWeekView:(id)sender eventSelected:(AKEvent *)event{
+    NSLog(@"Event selected: %@",event.title);
 }
 
 //=========================================
