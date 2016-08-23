@@ -96,12 +96,6 @@
     int daysDiff  = [self getDaysDiff:eventCell.akEvent  newDayIndex:[self getDayIndexForDragable]];
     int minute    = [self getMinuteForDragable];
     
-    /*NSLog(@"------------");
-    NSLog(@"Date: %@", eventCell.akEvent.StartDate);
-    NSLog(@"Days diff: %d",daysDiff);
-    NSLog(@"HoursDiff: %d",hoursDiff);
-    NSLog(@"Minute: %d",minute);*/
-    
     NSDate* newStartDate = [[[eventCell.akEvent.StartDate addHours:hoursDiff] addDays:daysDiff] withMinute:minute];
     NSDate* newEndDate   = [[[eventCell.akEvent.EndDate   addHours:hoursDiff] addDays:daysDiff] withMinute:minute];
     
