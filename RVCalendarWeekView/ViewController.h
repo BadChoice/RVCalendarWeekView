@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RVWeekView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet RVWeekView *weekView;
 

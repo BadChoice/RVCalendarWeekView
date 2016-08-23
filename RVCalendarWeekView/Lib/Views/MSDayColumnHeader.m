@@ -25,13 +25,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.titleBackground = [UIView new];
+        self.titleBackground                    = [UIView new];
         self.titleBackground.layer.cornerRadius = nearbyintf(15.0);
         [self addSubview:self.titleBackground];
         
-        self.backgroundColor = [UIColor clearColor];
-        self.title = [UILabel new];
-        self.title.backgroundColor = [UIColor clearColor];
+        self.backgroundColor        = [UIColor clearColor];
+        self.title                  = [UILabel new];
+        self.title.backgroundColor  = [UIColor clearColor];
         [self addSubview:self.title];
         
         [self.titleBackground makeConstraints:^(MASConstraintMaker *make) {
@@ -63,13 +63,13 @@
     _currentDay = currentDay;
     
     if (currentDay) {
-        self.title.textColor = [UIColor whiteColor];
-        self.title.font = [UIFont boldSystemFontOfSize:16.0];
-        self.titleBackground.backgroundColor = [UIColor colorWithHexString:@"fd3935"];
+        self.title.textColor                    = [UIColor whiteColor];
+        self.title.font                         = [UIFont boldSystemFontOfSize:16.0];
+        self.titleBackground.backgroundColor    = [UIColor colorWithHexString:@"fd3935"];
     } else {
-        self.title.font = [UIFont systemFontOfSize:16.0];
-        self.title.textColor = [UIColor blackColor];
-        self.titleBackground.backgroundColor = [UIColor clearColor];
+        self.title.font                         = [UIFont systemFontOfSize:16.0];
+        self.title.textColor                    = [UIColor blackColor];
+        self.titleBackground.backgroundColor    = [UIColor clearColor];
     }
 }
 

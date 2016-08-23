@@ -27,6 +27,7 @@
 //
 
 #import "MSCollectionViewCalendarLayout.h"
+#import "NSDate+Easy.h"
 
 NSString * const MSCollectionElementKindTimeRowHeader               = @"MSCollectionElementKindTimeRow";
 NSString * const MSCollectionElementKindDayColumnHeader             = @"MSCollectionElementKindDayHeader";
@@ -354,7 +355,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
                 [sectionItemAttributes addObject:itemAttributes];
                 
                 NSDateComponents *itemStartTime = [self startTimeForIndexPath:itemIndexPath];
-                NSDateComponents *itemEndTime = [self endTimeForIndexPath:itemIndexPath];
+                NSDateComponents *itemEndTime   = [self endTimeForIndexPath:itemIndexPath];
                 
                 CGFloat startHourY = ((itemStartTime.hour - earliestHour) * self.hourHeight);
                 CGFloat startMinuteY = (itemStartTime.minute * self.minuteHeight);
@@ -393,6 +394,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         horizontalGridlineIndex++;
     }
 }
+
 
 - (void)prepareVerticalTileSectionLayoutForSections:(NSIndexSet *)sectionIndexes
 {
@@ -753,13 +755,9 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 -(void)initializeMinuteTick{
     // Invalidate layout on minute ticks (to update the position of the current time indicator)
-    NSDate *oneMinuteInFuture = [NSDate.date dateByAddingTimeInterval:60];
-    NSDateComponents *components = [NSCalendar.currentCalendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:oneMinuteInFuture];
-    NSDate *nextMinuteBoundary = [NSCalendar.currentCalendar dateFromComponents:components];
-    
     // This needs to be a weak reference, otherwise we get a retain cycle
     MSTimerWeakTarget *timerWeakTarget = [[MSTimerWeakTarget alloc] initWithTarget:self selector:@selector(minuteTick:)];
-    self.minuteTimer = [[NSTimer alloc] initWithFireDate:nextMinuteBoundary interval:60 target:timerWeakTarget selector:timerWeakTarget.fireSelector userInfo:nil repeats:YES];
+    self.minuteTimer = [[NSTimer alloc] initWithFireDate:NSDate.nextMinute interval:60 target:timerWeakTarget selector:timerWeakTarget.fireSelector userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.minuteTimer forMode:NSDefaultRunLoopMode];
 }
 
@@ -1099,8 +1097,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 - (NSInteger)earliestHour
 {
     
-    if(self.show24Hours) return 0;
-    
+    if (self.show24Hours) return 0;
     if (self.cachedEarliestHour != NSIntegerMax) {
         return self.cachedEarliestHour;
     }
@@ -1121,8 +1118,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)latestHour
 {
-    if(self.show24Hours) return 24;
-    
+    if (self.show24Hours) return 24;
     if (self.cachedLatestHour != NSIntegerMin) {
         return self.cachedLatestHour;
     }
@@ -1143,13 +1139,13 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)earliestHourForSection:(NSInteger)section
 {
-    if(self.show24Hours) return 0;
+    if (self.show24Hours) return 0;
     if (self.cachedEarliestHours[@(section)]) {
         return [self.cachedEarliestHours[@(section)] integerValue];
     }
     NSInteger earliestHour = NSIntegerMax;
     for (NSInteger item = 0; item < [self.collectionView numberOfItemsInSection:section]; item++) {
-        NSIndexPath *itemIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+        NSIndexPath *itemIndexPath      = [NSIndexPath indexPathForItem:item inSection:section];
         NSDateComponents *itemStartTime = [self startTimeForIndexPath:itemIndexPath];
         if (itemStartTime.hour < earliestHour) {
             earliestHour = itemStartTime.hour;
@@ -1165,14 +1161,14 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (NSInteger)latestHourForSection:(NSInteger)section
 {
-    if(self.show24Hours) return 24;
+    if (self.show24Hours) return 24;
     if (self.cachedLatestHours[@(section)]) {
         return [self.cachedLatestHours[@(section)] integerValue];
     }
     NSInteger latestHour = NSIntegerMin;
     for (NSInteger item = 0; item < [self.collectionView numberOfItemsInSection:section]; item++) {
-        NSIndexPath *itemIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
-        NSDateComponents *itemEndTime = [self endTimeForIndexPath:itemIndexPath];
+        NSIndexPath *itemIndexPath      = [NSIndexPath indexPathForItem:item inSection:section];
+        NSDateComponents *itemEndTime   = [self endTimeForIndexPath:itemIndexPath];
         NSInteger itemEndTimeHour;
         if ([self dayForSection:section].day == itemEndTime.day) {
             itemEndTimeHour = (itemEndTime.hour + ((itemEndTime.minute > 0) ? 1 : 0));

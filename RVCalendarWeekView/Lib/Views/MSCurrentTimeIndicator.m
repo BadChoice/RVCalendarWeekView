@@ -28,25 +28,23 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor whiteColor];
-        
-        self.time = [UILabel new];
-        self.time.font = [UIFont boldSystemFontOfSize:10.0];
-        self.time.textColor = [UIColor colorWithHexString:@"fd3935"];
+        self.backgroundColor    = [UIColor whiteColor];
+        self.time               = [UILabel new];
+        self.time.font          = [UIFont boldSystemFontOfSize:10.0];
+        self.time.textColor     = [UIColor colorWithHexString:@"fd3935"];
         [self addSubview:self.time];
         
         [self.time makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.centerY);
-            make.right.equalTo(self.right).offset(-5.0);
+            make.right  .equalTo(self.right).offset(-5.0);
         }];
         
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDate *oneMinuteInFuture = [[NSDate date] dateByAddingTimeInterval:60];
-        NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:oneMinuteInFuture];
-        NSDate *nextMinuteBoundary = [calendar dateFromComponents:components];
-        
-        self.minuteTimer = [[NSTimer alloc] initWithFireDate:nextMinuteBoundary interval:60 target:self selector:@selector(minuteTick:) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:self.minuteTimer forMode:NSDefaultRunLoopMode];
+        self.minuteTimer = [[NSTimer alloc] initWithFireDate:NSDate.nextMinute interval:60
+                                                      target:self
+                                                    selector:@selector(minuteTick:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        [NSRunLoop.currentRunLoop addTimer:self.minuteTimer forMode:NSDefaultRunLoopMode];
         
         [self updateTime];
     }
@@ -54,15 +52,13 @@
 }
 
 #pragma mark - MSCurrentTimeIndicator
-
-- (void)minuteTick:(id)sender
-{
+- (void)minuteTick:(id)sender{
     [self updateTime];
 }
 
 - (void)updateTime
 {
-    self.time.text = [NSDate.now format:@"h:mm aa"];
+    self.time.text = [NSDate.now format:@"h:mm aa" timezone:@"device"];
     [self.time sizeToFit];
 }
 

@@ -56,6 +56,7 @@
     self.weekFlowLayout.delegate = self;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.weekFlowLayout];
     self.collectionView.dataSource                      = self;
+    self.collectionView.delegate                        = self;
     self.collectionView.directionalLockEnabled          = YES;
     self.collectionView.showsVerticalScrollIndicator    = NO;
     self.collectionView.showsHorizontalScrollIndicator  = NO;
@@ -169,7 +170,6 @@
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   
     NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
     AKEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
     
@@ -178,16 +178,22 @@
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
     AKEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
     return ev.EndDate;
-    
 }
 
 - (NSDate *)currentTimeComponentsForCollectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout
 {
     return NSDate.date;
+}
+
+//================================================
+#pragma mark - Collection view delegate
+//================================================
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@"Event selected: %@ / %@ ", cell.akEvent.title, cell.akEvent.StartDate);
 }
 
 //================================================

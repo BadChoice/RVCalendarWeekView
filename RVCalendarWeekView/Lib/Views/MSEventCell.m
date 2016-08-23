@@ -78,7 +78,6 @@
 }
 
 #pragma mark - UICollectionViewCell
-
 - (void)setSelected:(BOOL)selected
 {
     if (selected && (self.selected != selected)) {
@@ -100,8 +99,6 @@
 }
 
 #pragma mark - MSEventCell
-
-
 - (void)setAkEvent:(AKEvent *)event
 {
     _akEvent = event;
@@ -113,9 +110,9 @@
 - (void)updateColors
 {
     self.contentView.backgroundColor = [self backgroundColorHighlighted:self.selected];
-    self.borderView.backgroundColor = [self borderColor];
-    self.title.textColor = [self textColorHighlighted:self.selected];
-    self.location.textColor = [self textColorHighlighted:self.selected];
+    self.borderView.backgroundColor  = [self borderColor];
+    self.title.textColor             = [self textColorHighlighted:self.selected];
+    self.location.textColor          = [self textColorHighlighted:self.selected];
 }
 
 - (NSDictionary *)titleAttributesHighlighted:(BOOL)highlighted
