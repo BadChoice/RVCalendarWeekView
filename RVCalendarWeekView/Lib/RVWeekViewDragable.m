@@ -69,8 +69,10 @@
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
         CGPoint cp = [gestureRecognizer locationInView:self.superview];
         
-        
-        //[mDragableEvent setCenter:CGPointMake([self round:cp.x + self.collectionView.contentOffset.x toNearest:self.weekFlowLayout.sectionWidth], cp.y)];
+        /*[UIView animateWithDuration:0.1 animations:^{
+            [mDragableEvent setCenter:CGPointMake([self round:cp.x toNearest:self.weekFlowLayout.sectionWidth],
+                                                  cp.y)];
+        }];*/        
         
         [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
         
