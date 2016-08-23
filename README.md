@@ -23,3 +23,13 @@ you can now use storyboard to create a simple UIView extending the RVCalendarVie
 ```
 
 Easy right?
+
+You can get a dragable events calendar using `RVWeekViewDragable` instead.
+
+it will fire the two functions on your delegate
+
+``` 
+-(BOOL)RVWeekView:(RVWeekView*)weekView canMoveEvent:(AKEvent*)event to:(NSDate*)date;
+
+-(void)RVWeekView:(RVWeekView*)weekView event:(AKEvent*)event moved:(NSDate*)date;
+```

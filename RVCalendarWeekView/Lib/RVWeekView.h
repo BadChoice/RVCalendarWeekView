@@ -22,4 +22,6 @@
 
 @property(strong,nonatomic) NSArray* events;
 
+-(void)forceReload;
+
 @end

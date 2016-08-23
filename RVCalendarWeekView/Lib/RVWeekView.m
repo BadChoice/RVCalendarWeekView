@@ -10,11 +10,9 @@
 
 #import "NSDate+Easy.h"
 #import "RVCollection.h"
-#import "NSDate+DateTools.h"
 
 #define MAS_SHORTHAND
 #import "Masonry.h"
-
 
 // Collection View Reusable Views
 #import "MSGridline.h"
@@ -142,10 +140,6 @@
     NSString* day       = [mDays.allKeys.sort objectAtIndex:indexPath.section];
     cell.akEvent        = [mDays[day] objectAtIndex:indexPath.row];
     
-    
-    UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-    [cell addGestureRecognizer:lpgr];
-    
     return cell;
 }
 
@@ -210,75 +204,6 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@"Event selected: %@ / %@ ", cell.akEvent.title, cell.akEvent.StartDate);
-}
-
-//================================================
-#pragma mark - Drag & Drop
-//================================================
--(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
-    MSEventCell* eventCell = (MSEventCell*)gestureRecognizer.view;
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        
-        NSLog(@"Long press began: %@",eventCell.akEvent.title);
-        
-        CGPoint offset = self.collectionView.contentOffset;
-        CGRect  newFrame = CGRectMake(eventCell.frame.origin.x - offset.x, eventCell.frame.origin.y - offset.y, eventCell.frame.size.width, eventCell.frame.size.height);
-        
-        mDragableEvent = [[MSDragableEvent alloc] initWithFrame:newFrame];
-        mDragableEvent.backgroundColor = UIColor.greenColor;
-        [self.superview.superview addSubview:mDragableEvent];
-    }
-    else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
-        CGPoint cp = [gestureRecognizer locationInView:self.superview];
-        [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
-    }
-    else if(gestureRecognizer.state == UIGestureRecognizerStateEnded){
-        NSLog(@"Long press began: %@",eventCell.akEvent.title);
-        [self onDragEnded:eventCell];
-    }
-}
-
--(void)onDragEnded:(MSEventCell*)eventCell{
-    
-    int hoursDiff = [self getHoursDiff:eventCell.akEvent newHour:[self getHourForDragable]];
-    int daysDiff  = [self getDaysDiff:eventCell.akEvent  newDayIndex:[self getDayIndexForDragable]];
-    
-    eventCell.akEvent.StartDate = [[eventCell.akEvent.StartDate addHours:hoursDiff] addDays:daysDiff];
-    eventCell.akEvent.EndDate   = [[eventCell.akEvent.EndDate   addHours:hoursDiff] addDays:daysDiff];
-    
-    [self forceReload];
-    
-    [mDragableEvent removeFromSuperview];
-    mDragableEvent = nil;
-}
-
--(int)getHourForDragable{
-    int y               = mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y;
-    int earliestHour    = self.weekFlowLayout.earliestHour;
-    int hour            = y/self.weekFlowLayout.hourHeight - 1;
-    return hour + earliestHour;
-}
-
--(int)getDayIndexForDragable{
-    int x  = mDragableEvent.frame.origin.x + self.collectionView.contentOffset.x;
-    return x / self.weekFlowLayout.sectionWidth;
-}
-
--(int)getHoursDiff:(AKEvent*)event newHour:(int)newHour{
-    int eventHour = event.StartDate.hour;
-    return newHour - eventHour;
-}
-
--(int)getDaysDiff:(AKEvent*)event newDayIndex:(int)newDayIndex{
-    int __block eventDayOffset = 0;
-    [mDays.allKeys.sort eachWithIndex:^(NSString* day, int index, BOOL *stop) {
-        if([mDays[day] containsObject:event]){
-            eventDayOffset = index;
-            *stop = TRUE;
-        }
-    }];
-    return newDayIndex - eventDayOffset;
 }
 
 //================================================

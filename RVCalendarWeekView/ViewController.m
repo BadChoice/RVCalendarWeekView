@@ -43,8 +43,19 @@
                               title:@"Title 4"
                            location:@"Central perk"];
     
-
+    _weekView.dragDelegate = self;
     _weekView.events = @[event1,event2,event3,event4];
+}
+
+//=========================================
+#pragma mark - Week View Dragable delegate
+//=========================================
+-(void)RVWeekView:(RVWeekView *)weekView event:(AKEvent *)event moved:(NSDate *)date{
+    NSLog(@"Event moved");
+}
+
+-(BOOL)RVWeekView:(RVWeekView *)weekView canMoveEvent:(AKEvent *)event to:(NSDate *)date{
+    return YES;
 }
 
 

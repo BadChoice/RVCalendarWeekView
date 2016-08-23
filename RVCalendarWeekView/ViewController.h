@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RVWeekView.h"
+#import "RVWeekViewDragable.h"
 
-@interface ViewController : UIViewController <UICollectionViewDelegate>
+@interface ViewController : UIViewController <RVWeekViewDragableDelegate>
 
-@property (weak, nonatomic) IBOutlet RVWeekView *weekView;
+@property (weak, nonatomic) IBOutlet RVWeekViewDragable *weekView;
 
 @end
 
