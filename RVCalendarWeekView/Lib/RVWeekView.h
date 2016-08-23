@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MSCollectionViewCalendarLayout.h"
+#import "MSDragableEvent.h"
 
 @interface RVWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>
 {
-    NSDictionary* mDays;
+    NSArray         * mEvents;
+    NSDictionary    * mDays;
+    MSDragableEvent * mDragableEvent;
 }
 
 @property(strong,nonatomic) UICollectionView* collectionView;

@@ -25,6 +25,7 @@
 		76276EFE1D6B826B002C1D39 /* MSTimeRowHeaderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EF31D6B826B002C1D39 /* MSTimeRowHeaderBackground.m */; };
 		76276F051D6B8759002C1D39 /* AKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276F041D6B8759002C1D39 /* AKEvent.m */; };
 		763857F41D6BA4DF008D1328 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 763857F31D6BA4DF008D1328 /* README.md */; };
+		763A802A1D6C4488002E0CBF /* MSDragableEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 763A80291D6C4488002E0CBF /* MSDragableEvent.m */; };
 		766E7E1D1D6B9C9F007A410C /* RVWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 766E7E1C1D6B9C9F007A410C /* RVWeekView.m */; };
 		E24E9C4DAB2DA2174E77B5AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0AB32BB77DBD1AD335BF12 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,8 @@
 		76276F031D6B8759002C1D39 /* AKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKEvent.h; path = Lib/Views/AKEvent.h; sourceTree = "<group>"; };
 		76276F041D6B8759002C1D39 /* AKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKEvent.m; path = Lib/Views/AKEvent.m; sourceTree = "<group>"; };
 		763857F31D6BA4DF008D1328 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		763A80281D6C4488002E0CBF /* MSDragableEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDragableEvent.h; sourceTree = "<group>"; };
+		763A80291D6C4488002E0CBF /* MSDragableEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDragableEvent.m; sourceTree = "<group>"; };
 		766E7E1B1D6B9C9F007A410C /* RVWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RVWeekView.h; path = Lib/RVWeekView.h; sourceTree = "<group>"; };
 		766E7E1C1D6B9C9F007A410C /* RVWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RVWeekView.m; path = Lib/RVWeekView.m; sourceTree = "<group>"; };
 		AB0AB32BB77DBD1AD335BF12 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,6 +237,8 @@
 			children = (
 				76276EEC1D6B826B002C1D39 /* MSEventCell.h */,
 				76276EED1D6B826B002C1D39 /* MSEventCell.m */,
+				763A80281D6C4488002E0CBF /* MSDragableEvent.h */,
+				763A80291D6C4488002E0CBF /* MSDragableEvent.m */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				763A802A1D6C4488002E0CBF /* MSDragableEvent.m in Sources */,
 				76276EF51D6B826B002C1D39 /* MSCollectionViewCalendarLayout.m in Sources */,
 				76276F051D6B8759002C1D39 /* AKEvent.m in Sources */,
 				76276EFB1D6B826B002C1D39 /* MSEventCell.m in Sources */,

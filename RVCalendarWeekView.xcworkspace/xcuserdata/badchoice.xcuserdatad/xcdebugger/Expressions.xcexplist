@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[RVWeekView onLongPress:]:RVWeekView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "mEvents">
+            </PersistentString>
+            <PersistentString
+               value = "mDays">
+            </PersistentString>
+            <PersistentString
+               value = "earliestHour">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MSEventCell onLongPress:]:MSEventCell.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

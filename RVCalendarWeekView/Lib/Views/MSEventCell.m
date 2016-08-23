@@ -98,6 +98,7 @@
     [self updateColors];
 }
 
+
 #pragma mark - MSEventCell
 - (void)setAkEvent:(AKEvent *)event
 {
