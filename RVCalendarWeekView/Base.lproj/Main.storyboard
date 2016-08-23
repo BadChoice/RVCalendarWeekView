@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,12 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQ1-WO-IuM" customClass="RVWeekView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QQ1-WO-IuM" customClass="RVWeekView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="QQ1-WO-IuM" secondAttribute="trailing" constant="-20" id="8OL-C8-94m"/>
+                            <constraint firstItem="QQ1-WO-IuM" firstAttribute="top" secondItem="rqO-y9-S5B" secondAttribute="topMargin" id="gA8-1L-bV4"/>
+                            <constraint firstItem="QQ1-WO-IuM" firstAttribute="leading" secondItem="rqO-y9-S5B" secondAttribute="leadingMargin" constant="-20" id="v6T-Cd-1Tb"/>
+                            <constraint firstItem="Kwu-PG-3Yb" firstAttribute="top" secondItem="QQ1-WO-IuM" secondAttribute="bottom" id="yrj-qZ-QW2"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="weekView" destination="QQ1-WO-IuM" id="kzG-Ag-ivb"/>

@@ -12,6 +12,11 @@
 #import "RVCollection.h"
 #import "NSString+EasyDate.h"
 
+
+#define MAS_SHORTHAND
+#import "Masonry.h"
+
+
 // Collection View Reusable Views
 #import "MSGridline.h"
 #import "MSTimeRowHeaderBackground.h"
@@ -54,7 +59,14 @@
     self.collectionView.directionalLockEnabled          = YES;
     self.collectionView.showsVerticalScrollIndicator    = NO;
     self.collectionView.showsHorizontalScrollIndicator  = NO;
+    
     [self addSubview:self.collectionView];
+    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(self.height);
+        make.width.equalTo(self.width);
+        make.left.equalTo(self.left);
+        make.top.equalTo(self.top);
+    }];
     
         
     self.weekFlowLayout.sectionLayoutType = MSSectionLayoutTypeHorizontalTile;

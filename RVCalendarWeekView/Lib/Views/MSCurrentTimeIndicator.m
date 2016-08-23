@@ -12,6 +12,8 @@
 #import "Masonry.h"
 #import "UIColor+HexString.h"
 
+#import "NSDate+Easy.h"
+
 @interface MSCurrentTimeIndicator ()
 
 @property (nonatomic, strong) UILabel *time;
@@ -60,9 +62,7 @@
 
 - (void)updateTime
 {
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"h:mm aa"];
-    self.time.text = [dateFormatter stringFromDate:[NSDate date]];
+    self.time.text = [NSDate.now format:@"h:mm aa"];
     [self.time sizeToFit];
 }
 
