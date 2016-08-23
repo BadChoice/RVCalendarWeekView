@@ -12,9 +12,9 @@
 
 @interface RVWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>
 {
-    NSArray         * mEvents;
-    NSDictionary    * mDays;
-    MSDragableEvent * mDragableEvent;
+    NSArray             * mEvents;
+    NSMutableDictionary * mDays;
+    MSDragableEvent     * mDragableEvent;
 }
 
 @property(strong,nonatomic) UICollectionView* collectionView;

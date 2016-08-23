@@ -117,7 +117,15 @@
 }
 
 -(void)groupEventsByDays{
-    mDays = [mEvents groupBy:@"StartDate.toDateString"];
+    mDays = [mEvents groupBy:@"StartDate.toDateString"].mutableCopy;
+    
+    NSDate* date = NSDate.yesterday;
+    for(int i = 0; i<30; i++){
+        if(![mDays.allKeys containsObject:date.toDateString]){
+            [mDays setObject:@[] forKey:date.toDateString];
+        }
+        date = [date addDay];
+    }    
 }
 
 //================================================
@@ -173,8 +181,7 @@
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section
 {
     NSString* day   = [mDays.allKeys.sort objectAtIndex:section];
-    AKEvent* ev     = [mDays[day] firstObject];
-    return ev.day;
+    return [NSDate parse:[day append:@" 00:00:00"]];
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
