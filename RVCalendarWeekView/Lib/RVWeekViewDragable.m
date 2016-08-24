@@ -53,28 +53,25 @@
 -(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
     MSEventCell* eventCell = (MSEventCell*)gestureRecognizer.view;
     
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {        
         //NSLog(@"Long press began: %@",eventCell.akEvent.title);
-        CGPoint offset   = self.collectionView.contentOffset;
-        CGRect  newFrame = CGRectMake(eventCell.frame.origin.x - offset.x,
-                                      eventCell.frame.origin.y - offset.y,
-                                      eventCell.frame.size.width, eventCell.frame.size.height);
-        
-        mDragableEvent = [[MSDragableEvent alloc] initWithFrame:newFrame];
-        mDragableEvent.backgroundColor = [eventCell backgroundColorHighlighted:YES];
-        
+        mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.collectionView.contentOffset];
         [self.superview.superview addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
         CGPoint cp = [gestureRecognizer locationInView:self.superview];
         
-        /*[UIView animateWithDuration:0.1 animations:^{
-            [mDragableEvent setCenter:CGPointMake([self round:cp.x toNearest:self.weekFlowLayout.sectionWidth],
-                                                  cp.y)];
-        }];*/        
+        [UIView animateWithDuration:0.1 animations:^{
+            /*float xOffset = -13;
+            if([self isPortrait]){
+                xOffset = 5;
+            }
+            float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
+                    - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);*/
+            [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
+        }];
         
-        [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
+        //[mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
         
         int hour        = [self getHourForDragable];
         int minute      = [self getMinuteForDragable];
@@ -124,7 +121,10 @@
 -(int)getMinuteForDragable{
     int y              = mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - 40;
     int hours          = (y / self.weekFlowLayout.hourHeight);
-    return (y / self.weekFlowLayout.hourHeight - hours ) * 60;
+    int minute         = (y / self.weekFlowLayout.hourHeight - hours ) * 60;
+    
+    int minuteRounded  = [self round:minute toNearest:5];
+    return minuteRounded == 60 ? 55 : minuteRounded;
 }
 
 -(int)getDayIndexForDragable{
@@ -151,6 +151,10 @@
 -(BOOL)canMoveToNewDate:(AKEvent*)event newDate:(NSDate*)newDate{
     if (! self.dragDelegate) return true;
     return [self.dragDelegate RVWeekView:self canMoveEvent:event to:newDate];    
+}
+
+-(BOOL)isPortrait{
+    return (UIDevice.currentDevice.orientation == UIDeviceOrientationPortrait || UIDevice.currentDevice.orientation == UIDeviceOrientationFaceUp);
 }
 
 

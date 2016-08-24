@@ -6,12 +6,14 @@
 //  Copyright © 2016 revo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MSEventCell.h"
 
-@interface MSDragableEvent : UIView{
+@interface MSDragableEvent : MSEventCell{
     CGPoint _originalPosition;
     CGPoint _touchOffset;
 }
+
++(MSDragableEvent*)makeWithEventCell:(MSEventCell*)eventCell andOffset:(CGPoint)offset;
 
 @property (strong,nonatomic) UILabel* timeLabel;
 

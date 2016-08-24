@@ -13,6 +13,17 @@
 
 @implementation MSDragableEvent
 
++(MSDragableEvent*)makeWithEventCell:(MSEventCell*)eventCell andOffset:(CGPoint)offset{
+    
+    CGRect  newFrame = CGRectMake(eventCell.frame.origin.x - offset.x,
+                                  eventCell.frame.origin.y - offset.y,
+                                  eventCell.frame.size.width, eventCell.frame.size.height);
+    
+    MSDragableEvent *dragCell = [[MSDragableEvent alloc] initWithFrame:newFrame];
+    dragCell.akEvent          = eventCell.akEvent;
+    dragCell.backgroundColor  = [eventCell backgroundColorHighlighted:YES];
+    return dragCell;
+}
 
 -(id)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
@@ -20,15 +31,16 @@
         CGFloat borderWidth = 2.0;
         UIEdgeInsets contentPadding = UIEdgeInsetsMake(1.0, (borderWidth + 4.0), 1.0, 4.0);
         
-        self.timeLabel           = [UILabel new];
-        self.timeLabel.font      = [UIFont systemFontOfSize:12];
-        self.timeLabel.textColor = UIColor.whiteColor;
+        self.timeLabel                  = [UILabel new];
+        self.timeLabel.font             = [UIFont systemFontOfSize:12];
+        self.timeLabel.textColor        = UIColor.blackColor;
+        self.timeLabel.textAlignment    = NSTextAlignmentRight;
         [self addSubview:self.timeLabel];
         
         [self.timeLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.top).offset(contentPadding.top);
-            make.left.equalTo(self.left).offset(contentPadding.left);
-            make.right.equalTo(self.right).offset(-contentPadding.right);
+            make.top.equalTo    (self.top)  .offset(-15);
+            make.left.equalTo   (self.left) .offset(contentPadding.left);
+            make.right.equalTo  (self.right).offset(-contentPadding.right);
         }];        
         
         self.timeLabel.text = @"--";
@@ -36,19 +48,5 @@
     return self;
 }
 
-/*-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //_originalPosition   = self.center;
-    //_touchOffset        = CGPointMake(self.center.x-position.x,self.center.y - position.y);
-}
-
--(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch* mTouch = [touches anyObject];
-    CGPoint cp = [mTouch locationInView:self.superview];
-    [self setCenter:CGPointMake(cp.x, cp.y)];
-}
-
--(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-
-}*/
 
 @end

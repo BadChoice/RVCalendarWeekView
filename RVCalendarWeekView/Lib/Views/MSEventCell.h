@@ -8,13 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "AKEvent.h"
-#import "MSDragableEvent.h"
 
 @class AKEvent;
 
-@interface MSEventCell : UICollectionViewCell{
-    MSDragableEvent* mDragableEvent;
-}
+@interface MSEventCell : UICollectionViewCell
 
 @property (nonatomic, strong) AKEvent *akEvent;
 @property (nonatomic, strong) UILabel *title;

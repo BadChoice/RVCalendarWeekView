@@ -59,6 +59,9 @@
     self.collectionView.directionalLockEnabled          = YES;
     self.collectionView.showsVerticalScrollIndicator    = NO;
     self.collectionView.showsHorizontalScrollIndicator  = NO;
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+        self.collectionView.pagingEnabled = YES;
+    }
     
     [self addSubview:self.collectionView];
     [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
