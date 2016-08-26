@@ -23,10 +23,10 @@
 
 -(void)layoutSubviews{
     if(self.frame.size.width > 5 && self.frame.size.height > 5 ){
-        self.backgroundColor        = [UIColor colorWithHexString:@"fafafa"];
+        self.backgroundColor = [UIColor colorWithHexString:@"fafafa"];
     }
     else{
-        self.backgroundColor        = [UIColor colorWithHexString:@"d7d7d7"];
+        self.backgroundColor = [UIColor colorWithHexString:@"d7d7d7"];
     }
 }
 
