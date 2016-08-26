@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "MSEvent.h"
 #import "NSDate+Easy.h"
+#import "NSArray+Collection.h"
+
 @interface ViewController ()
 
 @end
@@ -86,6 +88,12 @@
     [condition unlock];
     
     return shouldMove;*/
+}
+
+-(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date{
+    NSLog(@"Long pressed at: %@", date);
+    MSEvent *newEvent = [MSEvent make:date title:@"New Event" location:@"Platinium stadium"];
+    [_weekView addEvent:newEvent];
 }
 
 

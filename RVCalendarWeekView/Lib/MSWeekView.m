@@ -123,6 +123,12 @@
     [self groupEventsByDays];
 }
 
+-(void)addEvent:(MSEvent *)event{
+    self.events = [mEvents arrayByAddingObject:event];
+    [self.weekFlowLayout invalidateLayoutCache];
+    [self.collectionView reloadData];
+}
+
 -(void)groupEventsByDays{
     mDays = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
