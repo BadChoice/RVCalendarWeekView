@@ -342,7 +342,15 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             NSIndexPath *verticalGridlineIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
             UICollectionViewLayoutAttributes *horizontalGridlineAttributes = [self layoutAttributesForDecorationViewAtIndexPath:verticalGridlineIndexPath ofKind:MSCollectionElementKindVerticalGridline withItemCache:self.verticalGridlineAttributes];
             CGFloat horizontalGridlineMinX = nearbyintf(sectionMinX - self.sectionMargin.left - (self.verticalGridlineWidth / 2.0));
-            horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.verticalGridlineWidth, sectionHeight);
+            
+            //Weekends
+            int weekDay = (currentTimeDateComponents.weekday + section) % 7;
+            if( weekDay == 6 || weekDay == 0){
+                horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.sectionWidth, sectionHeight);
+            }
+            else{
+                horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.verticalGridlineWidth, sectionHeight);
+            }
         }
         
         if (needsToPopulateItemAttributes) {
@@ -1043,15 +1051,15 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             }
             // Current Time Horizontal Gridline
             else if (elementKind == MSCollectionElementKindCurrentTimeHorizontalGridline) {
-                return (MSCollectionMinBackgroundZ + 2.0);
+                return (MSCollectionMinBackgroundZ + 1.0);
             }
             // Vertical Gridline
             else if (elementKind == MSCollectionElementKindVerticalGridline) {
-                return (MSCollectionMinBackgroundZ + 1.0);
+                return (MSCollectionMinBackgroundZ + 0.0);
             }
             // Horizontal Gridline
             else if (elementKind == MSCollectionElementKindHorizontalGridline) {
-                return MSCollectionMinBackgroundZ;
+                return MSCollectionMinBackgroundZ + 2.0;
             }
         }
         case MSSectionLayoutTypeVerticalTile: {
@@ -1236,7 +1244,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
     
     NSDate *date = [self.delegate currentTimeComponentsForCollectionView:self.collectionView layout:self];
-    NSDateComponents *currentTime = [NSCalendar.currentCalendar components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+    NSDateComponents *currentTime = [NSCalendar.currentCalendar components:(NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitWeekday) fromDate:date];
     
     [self.cachedCurrentDateComponents setObject:currentTime forKey:@(0)];
     return currentTime;

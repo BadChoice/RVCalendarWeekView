@@ -15,8 +15,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor colorWithHexString:@"d7d7d7"];
+        if(self.frame.size.width > 5 && self.frame.size.height > 10 ){
+            UIView* border = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, self.frame.size.height)];
+            [self addSubview:border];
+            border.backgroundColor = [UIColor colorWithHexString:@"d7d7d7"];
+            self.backgroundColor = [UIColor colorWithHexString:@"fafafa"];            
+        }
     }
     return self;
+}
+
+-(void)layoutSubviews{
+    if(self.frame.size.width > 5 && self.frame.size.height > 10 ){
+        self.backgroundColor = [UIColor colorWithHexString:@"fafafa"];
+    }
 }
 
 @end
