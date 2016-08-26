@@ -2,7 +2,6 @@
 Simple but powerful Calendar Week View for iOS With dragable events
 
 
-
 Following the work from [MSCollectionView](https://github.com/erichoracek/MSCollectionViewCalendarLayout)
 I created this library simplifing its usage
 
