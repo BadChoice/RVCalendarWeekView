@@ -7,7 +7,7 @@
 //
 
 #import "MSTimeRowHeader.h"
-
+#import "UIColor+HexString.h"
 #define MAS_SHORTHAND
 #import "Masonry.h"
 
@@ -21,6 +21,7 @@
         self.title = [UILabel new];
         self.title.backgroundColor = [UIColor clearColor];
         self.title.font = [UIFont systemFontOfSize:12.0];
+        self.title.textColor = [UIColor colorWithHexString:@"a7a7a7"];
         [self addSubview:self.title];
         
         [self.title makeConstraints:^(MASConstraintMaker *make) {
