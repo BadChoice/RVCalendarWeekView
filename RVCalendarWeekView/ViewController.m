@@ -66,6 +66,26 @@
 
 -(BOOL)RVWeekView:(RVWeekView *)weekView canMoveEvent:(AKEvent *)event to:(NSDate *)date{
     return YES;
+    
+    
+    //Example on how to return YES/NO from an async function (for example an alert)
+    /*NSCondition* condition = [NSCondition new];
+    BOOL __block shouldMove;
+    
+    RVAlertController* a = [RVAlertController alert:@"Move"
+                                            message:@"Do you want to move";
+    
+    
+    [a showAlertWithCompletion:^(NSInteger buttonIndex) {
+        shouldMove = (buttonIndex == RVALERT_OK);
+        [condition signal];
+    }];
+    
+    [condition lock];
+    [condition wait];
+    [condition unlock];
+    
+    return shouldMove;*/
 }
 
 
