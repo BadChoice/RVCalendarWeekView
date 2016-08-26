@@ -62,16 +62,21 @@
         CGPoint cp = [gestureRecognizer locationInView:self.superview];
         
         [UIView animateWithDuration:0.1 animations:^{
-            /*float xOffset = -13;
-            if([self isPortrait]){
-                xOffset = 5;
+            
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                float xOffset = -13;
+                if([self isPortrait]){
+                    xOffset = 5;
+                }
+                float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
+                        - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);
+                [mDragableEvent setCenter:CGPointMake(x, cp.y)];
             }
-            float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
-                    - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);*/
-            [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
+            else{
+                [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
+            }
         }];
         
-        //[mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
         
         int hour        = [self getHourForDragable];
         int minute      = [self getMinuteForDragable];

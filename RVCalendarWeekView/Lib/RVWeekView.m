@@ -59,9 +59,9 @@
     self.collectionView.directionalLockEnabled          = YES;
     self.collectionView.showsVerticalScrollIndicator    = NO;
     self.collectionView.showsHorizontalScrollIndicator  = NO;
-    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+    /*if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
         self.collectionView.pagingEnabled = YES;
-    }
+    }*/
     
     [self addSubview:self.collectionView];
     [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
@@ -166,8 +166,8 @@
         NSDate *day                 = [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:indexPath];
         NSDate *currentDay          = [self currentTimeComponentsForCollectionView:self.collectionView layout:self.weekFlowLayout];
         
-        NSDate *startOfDay          = [[NSCalendar currentCalendar] startOfDayForDate:day];
-        NSDate *startOfCurrentDay   = [[NSCalendar currentCalendar] startOfDayForDate:currentDay];
+        NSDate *startOfDay          = [NSCalendar.currentCalendar startOfDayForDate:day];
+        NSDate *startOfCurrentDay   = [NSCalendar.currentCalendar startOfDayForDate:currentDay];
         
         dayColumnHeader.day         = day;
         dayColumnHeader.currentDay  = [startOfDay isEqualToDate:startOfCurrentDay];
