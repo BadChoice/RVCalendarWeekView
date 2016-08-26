@@ -6,17 +6,17 @@
 //  Copyright © 2016 Eric Horacek. All rights reserved.
 //
 
-#import "AKEvent.h"
+#import "MSEvent.h"
 #import "NSDate+Easy.h"
 
-@implementation AKEvent
+@implementation MSEvent
 
-+(AKEvent*)make:(NSDate*)start title:(NSString*)title location:(NSString*)location{
++(MSEvent*)make:(NSDate*)start title:(NSString*)title location:(NSString*)location{
     return [self.class make:start duration:60 title:title location:location];
 }
 
-+(AKEvent*)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title location:(NSString*)location{
-    AKEvent* event = [AKEvent new];
++(MSEvent*)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title location:(NSString*)location{
+    MSEvent* event = [MSEvent new];
     event.StartDate = start;
     event.EndDate   = end;
     event.title     = title;
@@ -24,8 +24,8 @@
     return event;
 }
 
-+(AKEvent*)make:(NSDate*)start duration:(int)minutes title:(NSString*)title location:(NSString*)location{
-    AKEvent* event  = [AKEvent new];
++(MSEvent*)make:(NSDate*)start duration:(int)minutes title:(NSString*)title location:(NSString*)location{
+    MSEvent* event  = [MSEvent new];
     event.StartDate = start;
     event.EndDate   = [start addMinutes:minutes];
     event.title     = title;

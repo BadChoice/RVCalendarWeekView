@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AKEvent.h"
+#import "MSEvent.h"
 
-@class AKEvent;
+@class MSEvent;
 
 @interface MSEventCell : UICollectionViewCell
 
-@property (nonatomic, strong) AKEvent *akEvent;
+@property (nonatomic, strong) MSEvent *akEvent;
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UILabel *location;
 

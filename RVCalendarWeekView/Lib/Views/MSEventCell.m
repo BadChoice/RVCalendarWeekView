@@ -100,7 +100,7 @@
 
 
 #pragma mark - MSEventCell
-- (void)setAkEvent:(AKEvent *)event
+- (void)setAkEvent:(MSEvent *)event
 {
     _akEvent = event;
     self.title.attributedText = [[NSAttributedString alloc] initWithString:_akEvent.title attributes:[self titleAttributesHighlighted:self.selected]];

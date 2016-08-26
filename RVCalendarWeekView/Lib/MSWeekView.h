@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "MSCollectionViewCalendarLayout.h"
 #import "MSDragableEvent.h"
-#import "AKEvent.h"
+#import "MSEvent.h"
 
 
-@protocol RVWeekViewDelegate <NSObject>
--(void)RVWeekView:(id)sender eventSelected:(AKEvent*)event;
+@protocol MSWeekViewDelegate <NSObject>
+-(void)MSWeekView:(id)sender eventSelected:(MSEvent*)event;
 @end
 
-@interface RVWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>
+@interface MSWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>
 {
     NSArray             * mEvents;
     NSMutableDictionary * mDays;
@@ -30,7 +30,7 @@
 @property(nonatomic) int daysToShow;
 @property(strong,nonatomic) NSArray* events;
 
-@property(weak,nonatomic) id<RVWeekViewDelegate> delegate;
+@property(weak,nonatomic) id<MSWeekViewDelegate> delegate;
 
 -(void)forceReload;
 

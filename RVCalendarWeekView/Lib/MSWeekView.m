@@ -6,7 +6,7 @@
 //  Copyright © 2016 revo. All rights reserved.
 //
 
-#import "RVWeekView.h"
+#import "MSWeekView.h"
 
 #import "NSDate+Easy.h"
 #import "RVCollection.h"
@@ -28,7 +28,7 @@
 #define MSDayColumnHeaderReuseIdentifier  @"MSDayColumnHeaderReuseIdentifier"
 #define MSTimeRowHeaderReuseIdentifier    @"MSTimeRowHeaderReuseIdentifier"
 
-@implementation RVWeekView
+@implementation MSWeekView
 
 //================================================
 #pragma mark - Init
@@ -194,14 +194,14 @@
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
-    AKEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
+    MSEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
     return ev.StartDate;
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* day   = [mDays.allKeys.sort objectAtIndex:indexPath.section];
-    AKEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
+    MSEvent* ev     = [mDays[day] objectAtIndex:indexPath.row];
     return ev.EndDate;
 }
 
@@ -217,7 +217,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(self.delegate){
         MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        [self.delegate RVWeekView:self eventSelected:cell.akEvent];
+        [self.delegate MSWeekView:self eventSelected:cell.akEvent];
     }
 }
 

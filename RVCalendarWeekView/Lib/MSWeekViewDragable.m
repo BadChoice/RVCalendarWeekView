@@ -6,7 +6,7 @@
 //  Copyright © 2016 revo. All rights reserved.
 //
 
-#import "RVWeekViewDragable.h"
+#import "MSWeekViewDragable.h"
 
 #import "NSDate+Easy.h"
 #import "RVCollection.h"
@@ -30,7 +30,7 @@
 #define MSDayColumnHeaderReuseIdentifier  @"MSDayColumnHeaderReuseIdentifier"
 #define MSTimeRowHeaderReuseIdentifier    @"MSTimeRowHeaderReuseIdentifier"
 
-@implementation RVWeekViewDragable
+@implementation MSWeekViewDragable
 
 
 //================================================
@@ -108,7 +108,7 @@
         eventCell.akEvent.EndDate   = newEndDate;
         [self forceReload];
         if(self.dragDelegate){
-            [self.dragDelegate RVWeekView:self event:eventCell.akEvent moved:newStartDate];
+            [self.dragDelegate MSWeekView:self event:eventCell.akEvent moved:newStartDate];
         }
     }
     
@@ -137,12 +137,12 @@
     return x / self.weekFlowLayout.sectionWidth;
 }
 
--(int)getHoursDiff:(AKEvent*)event newHour:(int)newHour{
+-(int)getHoursDiff:(MSEvent*)event newHour:(int)newHour{
     int eventHour = event.StartDate.hour;
     return newHour - eventHour;
 }
 
--(int)getDaysDiff:(AKEvent*)event newDayIndex:(int)newDayIndex{
+-(int)getDaysDiff:(MSEvent*)event newDayIndex:(int)newDayIndex{
     int __block eventDayOffset = 0;
     [mDays.allKeys.sort eachWithIndex:^(NSString* day, int index, BOOL *stop) {
         if([mDays[day] containsObject:event]){
@@ -153,9 +153,9 @@
     return newDayIndex - eventDayOffset;
 }
 
--(BOOL)canMoveToNewDate:(AKEvent*)event newDate:(NSDate*)newDate{
+-(BOOL)canMoveToNewDate:(MSEvent*)event newDate:(NSDate*)newDate{
     if (! self.dragDelegate) return true;
-    return [self.dragDelegate RVWeekView:self canMoveEvent:event to:newDate];    
+    return [self.dragDelegate MSWeekView:self canMoveEvent:event to:newDate];
 }
 
 -(BOOL)isPortrait{
