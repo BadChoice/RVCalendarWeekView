@@ -10,4 +10,6 @@
 
 @interface MSGridline : UICollectionReusableView
 
+@property (strong,nonatomic) UIView* border;
+
 @end

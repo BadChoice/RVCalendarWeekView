@@ -347,10 +347,12 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             int weekDay = (currentTimeDateComponents.weekday + section) % 7;
             if( weekDay == 6 || weekDay == 0){
                 horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.sectionWidth, sectionHeight);
+                horizontalGridlineAttributes.zIndex = -1;
             }
             else{
                 horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.verticalGridlineWidth, sectionHeight);
             }
+            
         }
         
         if (needsToPopulateItemAttributes) {
