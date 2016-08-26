@@ -33,6 +33,8 @@
 @property(weak,nonatomic) id<MSWeekViewDelegate> delegate;
 
 -(void)forceReload;
--(void)addEvent:(MSEvent*)event;
+
+-(void)addEvent   :(MSEvent*)event;
+-(void)removeEvent:(MSEvent*)event;
 
 @end

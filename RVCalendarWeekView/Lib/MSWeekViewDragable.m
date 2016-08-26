@@ -43,13 +43,14 @@
     [super setup];
     
     UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+    [lpgr setCancelsTouchesInView:NO];  //To didSelectCell still works
     [self.collectionView addGestureRecognizer:lpgr];
 }
 
 -(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint cp          = [gestureRecognizer locationInView:self.collectionView];
-        CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - 40); //Why 40?
+        CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - 20); //Why 40 / 20?
         NSDate* date        = [self dateForPoint:finalPoint];
         
         if(date.minute > 15 && date.minute < 45)    date = [date withMinute:30];
@@ -164,7 +165,7 @@
 
 -(NSDate*)dateForDragable{
     CGPoint point = CGPointMake(mDragableEvent.frame.origin.x + self.collectionView.contentOffset.x,
-                                mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - 60);  //Why 60?
+                                mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - 30);  //Why 60?
     return [self dateForPoint:point];
 }
 

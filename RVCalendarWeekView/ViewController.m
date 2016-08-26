@@ -57,6 +57,7 @@
 //=========================================
 -(void)MSWeekView:(id)sender eventSelected:(MSEvent *)event{
     NSLog(@"Event selected: %@",event.title);
+    //[_weekView removeEvent:event];
 }
 
 //=========================================
@@ -68,7 +69,6 @@
 
 -(BOOL)MSWeekView:(MSWeekView *)weekView canMoveEvent:(MSEvent *)event to:(NSDate *)date{
     return YES;
-    
     
     //Example on how to return YES/NO from an async function (for example an alert)
     /*NSCondition* condition = [NSCondition new];
@@ -95,7 +95,5 @@
     MSEvent *newEvent = [MSEvent make:date title:@"New Event" location:@"Platinium stadium"];
     [_weekView addEvent:newEvent];
 }
-
-
 
 @end

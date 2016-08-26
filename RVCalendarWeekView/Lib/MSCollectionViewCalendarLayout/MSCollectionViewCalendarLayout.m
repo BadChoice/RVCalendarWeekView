@@ -754,7 +754,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     self.horizontalGridlineHeight = (([[UIScreen mainScreen] scale] == 2.0) ? 0.5 : 1.0);;
     self.sectionMargin = UIEdgeInsetsMake(30.0, 0.0, 30.0, 0.0);
     self.cellMargin = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
-    self.contentMargin = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? UIEdgeInsetsMake(30.0, 0.0, 30.0, 30.0) : UIEdgeInsetsMake(20.0, 0.0, 20.0, 10.0));
+    self.contentMargin = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) : UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0));
     
     self.displayHeaderBackgroundAtOrigin = YES;
     self.sectionLayoutType = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? MSSectionLayoutTypeHorizontalTile : MSSectionLayoutTypeVerticalTile);

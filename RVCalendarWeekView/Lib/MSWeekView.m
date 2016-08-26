@@ -129,6 +129,14 @@
     [self.collectionView reloadData];
 }
 
+-(void)removeEvent:(MSEvent*)event{
+    self.events = [mEvents reject:^BOOL(MSEvent* arrayEvent) {
+        return [arrayEvent isEqual:event];;
+    }];
+    [self.weekFlowLayout invalidateLayoutCache];
+    [self.collectionView reloadData];
+}
+
 -(void)groupEventsByDays{
     mDays = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
