@@ -147,7 +147,7 @@
 }
 
 -(int)getHourForY:(float)y{
-    int earliestHour    = self.weekFlowLayout.earliestHour;
+    int earliestHour    = (int)self.weekFlowLayout.earliestHour;
     int hour            = y/self.weekFlowLayout.hourHeight - 1;
     return hour + earliestHour;
 }
