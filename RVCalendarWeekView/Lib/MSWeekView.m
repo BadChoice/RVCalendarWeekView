@@ -51,7 +51,7 @@
     
     self.daysToShowOnScreen = 6;
     self.daysToShow         = 30;
-    self.weekFlowLayout     = [[MSCollectionViewCalendarLayout alloc] init];
+    self.weekFlowLayout     = [MSCollectionViewCalendarLayout new];
     self.weekFlowLayout.delegate = self;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.weekFlowLayout];
     self.collectionView.dataSource                      = self;
