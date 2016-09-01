@@ -25,9 +25,9 @@
 
 - (void)setupWeekData{
     
-    self.decoratedWeekView = [MSWeekViewDecoratorNewEvent makeWith:
-                              [MSWeekViewDecoratorInfinite makeWith:
-                              [MSWeekViewDecoratorDragable makeWith:self.weekView andDelegate:self]] andDelegate:self];
+    self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
+                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature)
+                                                  andDelegate:self];
     
     
     MSEvent* event1 = [MSEvent make:NSDate.now
@@ -50,7 +50,6 @@
                            location:@"Central perk"];
     
     _weekView.delegate                      = self;
-    //_weekView.dragDelegate                  = self;
     _weekView.weekFlowLayout.show24Hours    = YES;
     _weekView.daysToShowOnScreen            = 7;
     _weekView.daysToShow                    = 7;
@@ -66,7 +65,7 @@
 }
 
 //=========================================
-#pragma mark - Week View Dragable delegate
+#pragma mark - Week View Decorator Dragable delegate
 //=========================================
 -(void)MSWeekView:(MSWeekView *)weekView event:(MSEvent *)event moved:(NSDate *)date{
     NSLog(@"Event moved");
@@ -95,6 +94,9 @@
     return shouldMove;*/
 }
 
+//=========================================
+#pragma mark - Week View Decorator New event delegate
+//=========================================
 -(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date{
     NSLog(@"Long pressed at: %@", date);
     MSEvent *newEvent = [MSEvent make:date title:@"New Event" location:@"Platinium stadium"];

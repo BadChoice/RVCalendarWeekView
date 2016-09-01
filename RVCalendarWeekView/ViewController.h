@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MSWeekViewDecoratorDragable.h"
-#import "MSWeekViewDecoratorInfinite.h"
-#import "MSWeekViewDecoratorNewEvent.h"
+#import "MSWeekViewDecoratorFactory.h"
 
 @interface ViewController : UIViewController <MSWeekViewDelegate, MSWeekViewDragableDelegate,MSWeekViewNewEventDelegate>
 
+/**
+ * Base weekView with only selected event feature
+ */
 @property (weak, nonatomic) IBOutlet MSWeekView *weekView;
 
+/**
+ * Strong reference since it is what adds the features to the weekView
+ */
 @property (strong, nonatomic) MSWeekView *decoratedWeekView;
 
 @end
