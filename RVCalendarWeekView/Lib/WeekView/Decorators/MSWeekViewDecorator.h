@@ -14,7 +14,15 @@
 
 @property(strong,nonatomic) MSWeekView* weekView;
 
-+(MSWeekView*)makeWith:(MSWeekView*)weekView;
++(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView;
 -(void)setup;
 
+//=========================================================
+#pragma mark - Get XX for Point
+//=========================================================
+-(NSDate*)dateForPoint:(CGPoint)point;
+-(int)getHourForY:(float)y;
+-(int)getMinuteForY:(float)y;
+-(int)getDayIndexForX:(float)x;
+-(CGFloat)round:(float)number toNearest:(float)pivot;
 @end

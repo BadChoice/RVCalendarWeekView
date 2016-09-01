@@ -235,6 +235,9 @@
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+}
+
 //================================================
 #pragma mark - Dealloc
 //================================================

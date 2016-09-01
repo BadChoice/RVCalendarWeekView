@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MSWeekViewDragable.h"
+#import "MSWeekViewDecoratorDragable.h"
+#import "MSWeekViewDecoratorInfinite.h"
+#import "MSWeekViewDecoratorNewEvent.h"
 
-@interface ViewController : UIViewController <MSWeekViewDelegate, MSWeekViewDragableDelegate>
+@interface ViewController : UIViewController <MSWeekViewDelegate, MSWeekViewDragableDelegate,MSWeekViewNewEventDelegate>
 
-@property (weak, nonatomic) IBOutlet MSWeekViewDragable *weekView;
+@property (weak, nonatomic) IBOutlet MSWeekView *weekView;
+
+@property (strong, nonatomic) MSWeekView *decoratedWeekView;
 
 @end
 

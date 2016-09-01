@@ -13,32 +13,15 @@
 
 @implementation MSWeekViewDecoratorDragable
 
-
--(void)setup{
-    [super setup];
-    
-    UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-    [lpgr setCancelsTouchesInView:NO];  //To didSelectCell still works
-    [self.weekView.collectionView addGestureRecognizer:lpgr];
++(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewDragableDelegate>)delegate{
+    MSWeekViewDecoratorDragable * weekViewDecorator = [super makeWith:weekView];
+    weekViewDecorator.dragDelegate = delegate;
+    return weekViewDecorator;
 }
 
--(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint cp          = [gestureRecognizer locationInView:self.weekView.collectionView];
-        CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - 20); //Why 40 / 20?
-        NSDate* date        = [self dateForPoint:finalPoint];
-        
-        if(date.minute > 15 && date.minute < 45)    date = [date withMinute:30];
-        else if(date.minute > 45)                   date = [[date addHour] withMinute:0];
-        else                                        date = [date withMinute:0];
-        
-        if(self.dragDelegate) [self.dragDelegate MSWeekView:self onLongPressAt:date];
-    }
-}
-
-//================================================
-#pragma mark - CollectionView Datasource
-//================================================
+//=========================================================
+#pragma mark - Collection view datasource
+//=========================================================
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MSEventCell *cell         = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
@@ -48,19 +31,19 @@
     return cell;
 }
 
-//================================================
+//=========================================================
 #pragma mark - Drag & Drop
-//================================================
+//=========================================================
 -(void)onEventCellLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
     MSEventCell* eventCell = (MSEventCell*)gestureRecognizer.view;
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         //NSLog(@"Long press began: %@",eventCell.akEvent.title);
         mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset];
-        [self.superview.superview addSubview:mDragableEvent];
+        [self.weekView.superview.superview addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
-        CGPoint cp = [gestureRecognizer locationInView:self.superview];
+        CGPoint cp = [gestureRecognizer locationInView:self.weekView.superview];
         
         [UIView animateWithDuration:0.1 animations:^{
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -87,9 +70,6 @@
     }
 }
 
--(CGFloat)round:(float)number toNearest:(float)pivot{
-    return pivot * floor((number/pivot)+0.5);
-}
 
 -(void)onDragEnded:(MSEventCell*)eventCell{
     
@@ -99,7 +79,7 @@
         int duration = eventCell.akEvent.durationInSeconds;
         eventCell.akEvent.StartDate = newStartDate;
         eventCell.akEvent.EndDate = [eventCell.akEvent.StartDate dateByAddingSeconds:duration];
-        [self forceReload];
+        [self.weekView forceReload];
         if(self.dragDelegate){
             [self.dragDelegate MSWeekView:self event:eventCell.akEvent moved:newStartDate];
         }
@@ -109,34 +89,6 @@
     mDragableEvent = nil;
 }
 
-
-//=========================================================
-#pragma mark - Get XX for Point
-//=========================================================
--(NSDate*)dateForPoint:(CGPoint)point{
-    NSDate* firstDay = [self.weekView.weekFlowLayout dateForDayColumnHeaderAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    NSDate* date = [firstDay addDays    :[self getDayIndexForX:point.x] ];
-    date         = [date withHour       :[self getHourForY    :point.y] timezone:@"device"];
-    date         = [date withMinute     :[self getMinuteForY  :point.y] ];
-    return date;
-}
-
--(int)getHourForY:(float)y{
-    int earliestHour    = (int)self.weekView.weekFlowLayout.earliestHour;
-    int hour            = y/self.weekView.weekFlowLayout.hourHeight - 1;
-    return hour + earliestHour;
-}
-
--(int)getMinuteForY:(float)y{
-    int hours          = (y / self.weekView.weekFlowLayout.hourHeight);
-    int minute         = (y / self.weekView.weekFlowLayout.hourHeight - hours ) * 60;
-    int minuteRounded  = [self round:minute toNearest:5];
-    return minuteRounded == 60 ? 55 : minuteRounded;
-}
-
--(int)getDayIndexForX:(float)x{
-    return x / self.weekView.weekFlowLayout.sectionWidth;
-}
 
 -(NSDate*)dateForDragable{
     CGPoint point = CGPointMake(mDragableEvent.frame.origin.x + self.weekView.collectionView.contentOffset.x,
@@ -154,24 +106,6 @@
 
 -(BOOL)isPortrait{
     return (UIDevice.currentDevice.orientation == UIDeviceOrientationPortrait || UIDevice.currentDevice.orientation == UIDeviceOrientationFaceUp);
-}
-
-
-//======================================================
-#pragma mark - INFINITE SCROLL
-//======================================================
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    NSInteger currentOffset = scrollView.contentOffset.y;
-    NSInteger maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
-    
-    NSLog(@"Load more!");
-    // Change 10.0 to adjust the distance from bottom
-    if (maximumOffset - currentOffset <= 10.0 /*&& !mLoading && mShouldLoadMore*/) {
-        //[self methodThatAddsDataAndReloadsTableView];
-        NSLog(@"Load more if necessary");
-        //[self loadNextOrdersForDate:mCurrentDate];
-    }
 }
 
 

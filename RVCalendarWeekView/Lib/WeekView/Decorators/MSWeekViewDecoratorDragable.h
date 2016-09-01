@@ -10,18 +10,17 @@
 #import "MSDragableEvent.h"
 
 @protocol MSWeekViewDragableDelegate <NSObject>
-
 -(BOOL)MSWeekView:(MSWeekView*)weekView canMoveEvent:(MSEvent*)event to:(NSDate*)date;
 -(void)MSWeekView:(MSWeekView*)weekView event:(MSEvent*)event moved:(NSDate*)date;
--(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date;
 @end
 
 
-@interface MSWeekViewDecoratorDragable : MSWeekViewDecorator{
-    
+@interface MSWeekViewDecoratorDragable : MSWeekViewDecorator{    
     MSDragableEvent     * mDragableEvent;
 }
 
 @property(weak,nonatomic) id<MSWeekViewDragableDelegate> dragDelegate;
+
++(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewDragableDelegate>)delegate;
 
 @end

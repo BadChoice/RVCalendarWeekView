@@ -25,6 +25,10 @@
 
 - (void)setupWeekData{
     
+    self.decoratedWeekView = [MSWeekViewDecoratorNewEvent makeWith:
+                              [MSWeekViewDecoratorInfinite makeWith:
+                              [MSWeekViewDecoratorDragable makeWith:self.weekView andDelegate:self]] andDelegate:self];
+    
     
     MSEvent* event1 = [MSEvent make:NSDate.now
                               title:@"Title"
@@ -46,7 +50,7 @@
                            location:@"Central perk"];
     
     _weekView.delegate                      = self;
-    _weekView.dragDelegate                  = self;
+    //_weekView.dragDelegate                  = self;
     _weekView.weekFlowLayout.show24Hours    = YES;
     _weekView.daysToShowOnScreen            = 7;
     _weekView.daysToShow                    = 7;
