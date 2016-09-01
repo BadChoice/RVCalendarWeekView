@@ -21,11 +21,8 @@
 //======================================================
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"Scroll at infinite");
     [super scrollViewDidScroll:scrollView];
-    
-    return;
-    //[super scrollViewDidScroll:scrollView];
+
     NSInteger currentOffset = scrollView.contentOffset.y;
     NSInteger maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
     
