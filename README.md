@@ -84,10 +84,11 @@ it will fire the following functions on your `infiniteDelegate`
 ```
 
 ##### Options
-You can even customeize some options
+You can even customize some options (they all have defaults values so you just need to modify them if you want to work differently)
 
 ```
 _weekView.weekFlowLayout.show24Hours    = YES; //Show All hours or just the min to cover all events
+_weekView.weekFlowLayout.hourHeight     = 50;  //Define the hour height
 _weekView.daysToShowOnScreen            = 7;   //How many days visible at the same time
 _weekView.daysToShow                    = 31;  //How many days to display (Ininite scroll feature pending)
 ```

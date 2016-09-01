@@ -752,7 +752,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     self.currentTimeHorizontalGridlineHeight = 1.0;
     self.verticalGridlineWidth = (([[UIScreen mainScreen] scale] == 2.0) ? 0.5 : 1.0);
     self.horizontalGridlineHeight = (([[UIScreen mainScreen] scale] == 2.0) ? 0.5 : 1.0);;
-    self.sectionMargin = UIEdgeInsetsMake(30.0, 0.0, 30.0, 0.0);
+    self.sectionMargin = UIEdgeInsetsMake(20.0, 0.0, 20.0, 0.0);
     self.cellMargin = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     self.contentMargin = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) : UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0));
     

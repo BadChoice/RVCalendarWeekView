@@ -90,7 +90,7 @@
 
 -(int)getHourForY:(float)y{
     int earliestHour    = (int)self.weekFlowLayout.earliestHour;
-    int hour            = y/self.weekFlowLayout.hourHeight - 1;
+    int hour            = y/self.weekFlowLayout.hourHeight;
     return hour + earliestHour;
 }
 

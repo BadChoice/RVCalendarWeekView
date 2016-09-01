@@ -43,7 +43,7 @@
         [self.baseWeekView addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
-        CGPoint cp = [gestureRecognizer locationInView:self.baseWeekView];
+        CGPoint cp = [gestureRecognizer locationInView:self.collectionView];
         
         [UIView animateWithDuration:0.1 animations:^{
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -80,7 +80,7 @@
         eventCell.akEvent.EndDate = [eventCell.akEvent.StartDate dateByAddingSeconds:duration];
         [self.baseWeekView forceReload];
         if(self.dragDelegate){
-            [self.dragDelegate MSWeekView:self event:eventCell.akEvent moved:newStartDate];
+            [self.dragDelegate MSWeekView:self.baseWeekView event:eventCell.akEvent moved:newStartDate];
         }
     }
     
@@ -91,7 +91,7 @@
 
 -(NSDate*)dateForDragable{
     CGPoint point = CGPointMake(mDragableEvent.frame.origin.x + self.collectionView.contentOffset.x,
-                                mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - 10);  //Why 10?
+                                mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - self.weekFlowLayout.dayColumnHeaderHeight - 20);  //5 is the section margin
     return [self dateForPoint:point];
 }
 

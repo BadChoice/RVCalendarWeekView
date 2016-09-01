@@ -29,7 +29,7 @@
 -(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint cp          = [gestureRecognizer locationInView:self.collectionView];
-        CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - 20); //Why 40 / 20?
+        CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - self.weekFlowLayout.dayColumnHeaderHeight - 20); //20 is the section margin
         NSDate* date        = [self dateForPoint:finalPoint];
         
         if(date.minute > 15 && date.minute < 45)    date = [date withMinute:30];
@@ -37,7 +37,7 @@
         else                                        date = [date withMinute:0];
         
         if(self.createEventDelegate)
-            [self.createEventDelegate MSWeekView:self onLongPressAt:date];
+            [self.createEventDelegate MSWeekView:self.baseWeekView onLongPressAt:date];
     }
 }
 
