@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MSWeekViewDecoratorFactory.h"
 
-@interface ViewController : UIViewController <MSWeekViewDelegate, MSWeekViewDragableDelegate,MSWeekViewNewEventDelegate>
+@interface ViewController : UIViewController <MSWeekViewDelegate, MSWeekViewDragableDelegate,MSWeekViewNewEventDelegate, MSWeekViewInfiniteDelegate>
 
 /**
  * Base weekView with only selected event feature

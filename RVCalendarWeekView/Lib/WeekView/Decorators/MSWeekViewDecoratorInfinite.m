@@ -7,16 +7,18 @@
 //
 
 #import "MSWeekViewDecoratorInfinite.h"
+#import "NSDate+Easy.h"
 
+#define DAYS_TO_LOAD 30
 @interface MSWeekView()
--(void)groupEventsByDays;
+    -(void)groupEventsByDays;
 @end
 
 @implementation MSWeekViewDecoratorInfinite
 
-
-+(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView{
++(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewInfiniteDelegate>)delegate{
     MSWeekViewDecoratorInfinite * weekViewDecorator = [super makeWith:weekView];
+    weekViewDecorator.infiniteDelegate = delegate;
     return weekViewDecorator;
 }
 
@@ -30,23 +32,23 @@
     NSInteger currentOffset = scrollView.contentOffset.x;
     NSInteger maximumOffset = scrollView.contentSize.width - scrollView.frame.size.width;
     
-    // Change 10.0 to adjust the distance from bottom
+    // Change 10.0 to adjust the distance from side
     if (maximumOffset - currentOffset <= 10.0 && !mLoading /*&& mShouldLoadMore*/) {
-        //[self methodThatAddsDataAndReloadsTableView];
-        NSLog(@"Load more if necessary");
+        //NSLog(@"Load more if necessary");
         [self loadNextDays];
-        //[self loadNextOrdersForDate:mCurrentDate];
     }
 }
 
 -(void)loadNextDays{
     mLoading = true;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.baseWeekView.daysToShow += self.baseWeekView.daysToShow;
-        [self.baseWeekView groupEventsByDays];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.baseWeekView forceReload];
-        });
+        
+        NSDate * startDate  = [self.baseWeekView.firstDay   addDays:self.baseWeekView.daysToShow + 1];
+        NSDate * endDate    = [startDate                    addDays:DAYS_TO_LOAD                 - 1];
+        
+        self.baseWeekView.daysToShow += DAYS_TO_LOAD;
+        if(self.infiniteDelegate) [self.infiniteDelegate MSWeekView:self.baseWeekView newDaysLoaded:startDate to:endDate];
+        [self.baseWeekView forceReload];
         mLoading = false;
     });    
 }

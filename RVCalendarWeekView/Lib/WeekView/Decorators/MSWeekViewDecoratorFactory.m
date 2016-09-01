@@ -18,7 +18,7 @@
 
     
     if ( (features & MSInfiniteFeature) != 0 ){ // => true
-        decoratedView = [MSWeekViewDecoratorInfinite makeWith:decoratedView];
+        decoratedView = [MSWeekViewDecoratorInfinite makeWith:decoratedView andDelegate:delegate];
     }
     
     if ( (features & MSNewEventFeature) != 0 ){ // => true

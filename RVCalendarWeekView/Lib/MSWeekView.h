@@ -34,6 +34,9 @@
 -(void)forceReload;
 
 -(void)addEvent   :(MSEvent*)event;
+-(void)addEvents  :(NSArray*)events;
 -(void)removeEvent:(MSEvent*)event;
+
+-(NSDate*)firstDay;
 
 @end

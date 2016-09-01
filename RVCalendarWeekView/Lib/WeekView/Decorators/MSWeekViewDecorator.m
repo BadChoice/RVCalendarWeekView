@@ -81,7 +81,7 @@
 #pragma mark - Get XX for Point
 //=========================================================
 -(NSDate*)dateForPoint:(CGPoint)point{
-    NSDate* firstDay = [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSDate* firstDay = [self.baseWeekView firstDay];
     NSDate* date = [firstDay addDays    :[self getDayIndexForX:point.x] ];
     date         = [date withHour       :[self getHourForY    :point.y] timezone:@"device"];
     date         = [date withMinute     :[self getMinuteForY  :point.y] ];

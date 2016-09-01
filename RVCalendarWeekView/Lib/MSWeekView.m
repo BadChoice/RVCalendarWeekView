@@ -94,9 +94,11 @@
 }
 
 -(void)forceReload{
-    [self groupEventsByDays];
-    [self.weekFlowLayout invalidateLayoutCache];
-    [self.collectionView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self groupEventsByDays];
+        [self.weekFlowLayout invalidateLayoutCache];
+        [self.collectionView reloadData];
+    });
 }
 
 - (CGFloat)layoutSectionWidth
@@ -115,26 +117,32 @@
     return (width - timeRowHeaderWidth - rightMargin);
 }
 
+-(NSDate*)firstDay{
+    return [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
 //================================================
 #pragma mark - Set Events
 //================================================
 -(void)setEvents:(NSArray *)events{
     mEvents = events;
-    [self groupEventsByDays];
+    [self forceReload];
 }
 
 -(void)addEvent:(MSEvent *)event{
-    self.events = [mEvents arrayByAddingObject:event];
-    [self.weekFlowLayout invalidateLayoutCache];
-    [self.collectionView reloadData];
+    [self addEvents:@[event]];
+}
+
+-(void)addEvents:(NSArray*)events{
+    self.events = [mEvents arrayByAddingObjectsFromArray:events];
+    [self forceReload];
 }
 
 -(void)removeEvent:(MSEvent*)event{
     self.events = [mEvents reject:^BOOL(MSEvent* arrayEvent) {
         return [arrayEvent isEqual:event];;
     }];
-    [self.weekFlowLayout invalidateLayoutCache];
-    [self.collectionView reloadData];
+    [self forceReload];
 }
 
 -(void)groupEventsByDays{

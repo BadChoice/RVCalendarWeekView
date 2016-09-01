@@ -103,4 +103,24 @@
     [_weekView addEvent:newEvent];
 }
 
+
+//=========================================
+#pragma mark - Week View Decorator Infinite delegate
+//=========================================
+-(void)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate{
+    NSLog(@"New days loaded: %@ - %@", startDate, endDate);
+    
+    MSEvent* newEvent = [MSEvent make:[startDate addHours:7]
+                           duration:60*3
+                              title:@"New event"
+                           location:@"Batcave"];
+    
+    MSEvent* lastEvent = [MSEvent make:[endDate addHours:-7]
+                             duration:60*3
+                                title:@"Last event"
+                             location:@"Fantastic tower"];
+    
+    [weekView addEvents:@[newEvent,lastEvent]];
+}
+
 @end

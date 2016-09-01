@@ -8,8 +8,17 @@
 
 #import "MSWeekViewDecorator.h"
 
+
+@protocol MSWeekViewInfiniteDelegate <NSObject>
+-(void)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
+@end
+
 @interface MSWeekViewDecoratorInfinite : MSWeekViewDecorator{
     BOOL mLoading;
 }
+
++(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewInfiniteDelegate>)delegate;
+
+@property(weak,nonatomic) id<MSWeekViewInfiniteDelegate> infiniteDelegate;
 
 @end
