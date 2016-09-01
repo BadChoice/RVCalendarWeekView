@@ -47,8 +47,15 @@
         NSDate * endDate    = [startDate                    addDays:DAYS_TO_LOAD                 - 1];
         
         self.baseWeekView.daysToShow += DAYS_TO_LOAD;
-        if(self.infiniteDelegate) [self.infiniteDelegate MSWeekView:self.baseWeekView newDaysLoaded:startDate to:endDate];
-        [self.baseWeekView forceReload];
+        if(self.infiniteDelegate){
+            if(![self.infiniteDelegate MSWeekView:self.baseWeekView newDaysLoaded:startDate to:endDate]){
+                [self.baseWeekView forceReload];
+            }
+        }
+        else{
+            [self.baseWeekView forceReload];
+        }
+        
         mLoading = false;
     });    
 }

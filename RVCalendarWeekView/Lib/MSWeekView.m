@@ -146,6 +146,8 @@
 }
 
 -(void)groupEventsByDays{
+    
+    //TODO : Improve this to make it faster
     mDays = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
     NSDate* date = NSDate.today;

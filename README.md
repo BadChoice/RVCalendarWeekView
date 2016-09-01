@@ -69,6 +69,7 @@ it will fire the following functions on your `dragDelegate`
 
 
 ##### Create new event on long press
+it will fire the following functions on your `createEventDelegate`
 
 ```
     -(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date
@@ -76,9 +77,10 @@ it will fire the following functions on your `dragDelegate`
 
 ##### Infinite scroll
 
+it will fire the following functions on your `infiniteDelegate`
 
 ```
-    -(void)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
+    -(BOOL)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
 ```
 
 ##### Options
