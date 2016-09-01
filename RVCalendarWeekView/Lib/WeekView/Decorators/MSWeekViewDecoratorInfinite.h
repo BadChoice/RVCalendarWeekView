@@ -8,6 +8,8 @@
 
 #import "MSWeekViewDecorator.h"
 
-@interface MSWeekViewDecoratorInfinite : MSWeekViewDecorator
+@interface MSWeekViewDecoratorInfinite : MSWeekViewDecorator{
+    BOOL mLoading;
+}
 
 @end

@@ -8,6 +8,10 @@
 
 #import "MSWeekViewDecoratorInfinite.h"
 
+@interface MSWeekView()
+-(void)groupEventsByDays;
+@end
+
 @implementation MSWeekViewDecoratorInfinite
 
 
@@ -23,16 +27,28 @@
 {
     [super scrollViewDidScroll:scrollView];
 
-    NSInteger currentOffset = scrollView.contentOffset.y;
-    NSInteger maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+    NSInteger currentOffset = scrollView.contentOffset.x;
+    NSInteger maximumOffset = scrollView.contentSize.width - scrollView.frame.size.width;
     
-    NSLog(@"Load more!");
     // Change 10.0 to adjust the distance from bottom
-    if (maximumOffset - currentOffset <= 10.0 /*&& !mLoading && mShouldLoadMore*/) {
+    if (maximumOffset - currentOffset <= 10.0 && !mLoading /*&& mShouldLoadMore*/) {
         //[self methodThatAddsDataAndReloadsTableView];
         NSLog(@"Load more if necessary");
+        [self loadNextDays];
         //[self loadNextOrdersForDate:mCurrentDate];
     }
+}
+
+-(void)loadNextDays{
+    mLoading = true;
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.baseWeekView.daysToShow += self.baseWeekView.daysToShow;
+        [self.baseWeekView groupEventsByDays];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.baseWeekView forceReload];
+        });
+        mLoading = false;
+    });    
 }
 
 

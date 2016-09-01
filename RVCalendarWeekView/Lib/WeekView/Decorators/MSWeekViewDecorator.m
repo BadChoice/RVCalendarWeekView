@@ -28,15 +28,22 @@
     
 }
 
+-(MSWeekView*)baseWeekView{
+   if( [self.weekView isKindOfClass:MSWeekViewDecorator.class])
+    return [(MSWeekViewDecorator*)self.weekView baseWeekView];
+   else
+    return self.weekView;
+}
+
 //=========================================================
 #pragma mark - Get Overrides
 //=========================================================
 -(UICollectionView*)collectionView{
-    return self.weekView.collectionView;
+    return self.baseWeekView.collectionView;
 }
 
 -(MSCollectionViewCalendarLayout*)weekFlowLayout{
-    return self.weekView.weekFlowLayout;
+    return self.baseWeekView.weekFlowLayout;
 }
 
 //=========================================================
@@ -74,7 +81,7 @@
 #pragma mark - Get XX for Point
 //=========================================================
 -(NSDate*)dateForPoint:(CGPoint)point{
-    NSDate* firstDay = [self.weekView.weekFlowLayout dateForDayColumnHeaderAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSDate* firstDay = [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSDate* date = [firstDay addDays    :[self getDayIndexForX:point.x] ];
     date         = [date withHour       :[self getHourForY    :point.y] timezone:@"device"];
     date         = [date withMinute     :[self getMinuteForY  :point.y] ];
@@ -82,20 +89,20 @@
 }
 
 -(int)getHourForY:(float)y{
-    int earliestHour    = (int)self.weekView.weekFlowLayout.earliestHour;
-    int hour            = y/self.weekView.weekFlowLayout.hourHeight - 1;
+    int earliestHour    = (int)self.weekFlowLayout.earliestHour;
+    int hour            = y/self.weekFlowLayout.hourHeight - 1;
     return hour + earliestHour;
 }
 
 -(int)getMinuteForY:(float)y{
-    int hours          = (y / self.weekView.weekFlowLayout.hourHeight);
-    int minute         = (y / self.weekView.weekFlowLayout.hourHeight - hours ) * 60;
+    int hours          = (y / self.weekFlowLayout.hourHeight);
+    int minute         = (y / self.weekFlowLayout.hourHeight - hours ) * 60;
     int minuteRounded  = [self round:minute toNearest:5];
     return minuteRounded == 60 ? 55 : minuteRounded;
 }
 
 -(int)getDayIndexForX:(float)x{
-    return x / self.weekView.weekFlowLayout.sectionWidth;
+    return x / self.weekFlowLayout.sectionWidth;
 }
 
 -(CGFloat)round:(float)number toNearest:(float)pivot{

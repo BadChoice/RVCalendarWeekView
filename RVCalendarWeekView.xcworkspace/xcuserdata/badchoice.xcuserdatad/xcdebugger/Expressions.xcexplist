@@ -3,6 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[MSWeekViewDecoratorDragable dateForDragable]:MSWeekViewDecoratorDragable.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "mDragableEvent.frame.origin">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MSWeekView groupEventsByDays]:MSWeekView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MSWeekViewDecoratorInfinite loadNextDays]:MSWeekViewDecoratorInfinite.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MSEventCell onLongPress:]:MSEventCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController setupWeekData]:ViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MSWeekViewDecoratorNewEvent setup]:MSWeekViewDecoratorNewEvent.m">
+      </ContextState>
+      <ContextState
          contextName = "-[RVWeekView onLongPress:]:RVWeekView.m">
          <PersistentStrings>
             <PersistentString
@@ -15,9 +38,6 @@
                value = "earliestHour">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[MSEventCell onLongPress:]:MSEventCell.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

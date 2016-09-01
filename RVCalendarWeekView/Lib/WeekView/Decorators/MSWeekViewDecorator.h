@@ -17,6 +17,8 @@
 +(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView;
 -(void)setup;
 
+-(MSWeekView*)baseWeekView;
+
 //=========================================================
 #pragma mark - Get XX for Point
 //=========================================================

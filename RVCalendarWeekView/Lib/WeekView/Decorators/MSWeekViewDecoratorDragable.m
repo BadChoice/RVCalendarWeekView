@@ -40,10 +40,10 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         //NSLog(@"Long press began: %@",eventCell.akEvent.title);
         mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset];
-        [self.weekView.superview.superview addSubview:mDragableEvent];
+        [self.baseWeekView addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
-        CGPoint cp = [gestureRecognizer locationInView:self.weekView.superview];
+        CGPoint cp = [gestureRecognizer locationInView:self.baseWeekView];
         
         [UIView animateWithDuration:0.1 animations:^{
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -51,8 +51,8 @@
                 if([self isPortrait]){
                     xOffset = 5;
                 }
-                float x = [self round:cp.x toNearest:self.weekView.weekFlowLayout.sectionWidth] + xOffset
-                - ((int)self.weekView.collectionView.contentOffset.x % (int)self.weekView.weekFlowLayout.sectionWidth);
+                float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
+                - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);
                 [mDragableEvent setCenter:CGPointMake(x, cp.y)];
             }
             else{
@@ -70,7 +70,6 @@
     }
 }
 
-
 -(void)onDragEnded:(MSEventCell*)eventCell{
     
     NSDate* newStartDate = [self dateForDragable];
@@ -79,7 +78,7 @@
         int duration = eventCell.akEvent.durationInSeconds;
         eventCell.akEvent.StartDate = newStartDate;
         eventCell.akEvent.EndDate = [eventCell.akEvent.StartDate dateByAddingSeconds:duration];
-        [self.weekView forceReload];
+        [self.baseWeekView forceReload];
         if(self.dragDelegate){
             [self.dragDelegate MSWeekView:self event:eventCell.akEvent moved:newStartDate];
         }
@@ -91,8 +90,8 @@
 
 
 -(NSDate*)dateForDragable{
-    CGPoint point = CGPointMake(mDragableEvent.frame.origin.x + self.weekView.collectionView.contentOffset.x,
-                                mDragableEvent.frame.origin.y + self.weekView.collectionView.contentOffset.y - 30);  //Why 60?
+    CGPoint point = CGPointMake(mDragableEvent.frame.origin.x + self.collectionView.contentOffset.x,
+                                mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - 10);  //Why 10?
     return [self dateForPoint:point];
 }
 

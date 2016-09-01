@@ -15,15 +15,20 @@
     
     MSWeekView* decoratedView = baseView;
     
-    if ( (features & MSDragableEventFeature) != 0 ){ // => true
-        decoratedView = [MSWeekViewDecoratorDragable makeWith:decoratedView andDelegate:delegate];
-    }
-    if ( (features & MSNewEventFeature) != 0 ){ // => true
-        decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:delegate];
-    }
+
+    
     if ( (features & MSInfiniteFeature) != 0 ){ // => true
         decoratedView = [MSWeekViewDecoratorInfinite makeWith:decoratedView];
     }
+    
+    if ( (features & MSNewEventFeature) != 0 ){ // => true
+        decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:delegate];
+    }
+    
+    if ( (features & MSDragableEventFeature) != 0 ){ // => true
+        decoratedView = [MSWeekViewDecoratorDragable makeWith:decoratedView andDelegate:delegate];
+    }
+
     
     return decoratedView;
 }

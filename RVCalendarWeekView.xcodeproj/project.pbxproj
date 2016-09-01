@@ -293,9 +293,9 @@
 				76FC4A081D786E7F004CF995 /* MSWeekViewDecoratorFactory.m */,
 				768458231D7847080080A27A /* MSWeekViewDecorator.h */,
 				768458241D7847080080A27A /* MSWeekViewDecorator.m */,
-				76FC4A021D7865D5004CF995 /* Infinite */,
-				76FC4A011D7865CD004CF995 /* Dragable */,
 				76FC4A031D7865DE004CF995 /* NewEvent */,
+				76FC4A011D7865CD004CF995 /* Dragable */,
+				76FC4A021D7865D5004CF995 /* Infinite */,
 			);
 			name = Decorators;
 			sourceTree = "<group>";

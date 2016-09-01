@@ -28,7 +28,7 @@
 
 -(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint cp          = [gestureRecognizer locationInView:self.weekView.collectionView];
+        CGPoint cp          = [gestureRecognizer locationInView:self.collectionView];
         CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - 20); //Why 40 / 20?
         NSDate* date        = [self dateForPoint:finalPoint];
         
