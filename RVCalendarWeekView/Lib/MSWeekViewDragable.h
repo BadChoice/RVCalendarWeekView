@@ -17,7 +17,9 @@
 
 @end
 
-@interface MSWeekViewDragable : MSWeekView
+@interface MSWeekViewDragable : MSWeekView{
+    MSDragableEvent     * mDragableEvent;
+}
 
 @property(weak,nonatomic) id<MSWeekViewDragableDelegate> dragDelegate;
 

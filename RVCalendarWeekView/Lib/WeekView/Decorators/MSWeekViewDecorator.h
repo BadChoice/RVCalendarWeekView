@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "MSWeekView.h"
 
-@interface MSWeekViewDecorator : NSObject <UICollectionViewDataSource>
+@interface MSWeekViewDecorator : MSWeekView{
+}
 
-@property (strong,nonatomic) MSWeekView * weekView;
+@property(strong,nonatomic) MSWeekView* weekView;
 
++(MSWeekView*)makeWith:(MSWeekView*)weekView;
 -(void)setup;
 
 @end

@@ -20,7 +20,6 @@
 {
     NSArray             * mEvents;
     NSMutableDictionary * mDays;
-    MSDragableEvent     * mDragableEvent;
 }
 
 @property(strong,nonatomic) UICollectionView* collectionView;

@@ -32,7 +32,7 @@
         else if(date.minute > 45)                   date = [[date addHour] withMinute:0];
         else                                        date = [date withMinute:0];
         
-        if(self.dragDelegate) [self.dragDelegate MSWeekView:self.weekView onLongPressAt:date];
+        if(self.dragDelegate) [self.dragDelegate MSWeekView:self onLongPressAt:date];
     }
 }
 
@@ -57,10 +57,10 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         //NSLog(@"Long press began: %@",eventCell.akEvent.title);
         mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset];
-        [self.weekView.superview.superview addSubview:mDragableEvent];
+        [self.superview.superview addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
-        CGPoint cp = [gestureRecognizer locationInView:self.weekView.superview];
+        CGPoint cp = [gestureRecognizer locationInView:self.superview];
         
         [UIView animateWithDuration:0.1 animations:^{
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -99,9 +99,9 @@
         int duration = eventCell.akEvent.durationInSeconds;
         eventCell.akEvent.StartDate = newStartDate;
         eventCell.akEvent.EndDate = [eventCell.akEvent.StartDate dateByAddingSeconds:duration];
-        [self.weekView forceReload];
+        [self forceReload];
         if(self.dragDelegate){
-            [self.dragDelegate MSWeekView:self.weekView event:eventCell.akEvent moved:newStartDate];
+            [self.dragDelegate MSWeekView:self event:eventCell.akEvent moved:newStartDate];
         }
     }
     
@@ -149,7 +149,7 @@
 //=========================================================
 -(BOOL)canMoveToNewDate:(MSEvent*)event newDate:(NSDate*)newDate{
     if (! self.dragDelegate) return true;
-    return [self.dragDelegate MSWeekView:self.weekView canMoveEvent:event to:newDate];
+    return [self.dragDelegate MSWeekView:self canMoveEvent:event to:newDate];
 }
 
 -(BOOL)isPortrait{

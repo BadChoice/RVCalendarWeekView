@@ -11,6 +11,13 @@
 
 @implementation MSWeekViewDecorator
 
+
++(MSWeekView*)makeWith:(MSWeekView*)weekView{
+    MSWeekViewDecorator* weekViewDecorator = [MSWeekViewDecorator new];
+    weekViewDecorator.weekView = weekView;
+    return weekViewDecorator;
+}
+
 -(id)init{
     if(self = [super init]){
         [self setup];
@@ -19,8 +26,9 @@
 }
 
 -(void)setup{
-    self.weekView.collectionView.dataSource = self;
+    
 }
+
 
 //==========================================
 #pragma mark -Collection view datasource
@@ -30,7 +38,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return [_weekView collectionView:collectionView cellForItemAtIndexPath:indexPath];    
+    return [_weekView collectionView:collectionView cellForItemAtIndexPath:indexPath];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
