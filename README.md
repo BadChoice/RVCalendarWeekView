@@ -8,7 +8,11 @@ I created this library simplifing its usage and adding some interesting features
 
 ### Installation
 
-Pod pending yet... so you need to copy the files inside the `lib` folder by now
+`pod RVCalendarWeekView`
+
+**Pod not working since I get a lint error.. if anybody can help with this...**
+
+or just copy the files inside the `lib` folder by now
 
 
 ### Usage
