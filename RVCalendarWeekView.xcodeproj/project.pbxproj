@@ -29,6 +29,7 @@
 		766E7E1D1D6B9C9F007A410C /* MSWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 766E7E1C1D6B9C9F007A410C /* MSWeekView.m */; };
 		768458251D7847080080A27A /* MSWeekViewDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 768458241D7847080080A27A /* MSWeekViewDecorator.m */; };
 		768458281D7847D80080A27A /* MSWeekViewDecoratorDragable.m in Sources */ = {isa = PBXBuildFile; fileRef = 768458271D7847D80080A27A /* MSWeekViewDecoratorDragable.m */; };
+		7684582C1D7961350080A27A /* MSWeekViewDecoratorPinchable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7684582B1D7961350080A27A /* MSWeekViewDecoratorPinchable.m */; };
 		76FC4A001D7865BB004CF995 /* MSWeekViewDecoratorInfinite.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FC49FF1D7865BB004CF995 /* MSWeekViewDecoratorInfinite.m */; };
 		76FC4A061D78678C004CF995 /* MSWeekViewDecoratorNewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FC4A051D78678C004CF995 /* MSWeekViewDecoratorNewEvent.m */; };
 		76FC4A091D786E7F004CF995 /* MSWeekViewDecoratorFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FC4A081D786E7F004CF995 /* MSWeekViewDecoratorFactory.m */; };
@@ -91,6 +92,8 @@
 		768458241D7847080080A27A /* MSWeekViewDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecorator.m; path = Lib/WeekView/Decorators/MSWeekViewDecorator.m; sourceTree = "<group>"; };
 		768458261D7847D80080A27A /* MSWeekViewDecoratorDragable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorDragable.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorDragable.h; sourceTree = "<group>"; };
 		768458271D7847D80080A27A /* MSWeekViewDecoratorDragable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorDragable.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorDragable.m; sourceTree = "<group>"; };
+		7684582A1D7961350080A27A /* MSWeekViewDecoratorPinchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorPinchable.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorPinchable.h; sourceTree = "<group>"; };
+		7684582B1D7961350080A27A /* MSWeekViewDecoratorPinchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorPinchable.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorPinchable.m; sourceTree = "<group>"; };
 		76FC49FE1D7865BB004CF995 /* MSWeekViewDecoratorInfinite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorInfinite.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorInfinite.h; sourceTree = "<group>"; };
 		76FC49FF1D7865BB004CF995 /* MSWeekViewDecoratorInfinite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorInfinite.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorInfinite.m; sourceTree = "<group>"; };
 		76FC4A041D78678C004CF995 /* MSWeekViewDecoratorNewEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorNewEvent.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorNewEvent.h; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 		768458221D7846E60080A27A /* Decorators */ = {
 			isa = PBXGroup;
 			children = (
+				768458291D7961140080A27A /* Pinchable */,
 				76FC4A071D786E7F004CF995 /* MSWeekViewDecoratorFactory.h */,
 				76FC4A081D786E7F004CF995 /* MSWeekViewDecoratorFactory.m */,
 				768458231D7847080080A27A /* MSWeekViewDecorator.h */,
@@ -283,6 +287,15 @@
 				76FC4A021D7865D5004CF995 /* Infinite */,
 			);
 			name = Decorators;
+			sourceTree = "<group>";
+		};
+		768458291D7961140080A27A /* Pinchable */ = {
+			isa = PBXGroup;
+			children = (
+				7684582A1D7961350080A27A /* MSWeekViewDecoratorPinchable.h */,
+				7684582B1D7961350080A27A /* MSWeekViewDecoratorPinchable.m */,
+			);
+			name = Pinchable;
 			sourceTree = "<group>";
 		};
 		76FC4A011D7865CD004CF995 /* Dragable */ = {
@@ -493,6 +506,7 @@
 				76276EB71D6B81D4002C1D39 /* main.m in Sources */,
 				76276EFE1D6B826B002C1D39 /* MSTimeRowHeaderBackground.m in Sources */,
 				76276EF91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m in Sources */,
+				7684582C1D7961350080A27A /* MSWeekViewDecoratorPinchable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
