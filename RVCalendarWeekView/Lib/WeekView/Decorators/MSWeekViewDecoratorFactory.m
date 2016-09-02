@@ -28,6 +28,11 @@
     if ( (features & MSDragableEventFeature) != 0 ){ // => true
         decoratedView = [MSWeekViewDecoratorDragable makeWith:decoratedView andDelegate:delegate];
     }
+    
+    if ( (features & MSPinchableFeature) != 0 ){    // => true
+        decoratedView = [MSWeekViewDecoratorPinchable makeWith:decoratedView];
+    }
+
 
     
     return decoratedView;

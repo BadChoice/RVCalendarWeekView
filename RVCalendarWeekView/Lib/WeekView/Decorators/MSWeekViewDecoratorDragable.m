@@ -78,7 +78,7 @@
         int duration = eventCell.akEvent.durationInSeconds;
         eventCell.akEvent.StartDate = newStartDate;
         eventCell.akEvent.EndDate = [eventCell.akEvent.StartDate dateByAddingSeconds:duration];
-        [self.baseWeekView forceReload];
+        [self.baseWeekView forceReload:YES];
         if(self.dragDelegate){
             [self.dragDelegate MSWeekView:self.baseWeekView event:eventCell.akEvent moved:newStartDate];
         }

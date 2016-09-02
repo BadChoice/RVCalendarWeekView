@@ -26,7 +26,7 @@
 - (void)setupWeekData{
     
     self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
-                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature)
+                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature|MSPinchableFeature)
                                                   andDelegate:self];
     
     

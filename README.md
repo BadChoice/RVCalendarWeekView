@@ -1,13 +1,14 @@
 # RVCalendarWeekView
-Simple but powerful Calendar Week View for iOS With dragable events
+Simple but powerful Calendar Week View for iOS With dragable events, infinte scroll and pinchable hours size
 
 
 Following the work from [MSCollectionView](https://github.com/erichoracek/MSCollectionViewCalendarLayout)
-I created this library simplifing its usage
+
+I created this library simplifing its usage and adding some interesting features
 
 ### Installation
 
-Pod pending yet...
+Pod pending yet... so you need to copy the files inside the `lib` folder by now
 
 
 ### Usage
@@ -77,11 +78,15 @@ it will fire the following functions on your `createEventDelegate`
 
 ##### Infinite scroll
 
-it will fire the following functions on your `infiniteDelegate`
+It will fire the following functions on your `infiniteDelegate`
 
 ```
     -(BOOL)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
 ```
+
+##### Pinchable 
+** This doesn't work really well yet ** 
+You just need to add the  `MSPinchableFeature` in the `[MSWeekViewDecoratorFactory  make:...]`
 
 ##### Options
 You can even customize some options (they all have defaults values so you just need to modify them if you want to work differently)

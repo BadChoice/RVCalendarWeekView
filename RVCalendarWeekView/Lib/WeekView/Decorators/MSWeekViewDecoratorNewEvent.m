@@ -23,7 +23,7 @@
     
     UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
     [lpgr setCancelsTouchesInView:NO];  //To didSelectCell still works
-    [self.weekView.collectionView addGestureRecognizer:lpgr];
+    [self.collectionView addGestureRecognizer:lpgr];
 }
 
 -(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{

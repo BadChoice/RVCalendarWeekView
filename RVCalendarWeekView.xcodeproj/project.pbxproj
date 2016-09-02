@@ -30,6 +30,8 @@
 		768458251D7847080080A27A /* MSWeekViewDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 768458241D7847080080A27A /* MSWeekViewDecorator.m */; };
 		768458281D7847D80080A27A /* MSWeekViewDecoratorDragable.m in Sources */ = {isa = PBXBuildFile; fileRef = 768458271D7847D80080A27A /* MSWeekViewDecoratorDragable.m */; };
 		7684582C1D7961350080A27A /* MSWeekViewDecoratorPinchable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7684582B1D7961350080A27A /* MSWeekViewDecoratorPinchable.m */; };
+		7684582E1D7996A80080A27A /* RVCalendarWeekView.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 7684582D1D7996A80080A27A /* RVCalendarWeekView.podspec.json */; };
+		768458301D7996C70080A27A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 7684582F1D7996C70080A27A /* Podfile */; };
 		76FC4A001D7865BB004CF995 /* MSWeekViewDecoratorInfinite.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FC49FF1D7865BB004CF995 /* MSWeekViewDecoratorInfinite.m */; };
 		76FC4A061D78678C004CF995 /* MSWeekViewDecoratorNewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FC4A051D78678C004CF995 /* MSWeekViewDecoratorNewEvent.m */; };
 		76FC4A091D786E7F004CF995 /* MSWeekViewDecoratorFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FC4A081D786E7F004CF995 /* MSWeekViewDecoratorFactory.m */; };
@@ -94,6 +96,8 @@
 		768458271D7847D80080A27A /* MSWeekViewDecoratorDragable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorDragable.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorDragable.m; sourceTree = "<group>"; };
 		7684582A1D7961350080A27A /* MSWeekViewDecoratorPinchable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorPinchable.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorPinchable.h; sourceTree = "<group>"; };
 		7684582B1D7961350080A27A /* MSWeekViewDecoratorPinchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorPinchable.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorPinchable.m; sourceTree = "<group>"; };
+		7684582D1D7996A80080A27A /* RVCalendarWeekView.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RVCalendarWeekView.podspec.json; sourceTree = "<group>"; };
+		7684582F1D7996C70080A27A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		76FC49FE1D7865BB004CF995 /* MSWeekViewDecoratorInfinite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorInfinite.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorInfinite.h; sourceTree = "<group>"; };
 		76FC49FF1D7865BB004CF995 /* MSWeekViewDecoratorInfinite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorInfinite.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorInfinite.m; sourceTree = "<group>"; };
 		76FC4A041D78678C004CF995 /* MSWeekViewDecoratorNewEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorNewEvent.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorNewEvent.h; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				763857F31D6BA4DF008D1328 /* README.md */,
+				7684582D1D7996A80080A27A /* RVCalendarWeekView.podspec.json */,
+				7684582F1D7996C70080A27A /* Podfile */,
 				76276EBE1D6B81D4002C1D39 /* Main.storyboard */,
 				76276EB81D6B81D4002C1D39 /* AppDelegate.h */,
 				76276EB91D6B81D4002C1D39 /* AppDelegate.m */,
@@ -277,13 +283,13 @@
 		768458221D7846E60080A27A /* Decorators */ = {
 			isa = PBXGroup;
 			children = (
-				768458291D7961140080A27A /* Pinchable */,
 				76FC4A071D786E7F004CF995 /* MSWeekViewDecoratorFactory.h */,
 				76FC4A081D786E7F004CF995 /* MSWeekViewDecoratorFactory.m */,
 				768458231D7847080080A27A /* MSWeekViewDecorator.h */,
 				768458241D7847080080A27A /* MSWeekViewDecorator.m */,
 				76FC4A031D7865DE004CF995 /* NewEvent */,
 				76FC4A011D7865CD004CF995 /* Dragable */,
+				768458291D7961140080A27A /* Pinchable */,
 				76FC4A021D7865D5004CF995 /* Infinite */,
 			);
 			name = Decorators;
@@ -417,6 +423,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				768458301D7996C70080A27A /* Podfile in Resources */,
+				7684582E1D7996A80080A27A /* RVCalendarWeekView.podspec.json in Resources */,
 				76276EC51D6B81D4002C1D39 /* LaunchScreen.storyboard in Resources */,
 				76276EC21D6B81D4002C1D39 /* Assets.xcassets in Resources */,
 				76276EC01D6B81D4002C1D39 /* Main.storyboard in Resources */,

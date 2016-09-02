@@ -7,15 +7,29 @@
 //
 
 #import "MSWeekViewDecoratorPinchable.h"
+#define MAX_HOUR_HEIGHT 250
+#define MIN_HOUR_HEIGHT 20
 
 @implementation MSWeekViewDecoratorPinchable
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+-(void)setup{
+    [super setup];
+    
+    UIGestureRecognizer* lpgr = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(onPinch:)];
+    [lpgr setCancelsTouchesInView:NO];  //To didSelectCell still works
+    [self.collectionView addGestureRecognizer:lpgr];
 }
-*/
+
+-(void)onPinch:(UIPinchGestureRecognizer*)gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        CGFloat newHourHeight = MIN(50* gestureRecognizer.scale, MAX_HOUR_HEIGHT);
+        newHourHeight         = MAX(newHourHeight, MIN_HOUR_HEIGHT);
+        
+        self.baseWeekView.weekFlowLayout.hourHeight = newHourHeight;
+        [self.baseWeekView forceReload:NO];
+    }
+}
 
 @end

@@ -49,11 +49,11 @@
         self.baseWeekView.daysToShow += DAYS_TO_LOAD;
         if(self.infiniteDelegate){
             if(![self.infiniteDelegate MSWeekView:self.baseWeekView newDaysLoaded:startDate to:endDate]){
-                [self.baseWeekView forceReload];
+                [self.baseWeekView forceReload:YES];
             }
         }
         else{
-            [self.baseWeekView forceReload];
+            [self.baseWeekView forceReload:YES];
         }
         
         mLoading = false;

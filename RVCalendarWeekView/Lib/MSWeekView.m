@@ -75,6 +75,10 @@
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
+    [self registerClasses];
+}
+
+-(void)registerClasses{
     [self.collectionView registerClass:MSEventCell.class forCellWithReuseIdentifier:MSEventCellReuseIdentifier];
     [self.collectionView registerClass:MSDayColumnHeader.class forSupplementaryViewOfKind:MSCollectionElementKindDayColumnHeader withReuseIdentifier:MSDayColumnHeaderReuseIdentifier];
     [self.collectionView registerClass:MSTimeRowHeader.class forSupplementaryViewOfKind:MSCollectionElementKindTimeRowHeader withReuseIdentifier:MSTimeRowHeaderReuseIdentifier];
@@ -88,14 +92,16 @@
     [self.weekFlowLayout registerClass:MSDayColumnHeaderBackground.class forDecorationViewOfKind:MSCollectionElementKindDayColumnHeaderBackground];
 }
 
+
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.weekFlowLayout.sectionWidth = self.layoutSectionWidth;
 }
 
--(void)forceReload{
+-(void)forceReload:(BOOL)reloadEvents{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self groupEventsByDays];
+        if(reloadEvents)
+            [self groupEventsByDays];
         [self.weekFlowLayout invalidateLayoutCache];
         [self.collectionView reloadData];
     });
@@ -126,7 +132,7 @@
 //================================================
 -(void)setEvents:(NSArray *)events{
     mEvents = events;
-    [self forceReload];
+    [self forceReload:YES];
 }
 
 -(void)addEvent:(MSEvent *)event{
@@ -135,14 +141,14 @@
 
 -(void)addEvents:(NSArray*)events{
     self.events = [mEvents arrayByAddingObjectsFromArray:events];
-    [self forceReload];
+    [self forceReload:YES];
 }
 
 -(void)removeEvent:(MSEvent*)event{
     self.events = [mEvents reject:^BOOL(MSEvent* arrayEvent) {
         return [arrayEvent isEqual:event];;
     }];
-    [self forceReload];
+    [self forceReload:YES];
 }
 
 -(void)groupEventsByDays{

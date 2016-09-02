@@ -31,7 +31,15 @@
 
 @property(weak,nonatomic) id<MSWeekViewDelegate> delegate;
 
--(void)forceReload;
+/**
+ * Override this function to customize the views you want to use
+ */
+-(void)registerClasses;
+
+/**
+ * Call this function to reload (when
+ */
+-(void)forceReload:(BOOL)reloadEvents;
 
 -(void)addEvent   :(MSEvent*)event;
 -(void)addEvents  :(NSArray*)events;
