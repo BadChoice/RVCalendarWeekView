@@ -11,11 +11,11 @@
 
 @implementation MSEvent
 
-+(MSEvent*)make:(NSDate*)start title:(NSString*)title subtitle:(NSString*)subtitle{
++(instancetype)make:(NSDate*)start title:(NSString*)title subtitle:(NSString*)subtitle{
     return [self.class make:start duration:60 title:title subtitle:subtitle];
 }
 
-+(MSEvent*)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title subtitle:(NSString*)subtitle{
++(instancetype)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title subtitle:(NSString*)subtitle{
     MSEvent* event = [self.class new];
     event.StartDate = start;
     event.EndDate   = end;
@@ -24,7 +24,7 @@
     return event;
 }
 
-+(MSEvent*)make:(NSDate*)start duration:(int)minutes title:(NSString*)title subtitle:(NSString*)subtitle{
++(instancetype)make:(NSDate*)start duration:(int)minutes title:(NSString*)title subtitle:(NSString*)subtitle{
     MSEvent* event  = [self.class new];
     event.StartDate = start;
     event.EndDate   = [start addMinutes:minutes];
