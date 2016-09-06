@@ -32,22 +32,22 @@
     
     MSEvent* event1 = [MSEvent make:NSDate.now
                               title:@"Title"
-                           location:@"Central perk"];
+                           subtitle:@"Central perk"];
     
     MSEvent* event2 = [MSEvent make:[NSDate.now addMinutes:10]
                            duration:60*3
                               title:@"Title 2"
-                           location:@"Central perk"];
+                           subtitle:@"Central perk"];
     
     MSEvent* event3 = [MSEvent make:[NSDate.tomorrow addMinutes:10]
                            duration:60*3
                               title:@"Title 3"
-                           location:@"Central perk"];
+                           subtitle:@"Central perk"];
     
     MSEvent* event4 = [MSEvent make:[NSDate.nextWeek addHours:7]
                            duration:60*3
                               title:@"Title 4"
-                           location:@"Central perk"];
+                           subtitle:@"Central perk"];
     
     _weekView.delegate                      = self;
     _weekView.weekFlowLayout.show24Hours    = YES;
@@ -100,7 +100,7 @@
 //=========================================
 -(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date{
     NSLog(@"Long pressed at: %@", date);
-    MSEvent *newEvent = [MSEvent make:date title:@"New Event" location:@"Platinium stadium"];
+    MSEvent *newEvent = [MSEvent make:date title:@"New Event" subtitle:@"Platinium stadium"];
     [_weekView addEvent:newEvent];
 }
 
@@ -114,12 +114,12 @@
     MSEvent* newEvent = [MSEvent make:[startDate addHours:7]
                            duration:60*3
                               title:@"New event"
-                           location:@"Batcave"];
+                           subtitle:@"Batcave"];
     
     MSEvent* lastEvent = [MSEvent make:[endDate addHours:-7]
                              duration:60*3
                                 title:@"Last event"
-                             location:@"Fantastic tower"];
+                             subtitle:@"Fantastic tower"];
     
     [weekView addEvents:@[newEvent,lastEvent]];
     return YES;

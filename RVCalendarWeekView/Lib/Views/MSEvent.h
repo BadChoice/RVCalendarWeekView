@@ -14,10 +14,10 @@
 @property (nonatomic, strong) NSString  *title;
 @property (nonatomic, strong) NSString  *location;
 
-+(MSEvent*)make:(NSDate*)start title:(NSString*)title location:(NSString*)location;
-+(MSEvent*)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title location:(NSString*)location;
++(MSEvent*)make:(NSDate*)start title:(NSString*)title subtitle:(NSString*)subtitle;
++(MSEvent*)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title subtitle:(NSString*)subtitle;
 
-+(MSEvent*)make:(NSDate*)start duration:(int)minutes title:(NSString*)title location:(NSString*)location;
++(MSEvent*)make:(NSDate*)start duration:(int)minutes title:(NSString*)title subtitle:(NSString*)subtitle;
 
 - (NSDate *)day;
 

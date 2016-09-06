@@ -11,29 +11,29 @@
 
 @implementation MSEvent
 
-+(MSEvent*)make:(NSDate*)start title:(NSString*)title location:(NSString*)location{
-    return [self.class make:start duration:60 title:title location:location];
++(MSEvent*)make:(NSDate*)start title:(NSString*)title subtitle:(NSString*)subtitle{
+    return [self.class make:start duration:60 title:title subtitle:subtitle];
 }
 
-+(MSEvent*)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title location:(NSString*)location{
-    MSEvent* event = [MSEvent new];
++(MSEvent*)make:(NSDate*)start end:(NSDate*)end title:(NSString*)title subtitle:(NSString*)subtitle{
+    MSEvent* event = [self.class new];
     event.StartDate = start;
     event.EndDate   = end;
     event.title     = title;
-    event.location  = location;
+    event.location  = subtitle;
     return event;
 }
 
-+(MSEvent*)make:(NSDate*)start duration:(int)minutes title:(NSString*)title location:(NSString*)location{
-    MSEvent* event  = [MSEvent new];
++(MSEvent*)make:(NSDate*)start duration:(int)minutes title:(NSString*)title subtitle:(NSString*)subtitle{
+    MSEvent* event  = [self.class new];
     event.StartDate = start;
     event.EndDate   = [start addMinutes:minutes];
     event.title     = title;
-    event.location  = location;
+    event.location  = subtitle;
     return event;
 }
 
 - (NSDate *)day{
-    return [[NSCalendar currentCalendar] startOfDayForDate:self.StartDate];
+    return [NSCalendar.currentCalendar startOfDayForDate:self.StartDate];
 }
 @end
