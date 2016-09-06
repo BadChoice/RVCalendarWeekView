@@ -43,7 +43,7 @@
         [self.baseWeekView addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
-        CGPoint cp = [gestureRecognizer locationInView:self.collectionView];
+        CGPoint cp = [gestureRecognizer locationInView:self.baseWeekView];
         
         [UIView animateWithDuration:0.1 animations:^{
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

@@ -28,7 +28,7 @@
 
 -(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint cp          = [gestureRecognizer locationInView:self.collectionView];
+        CGPoint cp          = [gestureRecognizer locationInView:self.baseWeekView];
         CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - self.weekFlowLayout.dayColumnHeaderHeight - 20); //20 is the section margin
         NSDate* date        = [self dateForPoint:finalPoint];
         
