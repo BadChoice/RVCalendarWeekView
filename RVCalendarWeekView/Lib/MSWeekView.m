@@ -157,6 +157,9 @@
     mDays = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
     NSDate* date = NSDate.today;
+    if(self.daysToShow == 1 && mDays.count == 1){
+        date = [NSDate parse:mDays.allKeys.firstObject];
+    }
     for(int i = 0; i< self.daysToShow; i++){
         if(![mDays.allKeys containsObject:date.toDeviceTimezoneDateString]){
             [mDays setObject:@[] forKey:date.toDeviceTimezoneDateString];

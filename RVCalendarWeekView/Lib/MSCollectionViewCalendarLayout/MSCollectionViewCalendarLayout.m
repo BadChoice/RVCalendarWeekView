@@ -345,7 +345,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             
             //Weekends
             int weekDay = (currentTimeDateComponents.weekday + section) % 7;
-            if( weekDay == 6 || weekDay == 0){
+            if( weekDay == 0 || weekDay == 1){  //0 Saturday //1 sunday //2 Monday...
                 horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.sectionWidth, sectionHeight);
                 horizontalGridlineAttributes.zIndex = -1;
             }
