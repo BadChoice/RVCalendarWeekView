@@ -20,7 +20,7 @@
                                   eventCell.frame.size.width, eventCell.frame.size.height);
     
     MSDragableEvent *dragCell = [[MSDragableEvent alloc] initWithFrame:newFrame];
-    dragCell.akEvent          = eventCell.akEvent;
+    dragCell.event          = eventCell.event;
     dragCell.backgroundColor  = [eventCell backgroundColorHighlighted:YES];
     return dragCell;
 }

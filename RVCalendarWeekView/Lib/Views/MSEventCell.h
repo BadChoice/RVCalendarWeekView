@@ -13,7 +13,7 @@
 
 @interface MSEventCell : UICollectionViewCell
 
-@property (nonatomic, strong) MSEvent *akEvent;
+@property (nonatomic, strong) MSEvent *event;
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UILabel *location;
 

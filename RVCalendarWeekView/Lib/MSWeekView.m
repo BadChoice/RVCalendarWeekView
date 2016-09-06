@@ -182,8 +182,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MSEventCell *cell   = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
-    NSString* day       = [mDays.allKeys.sort objectAtIndex:indexPath.section];
-    cell.akEvent        = [mDays[day] objectAtIndex:indexPath.row];
+    NSString* day      = [mDays.allKeys.sort objectAtIndex:indexPath.section];
+    cell.event         = [mDays[day] objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -247,7 +247,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(self.delegate){
         MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        [self.delegate MSWeekView:self eventSelected:cell.akEvent];
+        [self.delegate MSWeekView:self eventSelected:cell];
     }
 }
 

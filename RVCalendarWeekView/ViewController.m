@@ -60,8 +60,8 @@
 //=========================================
 #pragma mark - Week View delegate
 //=========================================
--(void)MSWeekView:(id)sender eventSelected:(MSEvent *)event{
-    NSLog(@"Event selected: %@",event.title);
+-(void)MSWeekView:(id)sender eventSelected:(MSEventCell*)eventCell{
+    NSLog(@"Event selected: %@",eventCell.event.title);
     //[_weekView removeEvent:event];
 }
 

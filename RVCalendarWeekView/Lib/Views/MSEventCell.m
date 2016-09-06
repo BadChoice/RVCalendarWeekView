@@ -100,11 +100,11 @@
 
 
 #pragma mark - MSEventCell
-- (void)setAkEvent:(MSEvent *)event
+- (void)setEvent:(MSEvent *)event
 {
-    _akEvent = event;
-    self.title.attributedText = [[NSAttributedString alloc] initWithString:_akEvent.title attributes:[self titleAttributesHighlighted:self.selected]];
-    self.location.attributedText = [[NSAttributedString alloc] initWithString:_akEvent.location attributes:[self subtitleAttributesHighlighted:self.selected]];;
+    _event = event;
+    self.title.attributedText = [[NSAttributedString alloc] initWithString:_event.title attributes:[self titleAttributesHighlighted:self.selected]];
+    self.location.attributedText = [[NSAttributedString alloc] initWithString:_event.location attributes:[self subtitleAttributesHighlighted:self.selected]];;
 }
 
 
