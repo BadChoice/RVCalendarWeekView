@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DTTimePeriod.h"
+#import <DateTools/DTTimePeriod.h>
 
 @interface MSEvent : DTTimePeriod
 
