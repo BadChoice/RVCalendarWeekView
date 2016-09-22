@@ -10,8 +10,8 @@
 #import "MSDragableEvent.h"
 
 @protocol MSWeekViewDragableDelegate <NSObject>
--(BOOL)MSWeekView:(MSWeekView*)weekView canMoveEvent:(MSEvent*)event to:(NSDate*)date;
--(void)MSWeekView:(MSWeekView*)weekView event:(MSEvent*)event moved:(NSDate*)date;
+-(BOOL)weekView:(MSWeekView*)weekView canMoveEvent:(MSEvent*)event to:(NSDate*)date;
+-(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event moved:(NSDate*)date;
 @end
 
 

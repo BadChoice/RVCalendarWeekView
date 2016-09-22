@@ -64,9 +64,9 @@ You can get a dragable events calendar using `RVWeekViewDragable` instead.
 it will fire the following functions on your `dragDelegate`
 
 ``` 
-    -(BOOL)MSWeekView:(MSWeekView*)weekView canMoveEvent:(MSEvent*)event to:(NSDate*)date;
+    -(BOOL)weekView:(MSWeekView*)weekView canMoveEvent:(MSEvent*)event to:(NSDate*)date;
 
-    -(void)MSWeekView:(MSWeekView*)weekView event:(MSEvent*)event moved:(NSDate*)date;
+    -(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event moved:(NSDate*)date;
 
 ```
 
@@ -75,7 +75,7 @@ it will fire the following functions on your `dragDelegate`
 it will fire the following functions on your `createEventDelegate`
 
 ```
-    -(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date
+    -(void)weekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date
 ```
 
 ##### Infinite scroll
@@ -83,7 +83,7 @@ it will fire the following functions on your `createEventDelegate`
 It will fire the following functions on your `infiniteDelegate`
 
 ```
-    -(BOOL)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
+    -(BOOL)weekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
 ```
 
 ##### Pinchable 

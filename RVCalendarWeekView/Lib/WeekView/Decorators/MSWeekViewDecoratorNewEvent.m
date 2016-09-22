@@ -37,7 +37,7 @@
         else                                        date = [date withMinute:0];
         
         if(self.createEventDelegate)
-            [self.createEventDelegate MSWeekView:self.baseWeekView onLongPressAt:date];
+            [self.createEventDelegate weekView:self.baseWeekView onLongPressAt:date];
     }
 }
 

@@ -9,7 +9,7 @@
 #import "MSWeekViewDecorator.h"
 
 @protocol MSWeekViewNewEventDelegate <NSObject>
--(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date;
+-(void)weekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date;
 @end
 
 @interface MSWeekViewDecoratorNewEvent : MSWeekViewDecorator

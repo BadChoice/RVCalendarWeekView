@@ -250,7 +250,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(self.delegate){
         MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        [self.delegate MSWeekView:self eventSelected:cell];
+        [self.delegate weekView:self eventSelected:cell];
     }
 }
 

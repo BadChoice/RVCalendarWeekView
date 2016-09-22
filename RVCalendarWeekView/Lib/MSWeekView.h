@@ -13,7 +13,7 @@
 
 
 @protocol MSWeekViewDelegate <NSObject>
--(void)MSWeekView:(id)sender eventSelected:(MSEventCell*)eventCell;
+-(void)weekView:(id)sender eventSelected:(MSEventCell*)eventCell;
 @end
 
 @interface MSWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>

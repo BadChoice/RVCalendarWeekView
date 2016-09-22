@@ -14,7 +14,7 @@
 /**
  * Return YES if new events are added, or NO if not to improve performance
  */
--(BOOL)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
+-(BOOL)weekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
 @end
 
 @interface MSWeekViewDecoratorInfinite : MSWeekViewDecorator{

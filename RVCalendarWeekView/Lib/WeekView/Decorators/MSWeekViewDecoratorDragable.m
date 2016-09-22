@@ -80,7 +80,7 @@
         eventCell.event.EndDate = [eventCell.event.StartDate dateByAddingSeconds:duration];
         [self.baseWeekView forceReload:YES];
         if(self.dragDelegate){
-            [self.dragDelegate MSWeekView:self.baseWeekView event:eventCell.event moved:newStartDate];
+            [self.dragDelegate weekView:self.baseWeekView event:eventCell.event moved:newStartDate];
         }
     }
     
@@ -100,7 +100,7 @@
 //=========================================================
 -(BOOL)canMoveToNewDate:(MSEvent*)event newDate:(NSDate*)newDate{
     if (! self.dragDelegate) return true;
-    return [self.dragDelegate MSWeekView:self canMoveEvent:event to:newDate];
+    return [self.dragDelegate weekView:self canMoveEvent:event to:newDate];
 }
 
 -(BOOL)isPortrait{
