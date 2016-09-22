@@ -90,9 +90,7 @@
 
 
 -(NSDate*)dateForDragable{
-    CGPoint point = CGPointMake(mDragableEvent.frame.origin.x + self.collectionView.contentOffset.x,
-                                mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - self.weekFlowLayout.dayColumnHeaderHeight - 20);  //5 is the section margin
-    return [self dateForPoint:point];
+    return [self dateForPoint:mDragableEvent.frame.origin];
 }
 
 //=========================================================

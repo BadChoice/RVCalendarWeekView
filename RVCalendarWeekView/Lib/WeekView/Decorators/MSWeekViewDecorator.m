@@ -89,20 +89,31 @@
 }
 
 -(int)getHourForY:(float)y{
+    y = [self viewYToContentY:y];
     int earliestHour    = (int)self.weekFlowLayout.earliestHour;
     int hour            = y/self.weekFlowLayout.hourHeight;
-    return hour + earliestHour;
+    return MAX(0, MIN(23, hour + earliestHour));
 }
 
 -(int)getMinuteForY:(float)y{
+    y = [self viewYToContentY:y];
     int hours          = (y / self.weekFlowLayout.hourHeight);
     int minute         = (y / self.weekFlowLayout.hourHeight - hours ) * 60;
     int minuteRounded  = [self round:minute toNearest:5];
-    return minuteRounded == 60 ? 55 : minuteRounded;
+    return MAX(0, minuteRounded == 60 ? 55 : minuteRounded);
 }
 
 -(int)getDayIndexForX:(float)x{
-    return x / self.weekFlowLayout.sectionWidth;
+    x = [self viewXToContentX:x];
+    return x / (self.weekFlowLayout.sectionMargin.left + self.weekFlowLayout.sectionWidth + self.weekFlowLayout.sectionMargin.right);
+}
+
+-(float)viewXToContentX:(float)x{
+    return x - self.weekFlowLayout.timeRowHeaderWidth + self.collectionView.contentOffset.x - self.weekFlowLayout.contentMargin.left;
+}
+
+-(float)viewYToContentY:(float)y{
+    return y - self.weekFlowLayout.dayColumnHeaderHeight + self.collectionView.contentOffset.y - self.weekFlowLayout.contentMargin.top - self.weekFlowLayout.sectionMargin.top;
 }
 
 -(CGFloat)round:(float)number toNearest:(float)pivot{

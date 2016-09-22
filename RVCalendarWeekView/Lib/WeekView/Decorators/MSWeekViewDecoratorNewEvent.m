@@ -29,8 +29,7 @@
 -(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint cp          = [gestureRecognizer locationInView:self.baseWeekView];
-        CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - self.weekFlowLayout.dayColumnHeaderHeight - 20); //20 is the section margin
-        NSDate* date        = [self dateForPoint:finalPoint];
+        NSDate* date        = [self dateForPoint:cp];
         
         if(date.minute > 15 && date.minute < 45)    date = [date withMinute:30];
         else if(date.minute > 45)                   date = [[date addHour] withMinute:0];
