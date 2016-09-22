@@ -156,7 +156,7 @@
     //TODO : Improve this to make it faster
     mDays = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
-    NSDate* date = NSDate.today;
+    NSDate* date = [NSDate today:@"device"];
     if(self.daysToShow == 1 && mDays.count == 1){
         date = [NSDate parse:mDays.allKeys.firstObject];
     }
@@ -221,7 +221,7 @@
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section
 {
     NSString* day   = [mDays.allKeys.sort objectAtIndex:section];
-    return [NSDate parse:day];
+    return [NSDate parse:day timezone:@"device"];
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
