@@ -96,7 +96,9 @@
 
 
 -(NSDate*)dateForDragable{
-    return [self dateForPoint:mDragableEvent.frame.origin];
+    CGPoint dropPoint = CGPointMake(mDragableEvent.frame.origin.x + mDragableEvent.touchOffset.x,
+                                    mDragableEvent.frame.origin.y);
+    return [self dateForPoint:dropPoint];
 }
 
 //=========================================================
