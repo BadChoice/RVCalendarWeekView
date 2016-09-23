@@ -24,7 +24,6 @@
 		76276EFD1D6B826B002C1D39 /* MSTimeRowHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EF11D6B826B002C1D39 /* MSTimeRowHeader.m */; };
 		76276EFE1D6B826B002C1D39 /* MSTimeRowHeaderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EF31D6B826B002C1D39 /* MSTimeRowHeaderBackground.m */; };
 		76276F051D6B8759002C1D39 /* MSEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276F041D6B8759002C1D39 /* MSEvent.m */; };
-		763857F41D6BA4DF008D1328 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 763857F31D6BA4DF008D1328 /* README.md */; };
 		763A802A1D6C4488002E0CBF /* MSDragableEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 763A80291D6C4488002E0CBF /* MSDragableEvent.m */; };
 		766E7E1D1D6B9C9F007A410C /* MSWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 766E7E1C1D6B9C9F007A410C /* MSWeekView.m */; };
 		768458251D7847080080A27A /* MSWeekViewDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 768458241D7847080080A27A /* MSWeekViewDecorator.m */; };
@@ -506,7 +505,6 @@
 				766E7E1D1D6B9C9F007A410C /* MSWeekView.m in Sources */,
 				76276EF81D6B826B002C1D39 /* MSDayColumnHeader.m in Sources */,
 				76276EBA1D6B81D4002C1D39 /* AppDelegate.m in Sources */,
-				763857F41D6BA4DF008D1328 /* README.md in Sources */,
 				76FC4A061D78678C004CF995 /* MSWeekViewDecoratorNewEvent.m in Sources */,
 				76FC4A091D786E7F004CF995 /* MSWeekViewDecoratorFactory.m in Sources */,
 				76276EF61D6B826B002C1D39 /* MSCurrentTimeGridline.m in Sources */,
