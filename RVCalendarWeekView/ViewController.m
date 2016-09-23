@@ -26,7 +26,7 @@
 - (void)setupWeekData{
     
     self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
-                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature|MSPinchableFeature)
+                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature|MSPinchableFeature|MSShortPressNewEventFeature)
                                                   andDelegate:self];
     
     
@@ -106,6 +106,10 @@
     NSLog(@"Long pressed at: %@", date);
     MSEvent *newEvent = [MSEvent make:date title:@"New Event" subtitle:@"Platinium stadium"];
     [_weekView addEvent:newEvent];
+}
+
+-(void)weekView:(MSWeekView*)weekView onTapAt:(NSDate*)date{
+    NSLog(@"Short pressed at: %@", date);
 }
 
 
