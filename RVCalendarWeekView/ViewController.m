@@ -72,6 +72,10 @@
     NSLog(@"Event moved");
 }
 
+-(BOOL)weekView:(MSWeekView*)weekView canStartMovingEvent:(MSEvent*)event{
+    return YES;
+}
+
 -(BOOL)weekView:(MSWeekView *)weekView canMoveEvent:(MSEvent *)event to:(NSDate *)date{
     return YES;
     

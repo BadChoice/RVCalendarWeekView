@@ -11,6 +11,10 @@
 #import "RVCollection.h"
 #import "NSDate+DateTools.h"
 
+@interface MSWeekViewDecoratorDragable () <UIGestureRecognizerDelegate>
+
+@end
+
 @implementation MSWeekViewDecoratorDragable
 
 +(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewDragableDelegate>)delegate{
@@ -26,9 +30,18 @@
 {
     MSEventCell *cell         = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
+    lpgr.delegate = self;
     [cell addGestureRecognizer:lpgr];
     
     return cell;
+}
+
+//=========================================================
+#pragma mark - Gesture recognizer delegate
+//=========================================================
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    MSEventCell* eventCell = (MSEventCell*)gestureRecognizer.view;
+    return [self.dragDelegate weekView:self.weekView canStartMovingEvent:eventCell.event];
 }
 
 //=========================================================

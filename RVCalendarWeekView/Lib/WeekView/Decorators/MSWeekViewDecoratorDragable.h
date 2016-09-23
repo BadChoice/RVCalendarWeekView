@@ -12,6 +12,8 @@
 @protocol MSWeekViewDragableDelegate <NSObject>
 -(BOOL)weekView:(MSWeekView*)weekView canMoveEvent:(MSEvent*)event to:(NSDate*)date;
 -(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event moved:(NSDate*)date;
+@optional
+-(BOOL)weekView:(MSWeekView*)weekView canStartMovingEvent:(MSEvent*)event;
 @end
 
 
