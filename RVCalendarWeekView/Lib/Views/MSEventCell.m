@@ -104,7 +104,8 @@
 {
     _event = event;
     self.title.attributedText = [[NSAttributedString alloc] initWithString:_event.title attributes:[self titleAttributesHighlighted:self.selected]];
-    self.location.attributedText = [[NSAttributedString alloc] initWithString:_event.location attributes:[self subtitleAttributesHighlighted:self.selected]];;
+    self.location.attributedText = [[NSAttributedString alloc] initWithString:_event.location attributes:[self subtitleAttributesHighlighted:self.selected]];
+    [self updateColors];
 }
 
 
