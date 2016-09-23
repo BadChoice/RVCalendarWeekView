@@ -27,6 +27,6 @@ typedef NS_OPTIONS(NSUInteger, MSWeekViewFeatures) {
  * This adds the decorations to the baseView
  * Using this constructor the delegate should implement all the protocols fore each feature defined in `features`
  */
-+(MSWeekView*)make:(MSWeekView*)baseView features:(NSInteger)features andDelegate:(id)delegate;
++(MSWeekView*)make:(MSWeekView*)baseView features:(NSUInteger)features andDelegate:(id)delegate;
 
 @end

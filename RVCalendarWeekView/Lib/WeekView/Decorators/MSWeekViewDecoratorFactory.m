@@ -11,7 +11,7 @@
 
 @implementation MSWeekViewDecoratorFactory
 
-+(MSWeekView*)make:(MSWeekView*)baseView features:(NSInteger)features andDelegate:(id)delegate{
++(MSWeekView*)make:(MSWeekView*)baseView features:(NSUInteger)features andDelegate:(id)delegate{
     
     MSWeekView* decoratedView = baseView;
     
