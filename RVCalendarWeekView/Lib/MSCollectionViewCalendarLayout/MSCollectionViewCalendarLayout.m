@@ -767,7 +767,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     // Invalidate layout on minute ticks (to update the position of the current time indicator)
     // This needs to be a weak reference, otherwise we get a retain cycle
     MSTimerWeakTarget *timerWeakTarget = [[MSTimerWeakTarget alloc] initWithTarget:self selector:@selector(minuteTick:)];
-    self.minuteTimer = [[NSTimer alloc] initWithFireDate:NSDate.nextMinute interval:60 target:timerWeakTarget selector:timerWeakTarget.fireSelector userInfo:nil repeats:YES];
+    self.minuteTimer = [[NSTimer alloc] initWithFireDate:[NSDate.nextMinute dateByAddingTimeInterval:0.3] interval:60 target:timerWeakTarget selector:timerWeakTarget.fireSelector userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.minuteTimer forMode:NSDefaultRunLoopMode];
 }
 
