@@ -13,8 +13,10 @@
     CGPoint _touchOffset;
 }
 
-+(MSDragableEvent*)makeWithEventCell:(MSEventCell*)eventCell andOffset:(CGPoint)offset;
++(MSDragableEvent*)makeWithEventCell:(MSEventCell*)eventCell andOffset:(CGPoint)offset touchOffset:(CGPoint)touchOffset;
 
 @property (strong,nonatomic) UILabel* timeLabel;
+
+@property(nonatomic) CGPoint touchOffset;
 
 @end

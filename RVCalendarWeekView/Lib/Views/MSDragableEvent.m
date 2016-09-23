@@ -13,13 +13,14 @@
 
 @implementation MSDragableEvent
 
-+(MSDragableEvent*)makeWithEventCell:(MSEventCell*)eventCell andOffset:(CGPoint)offset{
++(MSDragableEvent*)makeWithEventCell:(MSEventCell*)eventCell andOffset:(CGPoint)offset touchOffset:(CGPoint)touchOffset{
     
     CGRect  newFrame = CGRectMake(eventCell.frame.origin.x - offset.x,
                                   eventCell.frame.origin.y - offset.y,
                                   eventCell.frame.size.width, eventCell.frame.size.height);
     
     MSDragableEvent *dragCell = [[MSDragableEvent alloc] initWithFrame:newFrame];
+    dragCell.touchOffset      = touchOffset;
     dragCell.event          = eventCell.event;
     dragCell.backgroundColor  = [eventCell backgroundColorHighlighted:YES];
     return dragCell;

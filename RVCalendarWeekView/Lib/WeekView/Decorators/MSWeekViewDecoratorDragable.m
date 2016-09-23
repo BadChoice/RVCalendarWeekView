@@ -39,25 +39,31 @@
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         //NSLog(@"Long press began: %@",eventCell.akEvent.title);
-        mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset];
+        CGPoint touchOffsetInCell = [gestureRecognizer locationInView:gestureRecognizer.view];
+        mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset touchOffset:touchOffsetInCell];
         [self.baseWeekView addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
         CGPoint cp = [gestureRecognizer locationInView:self.baseWeekView];
         
+        CGPoint newOrigin;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            float xOffset = -13;
+            if([self isPortrait]){
+                xOffset = 5;
+            }
+            float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
+            - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);
+            newOrigin = CGPointMake(x, cp.y);
+        }
+        else{
+            newOrigin = CGPointMake(cp.x, cp.y);
+        }
+        newOrigin = CGPointMake(newOrigin.x - mDragableEvent.touchOffset.x,
+                                newOrigin.y - mDragableEvent.touchOffset.y);
+        
         [UIView animateWithDuration:0.1 animations:^{
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                float xOffset = -13;
-                if([self isPortrait]){
-                    xOffset = 5;
-                }
-                float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
-                - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);
-                [mDragableEvent setCenter:CGPointMake(x, cp.y)];
-            }
-            else{
-                [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
-            }
+            mDragableEvent.frame = (CGRect) { .origin = newOrigin, .size = mDragableEvent.frame.size };
         }];
         
         NSDate* date = [self dateForDragable];
