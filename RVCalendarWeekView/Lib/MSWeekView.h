@@ -32,6 +32,23 @@
 @property(weak,nonatomic) id<MSWeekViewDelegate> delegate;
 
 /**
+ * Changes these in subclass's registerClasses before calling [super registerClasses];
+ */
+@property(nonatomic) Class eventCellClass;
+@property(nonatomic) Class dayColumnHeaderClass;
+@property(nonatomic) Class timeRowHeaderClass;
+
+/**
+ * These are optional. If you don't want any of the decoration views, just set them to nil.
+ */
+@property(nonatomic) Class currentTimeIndicatorClass;
+@property(nonatomic) Class currentTimeGridlineClass;
+@property(nonatomic) Class verticalGridlineClass;
+@property(nonatomic) Class horizontalGridlineClass;
+@property(nonatomic) Class timeRowHeaderBackgroundClass;
+@property(nonatomic) Class dayColumnHeaderBackgroundClass;
+
+/**
  * Override this function to customize the views you want to use
  */
 -(void)registerClasses;
