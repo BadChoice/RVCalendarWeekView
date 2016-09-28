@@ -20,6 +20,7 @@
     weekViewDecorator.weekView              = weekView;
     weekView.collectionView.dataSource      = weekViewDecorator;
     weekView.collectionView.delegate        = weekViewDecorator;
+    weekView.weekFlowLayout.delegate        = weekViewDecorator;
     [weekViewDecorator setup];
     return weekViewDecorator;
 }

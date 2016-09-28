@@ -101,7 +101,7 @@
 -(void)forceReload:(BOOL)reloadEvents{
     dispatch_async(dispatch_get_main_queue(), ^{
         if(reloadEvents)
-            [self groupEventsByDays];
+            [self groupEventsBySection];
         [self.weekFlowLayout invalidateLayoutCache];
         [self.collectionView reloadData];
     });
@@ -151,7 +151,10 @@
     [self forceReload:YES];
 }
 
--(void)groupEventsByDays{
+/**
+ * Note that in the standard calendar, each section is a day"
+ */
+-(void)groupEventsBySection{
     
     //TODO : Improve this to make it faster
     _eventsBySection = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;

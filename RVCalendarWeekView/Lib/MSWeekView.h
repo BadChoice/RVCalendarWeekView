@@ -31,10 +31,10 @@
 @property(weak,nonatomic) id<MSWeekViewDelegate> delegate;
 
 /**
- * Usually the section is the day, but you can create your decorator with custom eventsBySection and make
+ * Usually the section is the day, but you can create your decorator (or inherted) with custom eventsBySection and make
  * The section whatever you want
  */
-@property(strong,nonatomic,readonly) NSMutableDictionary *eventsBySection;
+@property(strong,nonatomic) NSMutableDictionary *eventsBySection;
 
 /**
  * Override this function to customize the views you want to use
