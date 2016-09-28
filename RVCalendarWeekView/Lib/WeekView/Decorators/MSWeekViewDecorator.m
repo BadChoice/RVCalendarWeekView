@@ -77,6 +77,21 @@
     [_weekView scrollViewDidScroll:scrollView];
 }
 
+//================================================
+#pragma mark - Week Flow Delegate
+//================================================
+- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section{
+    return [_weekView collectionView:collectionView layout:collectionViewCalendarLayout dayForSection:section];
+}
+
+- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return [_weekView collectionView:collectionView layout:collectionViewCalendarLayout startTimeForItemAtIndexPath:indexPath];
+}
+
+- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return [_weekView collectionView:collectionView layout:collectionViewCalendarLayout endTimeForItemAtIndexPath:indexPath];
+}
+
 //=========================================================
 #pragma mark - Get XX for Point
 //=========================================================

@@ -19,7 +19,6 @@
 @interface MSWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>
 {
     NSArray             * mEvents;
-    NSMutableDictionary * mDays;
 }
 
 @property(strong,nonatomic) UICollectionView* collectionView;
@@ -30,6 +29,12 @@
 @property(strong,nonatomic) NSArray* events;
 
 @property(weak,nonatomic) id<MSWeekViewDelegate> delegate;
+
+/**
+ * Usually the section is the day, but you can create your decorator with custom eventsBySection and make
+ * The section whatever you want
+ */
+@property(strong,nonatomic,readonly) NSMutableDictionary *eventsBySection;
 
 /**
  * Override this function to customize the views you want to use
