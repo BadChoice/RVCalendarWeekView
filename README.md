@@ -107,3 +107,11 @@ _weekView.daysToShow                    = 31;  //How many days to display (Inini
 
 ![iPad](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/ipad.png?raw=true)   
 
+
+### Contributors
+· Jordi Puigdellívol - https://github.com/badchoice
+· Eric Horacek - https://github.com/erichoracek      
+· Kyle Fleming - https://github.com/kylefleming   
+
+
+
