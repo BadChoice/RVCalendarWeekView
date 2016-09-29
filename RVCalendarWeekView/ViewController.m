@@ -51,7 +51,13 @@
     
     _weekView.delegate                      = self;
     _weekView.weekFlowLayout.show24Hours    = YES;
-    _weekView.daysToShowOnScreen            = 7;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        _weekView.daysToShowOnScreen            = 7;
+    }
+    else{
+        _weekView.daysToShowOnScreen            = 2;
+    }
     _weekView.daysToShow                    = 30;
     _weekView.weekFlowLayout.hourHeight     = 50;
     _weekView.events = @[event1,event2,event3,event4];

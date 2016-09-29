@@ -122,18 +122,7 @@
 
 - (CGFloat)layoutSectionWidth
 {
-    // Default to 254 on iPad.
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        return (self.frame.size.width - 50) / self.daysToShowOnScreen;
-        //return 254.0;
-    }
-    
-    // Otherwise, on iPhone, fit-to-width.
-    CGFloat width               = CGRectGetWidth(self.collectionView.bounds);
-    CGFloat timeRowHeaderWidth  = self.weekFlowLayout.timeRowHeaderWidth;
-    CGFloat rightMargin         = self.weekFlowLayout.contentMargin.right;
-    
-    return (width - timeRowHeaderWidth - rightMargin);
+    return (self.frame.size.width - 50) / self.daysToShowOnScreen;
 }
 
 -(NSDate*)firstDay{
