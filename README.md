@@ -109,9 +109,7 @@ _weekView.daysToShow                    = 31;  //How many days to display (Inini
 
 
 ### Contributors
-· Jordi Puigdellívol - https://github.com/badchoice
+· Jordi Puigdellívol - https://github.com/badchoice   
 · Eric Horacek - https://github.com/erichoracek      
 · Kyle Fleming - https://github.com/kylefleming   
-
-
 
