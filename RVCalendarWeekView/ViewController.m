@@ -30,9 +30,11 @@
                                                   andDelegate:self];
     
     
+    //Optional, set minutes precision for drag and new event
     [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:self.decoratedWeekView minutesPrecision:15];
     
     
+    //Create the events
     MSEvent* event1 = [MSEvent make:NSDate.now
                               title:@"Title"
                            subtitle:@"Central perk"];

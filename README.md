@@ -58,6 +58,12 @@ The long way is something more like the standard `decorator` pattern in case you
 
 ```
 
+There is a function to easily set the minutes precicion to all decorators in case you need something diferent than the default 5 minutes.
+
+```
+    [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:decoratedView minutesPrecision:15];
+```
+
 ##### Drag and drop
 You can get a dragable events calendar using `RVWeekViewDragable` instead.
 
