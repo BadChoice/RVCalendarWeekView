@@ -11,6 +11,10 @@
 #import "RVCollection.h"
 #import "NSDate+DateTools.h"
 
+@interface MSWeekViewDecoratorDragable () <UIGestureRecognizerDelegate>
+
+@end
+
 @implementation MSWeekViewDecoratorDragable
 
 +(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewDragableDelegate>)delegate{
@@ -26,9 +30,18 @@
 {
     MSEventCell *cell         = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
+    lpgr.delegate = self;
     [cell addGestureRecognizer:lpgr];
     
     return cell;
+}
+
+//=========================================================
+#pragma mark - Gesture recognizer delegate
+//=========================================================
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    MSEventCell* eventCell = (MSEventCell*)gestureRecognizer.view;
+    return [self.dragDelegate weekView:self.weekView canStartMovingEvent:eventCell.event];
 }
 
 //=========================================================
@@ -39,25 +52,31 @@
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         //NSLog(@"Long press began: %@",eventCell.akEvent.title);
-        mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset];
+        CGPoint touchOffsetInCell = [gestureRecognizer locationInView:gestureRecognizer.view];
+        mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset touchOffset:touchOffsetInCell];
         [self.baseWeekView addSubview:mDragableEvent];
     }
     else if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
         CGPoint cp = [gestureRecognizer locationInView:self.baseWeekView];
         
+        CGPoint newOrigin;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            float xOffset = -13;
+            if([self isPortrait]){
+                xOffset = 5;
+            }
+            float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
+            - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);
+            newOrigin = CGPointMake(x, cp.y);
+        }
+        else{
+            newOrigin = CGPointMake(cp.x, cp.y);
+        }
+        newOrigin = CGPointMake(newOrigin.x - mDragableEvent.touchOffset.x,
+                                newOrigin.y - mDragableEvent.touchOffset.y);
+        
         [UIView animateWithDuration:0.1 animations:^{
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                float xOffset = -13;
-                if([self isPortrait]){
-                    xOffset = 5;
-                }
-                float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
-                - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);
-                [mDragableEvent setCenter:CGPointMake(x, cp.y)];
-            }
-            else{
-                [mDragableEvent setCenter:CGPointMake(cp.x, cp.y)];
-            }
+            mDragableEvent.frame = (CGRect) { .origin = newOrigin, .size = mDragableEvent.frame.size };
         }];
         
         NSDate* date = [self dateForDragable];
@@ -80,7 +99,7 @@
         eventCell.event.EndDate = [eventCell.event.StartDate dateByAddingSeconds:duration];
         [self.baseWeekView forceReload:YES];
         if(self.dragDelegate){
-            [self.dragDelegate MSWeekView:self.baseWeekView event:eventCell.event moved:newStartDate];
+            [self.dragDelegate weekView:self.baseWeekView event:eventCell.event moved:newStartDate];
         }
     }
     
@@ -90,9 +109,9 @@
 
 
 -(NSDate*)dateForDragable{
-    CGPoint point = CGPointMake(mDragableEvent.frame.origin.x + self.collectionView.contentOffset.x,
-                                mDragableEvent.frame.origin.y + self.collectionView.contentOffset.y - self.weekFlowLayout.dayColumnHeaderHeight - 20);  //5 is the section margin
-    return [self dateForPoint:point];
+    CGPoint dropPoint = CGPointMake(mDragableEvent.frame.origin.x + mDragableEvent.touchOffset.x,
+                                    mDragableEvent.frame.origin.y);
+    return [self dateForPoint:dropPoint];
 }
 
 //=========================================================
@@ -100,7 +119,7 @@
 //=========================================================
 -(BOOL)canMoveToNewDate:(MSEvent*)event newDate:(NSDate*)newDate{
     if (! self.dragDelegate) return true;
-    return [self.dragDelegate MSWeekView:self canMoveEvent:event to:newDate];
+    return [self.dragDelegate weekView:self canMoveEvent:event to:newDate];
 }
 
 -(BOOL)isPortrait{

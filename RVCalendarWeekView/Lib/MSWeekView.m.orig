@@ -171,8 +171,8 @@
     _eventsBySection = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
     NSDate* date = [NSDate today:@"device"];
-    if(self.daysToShow == 1 && _eventsBySection.count == 1){
-        date = [NSDate parse:_eventsBySection.allKeys.firstObject];
+    if(self.daysToShow == 1 && mDays.count == 1){
+        date = [NSDate parse:mDays.allKeys.firstObject];
     }
     for(int i = 0; i< self.daysToShow; i++){
         if(![_eventsBySection.allKeys containsObject:date.toDeviceTimezoneDateString]){
@@ -235,6 +235,8 @@
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section
 {
     NSString* day = [_eventsBySection.allKeys.sort objectAtIndex:section];
+    return [NSDate parse:day];
+    NSString* day   = [mDays.allKeys.sort objectAtIndex:section];
     return [NSDate parse:day timezone:@"device"];
 }
 

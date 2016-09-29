@@ -767,7 +767,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     // Invalidate layout on minute ticks (to update the position of the current time indicator)
     // This needs to be a weak reference, otherwise we get a retain cycle
     MSTimerWeakTarget *timerWeakTarget = [[MSTimerWeakTarget alloc] initWithTarget:self selector:@selector(minuteTick:)];
-    self.minuteTimer = [[NSTimer alloc] initWithFireDate:NSDate.nextMinute interval:60 target:timerWeakTarget selector:timerWeakTarget.fireSelector userInfo:nil repeats:YES];
+    self.minuteTimer = [[NSTimer alloc] initWithFireDate:[NSDate.nextMinute dateByAddingTimeInterval:0.3] interval:60 target:timerWeakTarget selector:timerWeakTarget.fireSelector userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.minuteTimer forMode:NSDefaultRunLoopMode];
 }
 
@@ -862,28 +862,58 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     return [NSCalendar.currentCalendar startOfDayForDate:day];
 }
 
+- (NSInteger)hourIndexForDate:(NSDate *)date
+{
+    NSInteger hour;
+    [[NSCalendar currentCalendar] getHour:&hour minute:NULL second:NULL nanosecond:NULL fromDate:date];
+    return hour - [self earliestHour];
+}
+
 #pragma mark Scrolling
 - (void)scrollCollectionViewToClosetSectionToCurrentTimeAnimated:(BOOL)animated
 {
     if (self.collectionView.numberOfSections != 0) {
         NSInteger closestSectionToCurrentTime = [self closestSectionToCurrentTime];
+        [self scrollCollectionViewToSection:closestSectionToCurrentTime hourIndex:-1 animated:animated];
+    }
+}
+
+- (void)scrollCollectionViewToClosetSectionToTime:(NSDate *)time animated:(BOOL)animated
+{
+    if (self.collectionView.numberOfSections != 0) {
+        NSInteger closestSectionToTime = [self closestSectionToTime:time];
+        NSInteger hourIndex = [self hourIndexForDate:time];
+        [self scrollCollectionViewToSection:closestSectionToTime hourIndex:hourIndex animated:animated];
+    }
+}
+
+- (void)scrollCollectionViewToSection:(NSInteger)section hourIndex:(NSInteger)hourIndex animated:(BOOL)animated
+{
+    if (self.collectionView.numberOfSections != 0) {
         CGPoint contentOffset;
-        CGRect currentTimeHorizontalGridlineattributesFrame = [self.currentTimeHorizontalGridlineAttributes[[NSIndexPath indexPathForItem:0 inSection:0]] frame];
+        UICollectionViewLayoutAttributes *horizontalGridlineattributes;
+        if (hourIndex >= 0) {
+            horizontalGridlineattributes = [self layoutAttributesForDecorationViewAtIndexPath:[NSIndexPath indexPathForItem:hourIndex inSection:0] ofKind:MSCollectionElementKindHorizontalGridline withItemCache:self.horizontalGridlineAttributes];
+        }
+        if (horizontalGridlineattributes == nil) {
+            horizontalGridlineattributes = self.currentTimeHorizontalGridlineAttributes[[NSIndexPath indexPathForItem:0 inSection:0]];
+        }
+        CGRect horizontalGridlineattributesFrame = horizontalGridlineattributes.frame;
         if (self.sectionLayoutType == MSSectionLayoutTypeHorizontalTile) {
             CGFloat yOffset;
-            if (!CGRectEqualToRect(currentTimeHorizontalGridlineattributesFrame, CGRectZero)) {
-                yOffset = nearbyintf(CGRectGetMinY(currentTimeHorizontalGridlineattributesFrame) - (CGRectGetHeight(self.collectionView.frame) / 2.0));
+            if (!CGRectEqualToRect(horizontalGridlineattributesFrame, CGRectZero)) {
+                yOffset = nearbyintf(CGRectGetMinY(horizontalGridlineattributesFrame) - (CGRectGetHeight(self.collectionView.frame) / 2.0));
             } else {
                 yOffset = 0.0;
             }
-            CGFloat xOffset = self.contentMargin.left + ((self.sectionMargin.left + self.sectionWidth + self.sectionMargin.right) * closestSectionToCurrentTime);
+            CGFloat xOffset = self.contentMargin.left + ((self.sectionMargin.left + self.sectionWidth + self.sectionMargin.right) * section);
             contentOffset = CGPointMake(xOffset, yOffset);
         } else {
             CGFloat yOffset;
-            if (!CGRectEqualToRect(currentTimeHorizontalGridlineattributesFrame, CGRectZero)) {
-                yOffset = fmaxf(nearbyintf(CGRectGetMinY(currentTimeHorizontalGridlineattributesFrame) - (CGRectGetHeight(self.collectionView.frame) / 2.0)), [self stackedSectionHeightUpToSection:closestSectionToCurrentTime]);
+            if (!CGRectEqualToRect(horizontalGridlineattributesFrame, CGRectZero)) {
+                yOffset = fmaxf(nearbyintf(CGRectGetMinY(horizontalGridlineattributesFrame) - (CGRectGetHeight(self.collectionView.frame) / 2.0)), [self stackedSectionHeightUpToSection:section]);
             } else {
-                yOffset = [self stackedSectionHeightUpToSection:closestSectionToCurrentTime];
+                yOffset = [self stackedSectionHeightUpToSection:section];
             }
             contentOffset = CGPointMake(0.0, yOffset);
         }
@@ -907,8 +937,14 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 - (NSInteger)closestSectionToCurrentTime
 {
     NSDate *currentTime = [self.delegate currentTimeComponentsForCollectionView:self.collectionView layout:self];
-    NSDate *startOfCurrentDay = [NSCalendar.currentCalendar startOfDayForDate:currentTime];
+    return [self closestSectionToTime:currentTime];
+}
 
+
+- (NSInteger)closestSectionToTime:(NSDate *)time
+{
+    NSDate *startOfCurrentDay = [NSCalendar.currentCalendar startOfDayForDate:time];
+    
     NSTimeInterval minTimeInterval = CGFLOAT_MAX;
     NSInteger closestSection = NSIntegerMax;
     for (NSInteger section = 0; section < self.collectionView.numberOfSections; section++) {

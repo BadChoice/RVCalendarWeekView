@@ -26,7 +26,7 @@
 - (void)setupWeekData{
     
     self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
-                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature|MSPinchableFeature)
+                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature|MSPinchableFeature|MSShortPressNewEventFeature)
                                                   andDelegate:self];
     
     
@@ -60,7 +60,7 @@
 //=========================================
 #pragma mark - Week View delegate
 //=========================================
--(void)MSWeekView:(id)sender eventSelected:(MSEventCell*)eventCell{
+-(void)weekView:(id)sender eventSelected:(MSEventCell*)eventCell{
     NSLog(@"Event selected: %@",eventCell.event.title);
     //[_weekView removeEvent:event];
 }
@@ -68,11 +68,15 @@
 //=========================================
 #pragma mark - Week View Decorator Dragable delegate
 //=========================================
--(void)MSWeekView:(MSWeekView *)weekView event:(MSEvent *)event moved:(NSDate *)date{
+-(void)weekView:(MSWeekView *)weekView event:(MSEvent *)event moved:(NSDate *)date{
     NSLog(@"Event moved");
 }
 
--(BOOL)MSWeekView:(MSWeekView *)weekView canMoveEvent:(MSEvent *)event to:(NSDate *)date{
+-(BOOL)weekView:(MSWeekView*)weekView canStartMovingEvent:(MSEvent*)event{
+    return YES;
+}
+
+-(BOOL)weekView:(MSWeekView *)weekView canMoveEvent:(MSEvent *)event to:(NSDate *)date{
     return YES;
     
     //Example on how to return YES/NO from an async function (for example an alert)
@@ -98,17 +102,21 @@
 //=========================================
 #pragma mark - Week View Decorator New event delegate
 //=========================================
--(void)MSWeekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date{
+-(void)weekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date{
     NSLog(@"Long pressed at: %@", date);
     MSEvent *newEvent = [MSEvent make:date title:@"New Event" subtitle:@"Platinium stadium"];
     [_weekView addEvent:newEvent];
+}
+
+-(void)weekView:(MSWeekView*)weekView onTapAt:(NSDate*)date{
+    NSLog(@"Short pressed at: %@", date);
 }
 
 
 //=========================================
 #pragma mark - Week View Decorator Infinite delegate
 //=========================================
--(BOOL)MSWeekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate{
+-(BOOL)weekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate{
     NSLog(@"New days loaded: %@ - %@", startDate, endDate);
     
     MSEvent* newEvent = [MSEvent make:[startDate addHours:7]

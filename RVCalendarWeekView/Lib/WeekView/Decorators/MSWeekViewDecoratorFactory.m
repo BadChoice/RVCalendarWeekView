@@ -11,7 +11,7 @@
 
 @implementation MSWeekViewDecoratorFactory
 
-+(MSWeekView*)make:(MSWeekView*)baseView features:(NSInteger)features andDelegate:(id)delegate{
++(MSWeekView*)make:(MSWeekView*)baseView features:(NSUInteger)features andDelegate:(id)delegate{
     
     MSWeekView* decoratedView = baseView;
     
@@ -22,7 +22,7 @@
     }
     
     if ( (features & MSNewEventFeature) != 0 ){ // => true
-        decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:delegate];
+        decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:delegate shortPress:NO];
     }
     
     if ( (features & MSDragableEventFeature) != 0 ){ // => true
@@ -31,6 +31,10 @@
     
     if ( (features & MSPinchableFeature) != 0 ){    // => true
         decoratedView = [MSWeekViewDecoratorPinchable makeWith:decoratedView];
+    }
+    
+    if ( (features & MSShortPressNewEventFeature) != 0 ){    // => true
+        decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:delegate shortPress:YES];
     }
 
 

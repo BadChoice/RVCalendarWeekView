@@ -12,8 +12,13 @@
 
 @implementation MSWeekViewDecoratorNewEvent
 
-+(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewNewEventDelegate>)delegate{
-    MSWeekViewDecoratorNewEvent * weekViewDecorator = [super makeWith:weekView];
++(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewNewEventDelegate>)delegate shortPress:(BOOL)shortPress{
+    MSWeekViewDecoratorNewEvent * weekViewDecorator = [self.class new];
+    weekViewDecorator.weekView              = weekView;
+    weekViewDecorator.shortPress = shortPress;
+    weekView.collectionView.dataSource      = weekViewDecorator;
+    weekView.collectionView.delegate        = weekViewDecorator;
+    [weekViewDecorator setup];
     weekViewDecorator.createEventDelegate = delegate;
     return weekViewDecorator;
 }
@@ -21,24 +26,43 @@
 -(void)setup{
     [super setup];
     
-    UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-    [lpgr setCancelsTouchesInView:NO];  //To didSelectCell still works
-    [self.collectionView addGestureRecognizer:lpgr];
+    UIGestureRecognizer* gr;
+    if (self.shortPress) {
+        gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    } else {
+        gr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+    }
+    [gr setCancelsTouchesInView:NO];  //To didSelectCell still works
+    [self.collectionView addGestureRecognizer:gr];
 }
 
--(void)onLongPress:(UILongPressGestureRecognizer*)gestureRecognizer{
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint cp          = [gestureRecognizer locationInView:self.baseWeekView];
-        CGPoint finalPoint  = CGPointMake(cp.x - 40, cp.y - self.weekFlowLayout.dayColumnHeaderHeight - 20); //20 is the section margin
-        NSDate* date        = [self dateForPoint:finalPoint];
-        
-        if(date.minute > 15 && date.minute < 45)    date = [date withMinute:30];
-        else if(date.minute > 45)                   date = [[date addHour] withMinute:0];
-        else                                        date = [date withMinute:0];
+-(void)onTap:(UIGestureRecognizer*)gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
+        NSDate* date = [self dateForGesture:gestureRecognizer];
         
         if(self.createEventDelegate)
-            [self.createEventDelegate MSWeekView:self.baseWeekView onLongPressAt:date];
+            [self.createEventDelegate weekView:self.baseWeekView onTapAt:date];
     }
+}
+
+-(void)onLongPress:(UIGestureRecognizer*)gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSDate* date = [self dateForGesture:gestureRecognizer];
+        
+        if(self.createEventDelegate)
+            [self.createEventDelegate weekView:self.baseWeekView onLongPressAt:date];
+    }
+}
+
+-(NSDate*)dateForGesture:(UIGestureRecognizer*)gestureRecognizer{
+    CGPoint cp          = [gestureRecognizer locationInView:self.baseWeekView];
+    NSDate* date        = [self dateForPoint:cp];
+    
+    if(date.minute > 15 && date.minute < 45)    date = [date withMinute:30];
+    else if(date.minute > 45)                   date = [[date addHour] withMinute:0];
+    else                                        date = [date withMinute:0];
+    
+    return date;
 }
 
 

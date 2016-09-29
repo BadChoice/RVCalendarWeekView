@@ -17,7 +17,8 @@ typedef NS_OPTIONS(NSUInteger, MSWeekViewFeatures) {
     MSDragableEventFeature  = (1 << 0), // => 00000001
     MSNewEventFeature       = (1 << 1), // => 00000010
     MSInfiniteFeature       = (1 << 2), // => 00000100
-    MSPinchableFeature      = (1 << 3)  // => 00001000
+    MSPinchableFeature      = (1 << 3),  // => 00001000
+    MSShortPressNewEventFeature  = (1 << 4), // => 00010000
 };
 
 @interface MSWeekViewDecoratorFactory : NSObject
@@ -27,6 +28,6 @@ typedef NS_OPTIONS(NSUInteger, MSWeekViewFeatures) {
  * This adds the decorations to the baseView
  * Using this constructor the delegate should implement all the protocols fore each feature defined in `features`
  */
-+(MSWeekView*)make:(MSWeekView*)baseView features:(NSInteger)features andDelegate:(id)delegate;
++(MSWeekView*)make:(MSWeekView*)baseView features:(NSUInteger)features andDelegate:(id)delegate;
 
 @end
