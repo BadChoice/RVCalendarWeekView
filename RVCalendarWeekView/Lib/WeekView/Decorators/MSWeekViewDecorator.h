@@ -27,4 +27,5 @@
 -(int)getMinuteForY:(float)y;
 -(int)getDayIndexForX:(float)x;
 -(CGFloat)round:(float)number toNearest:(float)pivot;
+-(CGFloat)round:(float)number toLowest:(float)pivot;
 @end

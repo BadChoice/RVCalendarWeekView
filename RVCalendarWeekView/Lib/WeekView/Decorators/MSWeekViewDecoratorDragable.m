@@ -60,26 +60,18 @@
         CGPoint cp = [gestureRecognizer locationInView:self.baseWeekView];
         
         CGPoint newOrigin;
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            float xOffset = -13;
-            if([self isPortrait]){
-                xOffset = 5;
-            }
-            float x = [self round:cp.x toNearest:self.weekFlowLayout.sectionWidth] + xOffset
-            - ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth);
-            newOrigin = CGPointMake(x, cp.y);
-        }
-        else{
-            newOrigin = CGPointMake(cp.x, cp.y);
-        }
-        newOrigin = CGPointMake(newOrigin.x - mDragableEvent.touchOffset.x,
-                                newOrigin.y - mDragableEvent.touchOffset.y);
+        float xOffset   = ((int)self.collectionView.contentOffset.x % (int)self.weekFlowLayout.sectionWidth) - self.weekFlowLayout.timeRowHeaderWidth;
+        cp.x           += xOffset;
+        float x         = [self round:cp.x toLowest:self.weekFlowLayout.sectionWidth] - xOffset;
+        newOrigin       = CGPointMake(x, cp.y);
+        newOrigin       = CGPointMake(newOrigin.x /*+ mDragableEvent.touchOffset.x*/,
+                                      newOrigin.y - mDragableEvent.touchOffset.y);
         
         [UIView animateWithDuration:0.1 animations:^{
             mDragableEvent.frame = (CGRect) { .origin = newOrigin, .size = mDragableEvent.frame.size };
         }];
         
-        NSDate* date = [self dateForDragable];
+        NSDate* date                  = [self dateForDragable];
         mDragableEvent.timeLabel.text = [date format:@"HH:mm" timezone:@"device"];
         
     }

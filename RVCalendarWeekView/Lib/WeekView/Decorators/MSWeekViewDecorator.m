@@ -136,4 +136,8 @@
     return pivot * floor((number/pivot)+0.5);
 }
 
+-(CGFloat)round:(float)number toLowest:(float)pivot{
+    return pivot * floor(number/pivot);
+}
+
 @end
