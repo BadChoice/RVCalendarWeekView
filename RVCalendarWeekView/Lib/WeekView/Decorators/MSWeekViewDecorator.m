@@ -18,6 +18,7 @@
 +(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView{
     MSWeekViewDecorator* weekViewDecorator  = [self.class new];
     weekViewDecorator.weekView              = weekView;
+    weekViewDecorator.minutesPrecision      = 5;
     weekView.collectionView.dataSource      = weekViewDecorator;
     weekView.collectionView.delegate        = weekViewDecorator;
     weekView.weekFlowLayout.delegate        = weekViewDecorator;
@@ -115,8 +116,8 @@
     y = [self viewYToContentY:y];
     int hours          = (y / self.weekFlowLayout.hourHeight);
     int minute         = (y / self.weekFlowLayout.hourHeight - hours ) * 60;
-    int minuteRounded  = [self round:minute toNearest:5];
-    return MAX(0, minuteRounded == 60 ? 55 : minuteRounded);
+    int minuteRounded  = [self round:minute toNearest:self.minutesPrecision];
+    return MAX(0, minuteRounded == 60 ? 60-self.minutesPrecision : minuteRounded);
 }
 
 -(int)getDayIndexForX:(float)x{

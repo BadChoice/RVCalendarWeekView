@@ -30,6 +30,9 @@
                                                   andDelegate:self];
     
     
+    [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:self.decoratedWeekView minutesPrecision:15];
+    
+    
     MSEvent* event1 = [MSEvent make:NSDate.now
                               title:@"Title"
                            subtitle:@"Central perk"];

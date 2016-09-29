@@ -30,4 +30,9 @@ typedef NS_OPTIONS(NSUInteger, MSWeekViewFeatures) {
  */
 +(MSWeekView*)make:(MSWeekView*)baseView features:(NSUInteger)features andDelegate:(id)delegate;
 
+
+/**
+ * Recursive function to set minutesPrecision to all decorators 
+ */
++(void)setMinutesPrecisionToAllDecorators:(MSWeekView*)weekViewWithDecorators minutesPrecision:(int)minutesPrecision;
 @end

@@ -36,10 +36,17 @@
     if ( (features & MSShortPressNewEventFeature) != 0 ){    // => true
         decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:delegate shortPress:YES];
     }
-
-
     
     return decoratedView;
+}
+
++(void)setMinutesPrecisionToAllDecorators:(MSWeekView*)weekViewWithDecorators minutesPrecision:(int)minutesPrecision{
+    
+    if([weekViewWithDecorators isKindOfClass:MSWeekViewDecorator.class]){
+        MSWeekViewDecorator* decorator = (MSWeekViewDecorator*)weekViewWithDecorators;
+        decorator.minutesPrecision= minutesPrecision;
+        [self.class setMinutesPrecisionToAllDecorators:decorator.weekView minutesPrecision:minutesPrecision];
+    }
 }
 
 @end

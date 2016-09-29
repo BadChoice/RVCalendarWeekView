@@ -19,6 +19,14 @@
 
 -(MSWeekView*)baseWeekView;
 
+/**
+ * Use this variable to change the minutes precision when
+ * dragging or creating new event 
+ * use values from 0 to 60
+ * default is 5 minutes
+ */
+@property(nonatomic) int minutesPrecision;
+
 //=========================================================
 #pragma mark - Get XX for Point
 //=========================================================
