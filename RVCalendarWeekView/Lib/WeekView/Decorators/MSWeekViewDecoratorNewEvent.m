@@ -13,19 +13,18 @@
 @implementation MSWeekViewDecoratorNewEvent
 
 +(__kindof MSWeekView*)makeWith:(MSWeekView*)weekView andDelegate:(id<MSWeekViewNewEventDelegate>)delegate shortPress:(BOOL)shortPress{
-    MSWeekViewDecoratorNewEvent * weekViewDecorator = [self.class new];
-    weekViewDecorator.weekView              = weekView;
-    weekViewDecorator.shortPress = shortPress;
-    weekView.collectionView.dataSource      = weekViewDecorator;
-    weekView.collectionView.delegate        = weekViewDecorator;
-    [weekViewDecorator setup];
-    weekViewDecorator.createEventDelegate = delegate;
+    MSWeekViewDecoratorNewEvent * weekViewDecorator = [super makeWith:weekView];
+    weekViewDecorator.shortPress                    = shortPress;
+    weekViewDecorator.createEventDelegate           = delegate;
     return weekViewDecorator;
 }
 
 -(void)setup{
     [super setup];
-    
+}
+
+-(void)setShortPress:(BOOL)shortPress{
+    _shortPress = shortPress;
     UIGestureRecognizer* gr;
     if (self.shortPress) {
         gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
