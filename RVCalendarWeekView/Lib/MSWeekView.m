@@ -72,24 +72,26 @@
     }];
     
     self.weekFlowLayout.sectionLayoutType = MSSectionLayoutTypeHorizontalTile;
+    self.collectionView.backgroundColor   = [UIColor whiteColor];
     
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-    
-    self.eventCellClass = MSEventCell.class;
-    self.dayColumnHeaderClass = MSDayColumnHeader.class;
-    self.timeRowHeaderClass = MSTimeRowHeader.class;
-    
-    self.currentTimeIndicatorClass = MSCurrentTimeIndicator.class;
-    self.currentTimeGridlineClass = MSCurrentTimeGridline.class;
-    self.verticalGridlineClass = MSGridline.class;
-    self.horizontalGridlineClass = MSGridline.class;
-    self.timeRowHeaderBackgroundClass = MSTimeRowHeaderBackground.class;
-    self.dayColumnHeaderBackgroundClass = MSDayColumnHeaderBackground.class;
-    
-    [self registerClasses];
+    [self setupSupplementaryViewClasses];
+    [self registerSupplementaryViewClasses];
 }
 
--(void)registerClasses{
+-(void)setupSupplementaryViewClasses{
+    self.eventCellClass                 = MSEventCell.class;
+    self.dayColumnHeaderClass           = MSDayColumnHeader.class;
+    self.timeRowHeaderClass             = MSTimeRowHeader.class;
+    
+    self.currentTimeIndicatorClass      = MSCurrentTimeIndicator.class;
+    self.currentTimeGridlineClass       = MSCurrentTimeGridline.class;
+    self.verticalGridlineClass          = MSGridline.class;
+    self.horizontalGridlineClass        = MSGridline.class;
+    self.timeRowHeaderBackgroundClass   = MSTimeRowHeaderBackground.class;
+    self.dayColumnHeaderBackgroundClass = MSDayColumnHeaderBackground.class;
+}
+
+-(void)registerSupplementaryViewClasses{
     [self.collectionView registerClass:self.eventCellClass forCellWithReuseIdentifier:MSEventCellReuseIdentifier];
     [self.collectionView registerClass:self.dayColumnHeaderClass forSupplementaryViewOfKind:MSCollectionElementKindDayColumnHeader withReuseIdentifier:MSDayColumnHeaderReuseIdentifier];
     [self.collectionView registerClass:self.timeRowHeaderClass forSupplementaryViewOfKind:MSCollectionElementKindTimeRowHeader withReuseIdentifier:MSTimeRowHeaderReuseIdentifier];

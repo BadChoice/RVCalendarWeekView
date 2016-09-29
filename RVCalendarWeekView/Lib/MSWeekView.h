@@ -54,8 +54,9 @@
 
 /**
  * Override this function to customize the views you want to use
+ * Just change the classes that you will use
  */
--(void)registerClasses;
+-(void)setupSupplementaryViewClasses;
 
 /**
  * Call this function to reload (when
