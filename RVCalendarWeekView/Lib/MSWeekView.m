@@ -23,6 +23,7 @@
 #import "MSTimeRowHeader.h"
 #import "MSCurrentTimeIndicator.h"
 #import "MSCurrentTimeGridline.h"
+#import "MSUnavailableHour.h"
 
 #define MSEventCellReuseIdentifier        @"MSEventCellReuseIdentifier"
 #define MSDayColumnHeaderReuseIdentifier  @"MSDayColumnHeaderReuseIdentifier"
@@ -103,6 +104,8 @@
     [self.weekFlowLayout registerClass:self.horizontalGridlineClass forDecorationViewOfKind:MSCollectionElementKindHorizontalGridline];
     [self.weekFlowLayout registerClass:self.timeRowHeaderBackgroundClass forDecorationViewOfKind:MSCollectionElementKindTimeRowHeaderBackground];
     [self.weekFlowLayout registerClass:self.dayColumnHeaderBackgroundClass forDecorationViewOfKind:MSCollectionElementKindDayColumnHeaderBackground];
+    
+    [self.weekFlowLayout registerClass:MSUnavailableHour.class forDecorationViewOfKind:MSCollectionElementKindUnavailableHour];
 }
 
 
@@ -161,7 +164,8 @@
     //TODO : Improve this to make it faster
     _eventsBySection = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
-    NSDate* date = [NSDate today:@"device"];
+    //NSDate* date = [NSDate today:@"device"];
+    NSDate* date = NSDate.date;
     if(self.daysToShow == 1 && _eventsBySection.count == 1){
         date = [NSDate parse:_eventsBySection.allKeys.firstObject];
     }
@@ -189,7 +193,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MSEventCell *cell   = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
+    MSEventCell *cell  = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
     NSString* day      = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
     cell.event         = [_eventsBySection[day] objectAtIndex:indexPath.row];
     

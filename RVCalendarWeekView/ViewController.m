@@ -10,6 +10,8 @@
 #import "MSEvent.h"
 #import "NSDate+Easy.h"
 #import "NSArray+Collection.h"
+#import "MSHourPerdiod.h"
+
 
 @interface ViewController ()
 
@@ -26,9 +28,8 @@
 - (void)setupWeekData{
     
     self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
-                                                      features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature|MSPinchableFeature|MSShortPressNewEventFeature)
+                                                      features:(MSDragableEventFeature | MSNewEventFeature | MSInfiniteFeature | MSPinchableFeature |MSShortPressNewEventFeature | MSUnavailableHoursFeature)
                                                   andDelegate:self];
-    
     
     //Optional, set minutes precision for drag and new event
     [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:self.decoratedWeekView minutesPrecision:15];
@@ -58,10 +59,10 @@
     _weekView.weekFlowLayout.show24Hours    = YES;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        _weekView.daysToShowOnScreen            = 7;
+        _weekView.daysToShowOnScreen        = 7;
     }
     else{
-        _weekView.daysToShowOnScreen            = 2;
+        _weekView.daysToShowOnScreen        = 2;
     }
     _weekView.daysToShow                    = 30;
     _weekView.weekFlowLayout.hourHeight     = 50;
@@ -142,6 +143,16 @@
     
     [weekView addEvents:@[newEvent,lastEvent]];
     return YES;
+}
+
+//=========================================
+#pragma mark - Week View decorator unavailable hours
+//=========================================
+-(NSArray*)weekView:(MSWeekView*)weekView unavailableHoursFor:(NSDate*)date{
+    return @[
+             [MSHourPerdiod make:@"00:00:00" end:@"09:00:00"],
+             [MSHourPerdiod make:@"18:00:00" end:@"20:00:00"],
+            ];
 }
 
 @end

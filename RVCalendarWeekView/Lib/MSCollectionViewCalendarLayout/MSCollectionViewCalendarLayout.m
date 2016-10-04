@@ -37,6 +37,7 @@ NSString * const MSCollectionElementKindCurrentTimeIndicator        = @"MSCollec
 NSString * const MSCollectionElementKindCurrentTimeHorizontalGridline = @"MSCollectionElementKindCurrentTimeHorizontalGridline";
 NSString * const MSCollectionElementKindVerticalGridline            = @"MSCollectionElementKindVerticalGridline";
 NSString * const MSCollectionElementKindHorizontalGridline          = @"MSCollectionElementKindHorizontalGridline";
+NSString * const MSCollectionElementKindUnavailableHour             = @"MSCollect0ionElementKindUnavailableHour";
 
 NSUInteger const MSCollectionMinOverlayZ    = 1000.0; // Allows for 900 items in a section without z overlap issues
 NSUInteger const MSCollectionMinCellZ       = 100.0;  // Allows for 100 items in a section's background
@@ -107,6 +108,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 @property (nonatomic, strong) NSMutableDictionary *verticalGridlineAttributes;
 @property (nonatomic, strong) NSMutableDictionary *currentTimeIndicatorAttributes;
 @property (nonatomic, strong) NSMutableDictionary *currentTimeHorizontalGridlineAttributes;
+@property (nonatomic, strong) NSMutableDictionary *unavailableHoursAttributes;
 
 - (void)initialize;
 // Minute Updates
@@ -219,6 +221,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         [self.allAttributes addObjectsFromArray:self.itemAttributes                         .allValues];
         [self.allAttributes addObjectsFromArray:self.currentTimeIndicatorAttributes         .allValues];
         [self.allAttributes addObjectsFromArray:self.currentTimeHorizontalGridlineAttributes.allValues];
+        [self.allAttributes addObjectsFromArray:self.unavailableHoursAttributes             .allValues];
     }
 }
 
@@ -352,7 +355,6 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             else{
                 horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.verticalGridlineWidth, sectionHeight);
             }
-            
         }
         
         if (needsToPopulateItemAttributes) {
@@ -388,6 +390,15 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             }
             [self adjustItemsForOverlap:sectionItemAttributes inSection:section sectionMinX:sectionMinX];
         }
+        
+        if(true){
+            // Unavailable hours
+            NSIndexPath *verticalGridlineIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+                        UICollectionViewLayoutAttributes *horizontalGridlineAttributes = [self layoutAttributesForDecorationViewAtIndexPath:verticalGridlineIndexPath ofKind:MSCollectionElementKindUnavailableHour withItemCache:self.unavailableHoursAttributes];
+            CGFloat horizontalGridlineMinX = nearbyintf(sectionMinX - self.sectionMargin.left - (self.verticalGridlineWidth / 2.0));
+            horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, self.sectionMargin.top , self.sectionWidth, self.hourHeight*3);
+        }
+        
     }];
     
     // Horizontal Gridlines
@@ -686,6 +697,9 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     else if (decorationViewKind == MSCollectionElementKindDayColumnHeader) {
         return self.dayColumnHeaderBackgroundAttributes[indexPath];
     }
+    else if(decorationViewKind == MSCollectionElementKindUnavailableHour){
+        return self.unavailableHoursAttributes[indexPath];
+    }
     return nil;
 }
 
@@ -718,47 +732,49 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 - (void)initialize
 {
-    self.show24Hours = NO;
-    self.needsToPopulateAttributesForAllSections = YES;
-    self.cachedDayDateComponents = [NSCache new];
-    self.cachedStartTimeDateComponents = [NSCache new];
-    self.cachedEndTimeDateComponents = [NSCache new];
-    self.cachedCurrentDateComponents = [NSCache new];
-    self.cachedMaxColumnHeight = CGFLOAT_MIN;
-    self.cachedEarliestHour = NSIntegerMax;
-    self.cachedLatestHour = NSIntegerMin;
-    self.cachedColumnHeights = [NSMutableDictionary new];
-    self.cachedEarliestHours = [NSMutableDictionary new];
-    self.cachedLatestHours = [NSMutableDictionary new];
+    self.show24Hours                                = NO;
+    self.needsToPopulateAttributesForAllSections    = YES;
+    self.cachedDayDateComponents                    = [NSCache new];
+    self.cachedStartTimeDateComponents              = [NSCache new];
+    self.cachedEndTimeDateComponents                = [NSCache new];
+    self.cachedCurrentDateComponents                = [NSCache new];
+    self.cachedMaxColumnHeight                      = CGFLOAT_MIN;
+    self.cachedEarliestHour                         = NSIntegerMax;
+    self.cachedLatestHour                           = NSIntegerMin;
+    self.cachedColumnHeights                        = [NSMutableDictionary new];
+    self.cachedEarliestHours                        = [NSMutableDictionary new];
+    self.cachedLatestHours                          = [NSMutableDictionary new];
     
-    self.registeredDecorationClasses = [NSMutableDictionary new];
+    self.registeredDecorationClasses                = [NSMutableDictionary new];
     
-    self.allAttributes = [NSMutableArray new];
-    self.itemAttributes = [NSMutableDictionary new];
-    self.dayColumnHeaderAttributes = [NSMutableDictionary new];
-    self.dayColumnHeaderBackgroundAttributes = [NSMutableDictionary new];
-    self.timeRowHeaderAttributes = [NSMutableDictionary new];
-    self.timeRowHeaderBackgroundAttributes = [NSMutableDictionary new];
-    self.verticalGridlineAttributes = [NSMutableDictionary new];
-    self.horizontalGridlineAttributes = [NSMutableDictionary new];
-    self.currentTimeIndicatorAttributes = [NSMutableDictionary new];
-    self.currentTimeHorizontalGridlineAttributes = [NSMutableDictionary new];
+    self.allAttributes                              = [NSMutableArray new];
+    self.itemAttributes                             = [NSMutableDictionary new];
+    self.dayColumnHeaderAttributes                  = [NSMutableDictionary new];
+    self.dayColumnHeaderBackgroundAttributes        = [NSMutableDictionary new];
+    self.timeRowHeaderAttributes                    = [NSMutableDictionary new];
+    self.timeRowHeaderBackgroundAttributes          = [NSMutableDictionary new];
+    self.verticalGridlineAttributes                 = [NSMutableDictionary new];
+    self.horizontalGridlineAttributes               = [NSMutableDictionary new];
+    self.currentTimeIndicatorAttributes             = [NSMutableDictionary new];
+    self.currentTimeHorizontalGridlineAttributes    = [NSMutableDictionary new];
+    self.unavailableHoursAttributes                 = [NSMutableDictionary new];
     
-    self.hourHeight = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 80.0 : 80.0);
-    self.sectionWidth = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 194.0 : 254.0);
-    self.dayColumnHeaderHeight = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 60.0 : 50.0);
-    self.timeRowHeaderWidth = 56.0;
+    
+    self.hourHeight             = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 80.0 : 80.0);
+    self.sectionWidth           = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 194.0 : 254.0);
+    self.dayColumnHeaderHeight  = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 60.0 : 50.0);
+    self.timeRowHeaderWidth     = 56.0;
     self.currentTimeIndicatorSize = CGSizeMake(self.timeRowHeaderWidth, 10.0);
     self.currentTimeHorizontalGridlineHeight = 1.0;
-    self.verticalGridlineWidth = (([[UIScreen mainScreen] scale] == 2.0) ? 0.5 : 1.0);
-    self.horizontalGridlineHeight = (([[UIScreen mainScreen] scale] == 2.0) ? 0.5 : 1.0);;
-    self.sectionMargin = UIEdgeInsetsMake(20.0, 0.0, 20.0, 0.0);
-    self.cellMargin = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
-    self.contentMargin = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) : UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0));
+    self.verticalGridlineWidth      = (([[UIScreen mainScreen] scale] == 2.0) ? 0.5 : 1.0);
+    self.horizontalGridlineHeight   = (([[UIScreen mainScreen] scale] == 2.0) ? 0.5 : 1.0);;
+    self.sectionMargin  = UIEdgeInsetsMake(20.0, 0.0, 20.0, 0.0);
+    self.cellMargin     = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+    self.contentMargin  = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) : UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0));
     
     self.displayHeaderBackgroundAtOrigin = YES;
-    self.sectionLayoutType = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? MSSectionLayoutTypeHorizontalTile : MSSectionLayoutTypeVerticalTile);
-    self.headerLayoutType = MSHeaderLayoutTypeDayColumnAboveTimeRow;
+    self.sectionLayoutType  = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? MSSectionLayoutTypeHorizontalTile : MSSectionLayoutTypeVerticalTile);
+    self.headerLayoutType   = MSHeaderLayoutTypeDayColumnAboveTimeRow;
     
     [self initializeMinuteTick];
 }
@@ -1099,6 +1115,9 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             else if (elementKind == MSCollectionElementKindHorizontalGridline) {
                 return MSCollectionMinBackgroundZ + 2.0;
             }
+            else if(elementKind == MSCollectionElementKindUnavailableHour){
+                return MSCollectionMinBackgroundZ + 0.0;
+            }
         }
         case MSSectionLayoutTypeVerticalTile: {
             // Day Column Header
@@ -1132,6 +1151,9 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             // Horizontal Gridline
             else if (elementKind == MSCollectionElementKindHorizontalGridline) {
                 return MSCollectionMinBackgroundZ;
+            }
+            else if(elementKind == MSCollectionElementKindUnavailableHour){
+                return MSCollectionMinBackgroundZ + 0.0;
             }
         }
     }

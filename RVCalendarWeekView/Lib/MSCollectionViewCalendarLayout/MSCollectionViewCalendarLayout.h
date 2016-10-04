@@ -36,6 +36,7 @@ extern NSString * const MSCollectionElementKindCurrentTimeIndicator;
 extern NSString * const MSCollectionElementKindCurrentTimeHorizontalGridline;
 extern NSString * const MSCollectionElementKindVerticalGridline;
 extern NSString * const MSCollectionElementKindHorizontalGridline;
+extern NSString * const MSCollectionElementKindUnavailableHour;
 
 typedef NS_ENUM(NSUInteger, MSSectionLayoutType) {
     MSSectionLayoutTypeHorizontalTile,

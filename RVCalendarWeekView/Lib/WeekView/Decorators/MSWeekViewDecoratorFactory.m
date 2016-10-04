@@ -37,6 +37,10 @@
         decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:delegate shortPress:YES];
     }
     
+    if ( (features & MSUnavailableHoursFeature) != 0 ){    // => true
+        decoratedView = [MSWeekViewDecoratorUnavailableHours makeWith:decoratedView andDelegate:delegate];
+    }
+    
     return decoratedView;
 }
 
