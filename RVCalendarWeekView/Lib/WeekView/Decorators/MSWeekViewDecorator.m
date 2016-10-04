@@ -94,6 +94,10 @@
     return [_weekView collectionView:collectionView layout:collectionViewCalendarLayout endTimeForItemAtIndexPath:indexPath];
 }
 
+-(NSArray*)unavailableHoursPeriods:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
+    return [_weekView unavailableHoursPeriods:collectionView layout:collectionViewLayout section:section];
+}
+
 //=========================================================
 #pragma mark - Get XX for Point
 //=========================================================

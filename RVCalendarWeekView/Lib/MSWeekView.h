@@ -14,6 +14,12 @@
 
 @protocol MSWeekViewDelegate <NSObject>
 -(void)weekView:(id)sender eventSelected:(MSEventCell*)eventCell;
+
+@optional
+/**
+ * Should Return an array of MSHourPerdiod ex:(00:00,10:00) 
+ */
+-(NSArray*)weekView:(id)sender unavailableHoursPeriods:(id)section;
 @end
 
 @interface MSWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>

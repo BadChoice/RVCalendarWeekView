@@ -247,13 +247,16 @@
     return ev.EndDate;
 }
 
+-(NSArray*)unavailableHoursPeriods:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
+    if([self.delegate respondsToSelector:@selector(weekView:unavailableHoursPeriods:)]){
+        return [self.delegate weekView:self unavailableHoursPeriods:_eventsBySection.allKeys[section]];
+    }
+    return @[];
+}
+
 - (NSDate *)currentTimeComponentsForCollectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout
 {
     return NSDate.date;
-}
-
--(NSArray*)unavailableHours:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
-    return @[];
 }
 
 

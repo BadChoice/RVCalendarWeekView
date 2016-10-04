@@ -31,8 +31,8 @@
                                                       features:(MSDragableEventFeature | MSNewEventFeature | MSInfiniteFeature | MSPinchableFeature |MSShortPressNewEventFeature | MSUnavailableHoursFeature)
                                                   andDelegate:self];
     
-    //Optional, set minutes precision for drag and new event
-    [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:self.decoratedWeekView minutesPrecision:15];
+    //Optional, set minutes precision for drag and new event (by default it is already set to 5)
+    [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:self.decoratedWeekView minutesPrecision:5];
     
     
     //Create the events
@@ -75,6 +75,14 @@
 -(void)weekView:(id)sender eventSelected:(MSEventCell*)eventCell{
     NSLog(@"Event selected: %@",eventCell.event.title);
     //[_weekView removeEvent:event];
+}
+
+-(NSArray*)weekView:(id)sender unavailableHoursPeriods:(id)section{
+    
+    return @[
+             [MSHourPerdiod make:@"00:00" end:@"09:00"],
+             [MSHourPerdiod make:@"18:30" end:@"21:00"],
+             ];
 }
 
 //=========================================
@@ -145,14 +153,5 @@
     return YES;
 }
 
-//=========================================
-#pragma mark - Week View decorator unavailable hours
-//=========================================
--(NSArray*)weekView:(MSWeekView*)weekView unavailableHoursFor:(NSDate*)date{
-    return @[
-             [MSHourPerdiod make:@"00:00:00" end:@"09:00:00"],
-             [MSHourPerdiod make:@"18:00:00" end:@"20:00:00"],
-            ];
-}
 
 @end

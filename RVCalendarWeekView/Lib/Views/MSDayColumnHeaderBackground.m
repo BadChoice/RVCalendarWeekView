@@ -10,6 +10,7 @@
 #import "UIColor+HexString.h"
 
 #define BOTTOM_BORDER_WIDTH 4
+
 @implementation MSDayColumnHeaderBackground
 
 - (id)initWithFrame:(CGRect)frame

@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RVCalendarWeekView/Lib/MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout.m"
-            timestampString = "497288513.167007"
+            timestampString = "497306502.941413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "715"
+            endingLineNumber = "715"
             landmarkName = "-layoutAttributesForDecorationViewOfKind:atIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
