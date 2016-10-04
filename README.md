@@ -93,7 +93,7 @@ It will fire the following functions on your `infiniteDelegate`
 ```
 
 ##### Pinchable 
-** This doesn't work really well yet ** 
+**This doesn't work really well yet**  
 You just need to add the  `MSPinchableFeature` in the `[MSWeekViewDecoratorFactory  make:...]`
 
 ##### Options
