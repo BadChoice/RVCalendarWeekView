@@ -15,6 +15,7 @@
 @interface MSEventCell ()
 
 @property (nonatomic, strong) UIView *borderView;
+@property (nonatomic, strong) UIView *topBorderView;
 
 @end
 
@@ -38,6 +39,10 @@
         self.borderView = [UIView new];
         [self.contentView addSubview:self.borderView];
         
+        self.topBorderView = [UIView new];
+        self.topBorderView.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:self.topBorderView];
+        
         self.title = [UILabel new];
         self.title.numberOfLines = 0;
         self.title.backgroundColor = [UIColor clearColor];
@@ -52,13 +57,21 @@
         
         CGFloat borderWidth = 2.0;
         CGFloat contentMargin = 2.0;
-        UIEdgeInsets contentPadding = UIEdgeInsetsMake(1.0, (borderWidth + 4.0), 1.0, 4.0);
+        UIEdgeInsets contentPadding = UIEdgeInsetsMake(4.0, (borderWidth + 4.0), 1.0, 4.0);
         
         [self.borderView makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(self.height);
             make.width.equalTo(@(borderWidth));
             make.left.equalTo(self.left);
             make.top.equalTo(self.top);
+        }];
+        
+        [self.topBorderView makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(borderWidth));
+            make.width.equalTo(self.width);
+            make.top.equalTo(self.top);
+            make.left.equalTo(self.left);
+            make.right.equalTo(self.right);
         }];
         
         [self.title makeConstraints:^(MASConstraintMaker *make) {
@@ -73,6 +86,8 @@
             make.right.equalTo(self.right).offset(-contentPadding.right);
             make.bottom.lessThanOrEqualTo(self.bottom).offset(-contentPadding.bottom);
         }];
+        
+        
     }
     return self;
 }
@@ -103,7 +118,7 @@
 - (void)setEvent:(MSEvent *)event
 {
     _event = event;
-    self.title.attributedText = [[NSAttributedString alloc] initWithString:_event.title attributes:[self titleAttributesHighlighted:self.selected]];
+    self.title.attributedText    = [[NSAttributedString alloc] initWithString:_event.title attributes:[self titleAttributesHighlighted:self.selected]];
     self.location.attributedText = [[NSAttributedString alloc] initWithString:_event.location attributes:[self subtitleAttributesHighlighted:self.selected]];
     [self updateColors];
 }
