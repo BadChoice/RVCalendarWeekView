@@ -248,8 +248,9 @@
 }
 
 -(NSArray*)unavailableHoursPeriods:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
-    if([self.delegate respondsToSelector:@selector(weekView:unavailableHoursPeriods:)]){
-        return [self.delegate weekView:self unavailableHoursPeriods:_eventsBySection.allKeys[section]];
+    if([self.delegate respondsToSelector:@selector(weekView:unavailableHoursPeriods:date:)]){
+        NSDate* date = [self collectionView:collectionView layout:collectionViewLayout dayForSection:section];
+        return [self.delegate weekView:self unavailableHoursPeriods:_eventsBySection.allKeys[section] date:date];
     }
     return @[];
 }

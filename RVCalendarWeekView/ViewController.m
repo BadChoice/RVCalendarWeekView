@@ -77,12 +77,15 @@
     //[_weekView removeEvent:event];
 }
 
--(NSArray*)weekView:(id)sender unavailableHoursPeriods:(id)section{
-    
-    return @[
-             [MSHourPerdiod make:@"00:00" end:@"09:00"],
-             [MSHourPerdiod make:@"18:30" end:@"21:00"],
-             ];
+//This one is optional
+-(NSArray*)weekView:(id)sender unavailableHoursPeriods:(id)section date:(NSDate *)date{
+    if(!unavailableHours){
+        unavailableHours = @[
+                             [MSHourPerdiod make:@"00:00" end:@"09:00"],
+                             [MSHourPerdiod make:@"18:30" end:@"21:00"],
+                             ];
+    }
+    return unavailableHours;
 }
 
 //=========================================
