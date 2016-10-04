@@ -7,6 +7,7 @@
 //
 
 #import "MSUnavailableHour.h"
+#import "UIColor+HexString.h"
 
 @implementation MSUnavailableHour
 
@@ -14,8 +15,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor redColor];
-        self.alpha           = 0.2;
+        self.backgroundColor = [UIColor colorWithHexString:@"F6F5FB"];
     }
     
     return self;

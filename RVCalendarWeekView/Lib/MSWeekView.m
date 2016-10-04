@@ -252,6 +252,10 @@
     return NSDate.date;
 }
 
+-(NSArray*)unavailableHours:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
+    return @[];
+}
+
 
 //================================================
 #pragma mark - Collection view delegate

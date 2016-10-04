@@ -393,10 +393,14 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         
         if(true){
             // Unavailable hours
-            NSIndexPath *verticalGridlineIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
-                        UICollectionViewLayoutAttributes *horizontalGridlineAttributes = [self layoutAttributesForDecorationViewAtIndexPath:verticalGridlineIndexPath ofKind:MSCollectionElementKindUnavailableHour withItemCache:self.unavailableHoursAttributes];
-            CGFloat horizontalGridlineMinX = nearbyintf(sectionMinX - self.sectionMargin.left - (self.verticalGridlineWidth / 2.0));
-            horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, self.sectionMargin.top , self.sectionWidth, self.hourHeight*3);
+            NSArray* unavailableHours = [self.delegate unavailableHours:self.collectionView layout:self section:section];
+            for(int i = 0; i < unavailableHours.count; i++){
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:section];
+                            UICollectionViewLayoutAttributes *horizontalGridlineAttributes = [self layoutAttributesForDecorationViewAtIndexPath:indexPath ofKind:MSCollectionElementKindUnavailableHour withItemCache:self.unavailableHoursAttributes];
+                CGFloat horizontalGridlineMinX = nearbyintf(sectionMinX - self.sectionMargin.left - (self.verticalGridlineWidth / 2.0));
+                CGFloat itemMinY = nearbyintf(i*_hourHeight + 0 + calendarContentMinY + self.cellMargin.top);   //Hour + minute + ...
+                horizontalGridlineAttributes.frame = CGRectMake(horizontalGridlineMinX, itemMinY , self.sectionWidth, self.hourHeight*3);
+            }
         }
         
     }];
@@ -1116,7 +1120,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
                 return MSCollectionMinBackgroundZ + 2.0;
             }
             else if(elementKind == MSCollectionElementKindUnavailableHour){
-                return MSCollectionMinBackgroundZ + 0.0;
+                return MSCollectionMinBackgroundZ - 1.0;
             }
         }
         case MSSectionLayoutTypeVerticalTile: {
@@ -1153,7 +1157,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
                 return MSCollectionMinBackgroundZ;
             }
             else if(elementKind == MSCollectionElementKindUnavailableHour){
-                return MSCollectionMinBackgroundZ + 0.0;
+                return MSCollectionMinBackgroundZ - 1.0;
             }
         }
     }
