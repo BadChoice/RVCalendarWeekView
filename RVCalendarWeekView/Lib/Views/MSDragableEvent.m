@@ -11,6 +11,12 @@
 #define MAS_SHORTHAND
 #import "Masonry.h"
 
+
+@interface MSEventCell ()
+- (UIColor *)textColorHighlighted:(BOOL)selected;
+@end
+
+
 @implementation MSDragableEvent
 
 +(MSDragableEvent*)makeWithEventCell:(MSEventCell*)eventCell andOffset:(CGPoint)offset touchOffset:(CGPoint)touchOffset{
@@ -19,10 +25,13 @@
                                   eventCell.frame.origin.y - offset.y,
                                   eventCell.frame.size.width, eventCell.frame.size.height);
     
-    MSDragableEvent *dragCell = [[MSDragableEvent alloc] initWithFrame:newFrame];
-    dragCell.touchOffset      = touchOffset;
-    dragCell.event          = eventCell.event;
-    dragCell.backgroundColor  = [eventCell backgroundColorHighlighted:YES];
+    MSDragableEvent *dragCell   = [[MSDragableEvent alloc] initWithFrame:newFrame];
+    dragCell.touchOffset        = touchOffset;
+    dragCell.event              = eventCell.event;
+    dragCell.backgroundColor    = [eventCell backgroundColorHighlighted:YES];    
+    dragCell.title.textColor    = [eventCell textColorHighlighted:YES];
+    dragCell.location.textColor = [eventCell textColorHighlighted:YES];
+    
     return dragCell;
 }
 
@@ -42,7 +51,7 @@
             make.top.equalTo    (self.top)  .offset(-15);
             make.left.equalTo   (self.left) .offset(contentPadding.left);
             make.right.equalTo  (self.right).offset(-contentPadding.right);
-        }];        
+        }];
         
         self.timeLabel.text = @"--";
     }
