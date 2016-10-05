@@ -990,7 +990,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 -(void)scrollCollectionViewToCurrentTime:(BOOL)animated{
     int hour    = [NSDate now:@"device"].hour;
     //int hour    = [NSDate now].hour;
-    CGFloat y   = hour*self.hourHeight;
+    CGFloat y   = MIN(hour*self.hourHeight, self.collectionView.contentSize.height - self.collectionView.frame.size.height);
     [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, y) animated:animated];
 }
 
