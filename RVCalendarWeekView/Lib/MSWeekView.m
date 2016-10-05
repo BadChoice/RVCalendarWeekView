@@ -164,6 +164,7 @@
     _eventsBySection = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
     NSDate* date = [NSDate today:@"device"];
+    //NSDate*date = [NSDate date];
     if(self.daysToShow == 1 && _eventsBySection.count == 1){
         date = [NSDate parse:_eventsBySection.allKeys.firstObject];
     }

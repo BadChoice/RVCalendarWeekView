@@ -39,5 +39,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "__68-[MSCollectionViewCalendarLayout scrollCollectionViewToCurrentTime:]_block_invoke:MSCollectionViewCalendarLayout.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.collectionView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
