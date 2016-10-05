@@ -251,7 +251,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     NSInteger latestHour = [self latestHour];
     
     CGFloat sectionWidth = (self.sectionMargin.left + self.sectionWidth + self.sectionMargin.right);
-    CGFloat sectionHeight = nearbyintf((self.hourHeight * (latestHour - earliestHour)) + (self.sectionMargin.top + self.sectionMargin.bottom));
+    //CGFloat sectionHeight = nearbyintf((self.hourHeight * (latestHour - earliestHour)) + (self.sectionMargin.top + self.sectionMargin.bottom));
     CGFloat calendarGridMinX = (self.timeRowHeaderWidth + self.contentMargin.left);
     CGFloat calendarGridMinY = (self.dayColumnHeaderHeight + self.contentMargin.top);
     CGFloat calendarContentMinX = (self.timeRowHeaderWidth + self.contentMargin.left + self.sectionMargin.left);
@@ -415,7 +415,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 
 -(void)layoutVerticalGridLinesAttributes:(int)section sectionX:(CGFloat)sectionX earliestHour:(int)earliestHour latestHour:(int)latestHour currentTimeDateComponents:(NSDateComponents*)currentTimeDateComponents calendarGridMinY:(CGFloat)calendarGridMinY{
     // Vertical Gridline
-    sectionHeight       = nearbyintf((self.hourHeight * (latestHour - earliestHour)) + (self.sectionMargin.top + self.sectionMargin.bottom));
+    float sectionHeight = nearbyintf((self.hourHeight * (latestHour - earliestHour)) + (self.sectionMargin.top + self.sectionMargin.bottom));
     
     NSIndexPath *verticalGridlineIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
     UICollectionViewLayoutAttributes *verticalGridLineAttribute = [self layoutAttributesForDecorationViewAtIndexPath:verticalGridlineIndexPath ofKind:MSCollectionElementKindVerticalGridline withItemCache:self.verticalGridlineAttributes];

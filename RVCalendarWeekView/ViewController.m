@@ -78,7 +78,7 @@
 }
 
 //This one is optional
--(NSArray*)weekView:(id)sender unavailableHoursPeriods:(id)section date:(NSDate *)date{
+-(NSArray*)weekView:(id)sender unavailableHoursPeriods:(NSDate*)date{
     if(!unavailableHours){
         unavailableHours = @[
                              [MSHourPerdiod make:@"00:00" end:@"09:00"],

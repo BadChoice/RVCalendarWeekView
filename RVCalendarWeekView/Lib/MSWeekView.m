@@ -123,8 +123,7 @@
     });
 }
 
-- (CGFloat)layoutSectionWidth
-{
+- (CGFloat)layoutSectionWidth{
     return (self.frame.size.width - 50) / self.daysToShowOnScreen;
 }
 
@@ -164,8 +163,7 @@
     //TODO : Improve this to make it faster
     _eventsBySection = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
-    //NSDate* date = [NSDate today:@"device"];
-    NSDate* date = NSDate.date;
+    NSDate* date = [NSDate today:@"device"];
     if(self.daysToShow == 1 && _eventsBySection.count == 1){
         date = [NSDate parse:_eventsBySection.allKeys.firstObject];
     }
@@ -248,9 +246,9 @@
 }
 
 -(NSArray*)unavailableHoursPeriods:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
-    if([self.delegate respondsToSelector:@selector(weekView:unavailableHoursPeriods:date:)]){
+    if([self.delegate respondsToSelector:@selector(weekView:unavailableHoursPeriods:)]){
         NSDate* date = [self collectionView:collectionView layout:collectionViewLayout dayForSection:section];
-        return [self.delegate weekView:self unavailableHoursPeriods:_eventsBySection.allKeys[section] date:date];
+        return [self.delegate weekView:self unavailableHoursPeriods:date];
     }
     return @[];
 }
@@ -272,6 +270,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
 }
 
 //================================================

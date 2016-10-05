@@ -19,7 +19,7 @@
 /**
  * Should Return an array of MSHourPerdiod ex:(00:00,10:00) 
  */
--(NSArray*)weekView:(id)sender unavailableHoursPeriods:(id)section date:(NSDate*)date;
+-(NSArray*)weekView:(id)sender unavailableHoursPeriods:(NSDate*)date;
 @end
 
 @interface MSWeekView : UIView <UICollectionViewDataSource, UICollectionViewDelegate,MSCollectionViewDelegateCalendarLayout>
