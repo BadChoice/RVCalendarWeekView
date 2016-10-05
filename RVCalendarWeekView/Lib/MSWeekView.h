@@ -57,6 +57,7 @@
 @property(nonatomic) Class horizontalGridlineClass;
 @property(nonatomic) Class timeRowHeaderBackgroundClass;
 @property(nonatomic) Class dayColumnHeaderBackgroundClass;
+@property(nonatomic) Class unavailableHourClass;
 
 /**
  * Override this function to customize the views you want to use

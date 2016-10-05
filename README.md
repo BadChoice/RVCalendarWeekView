@@ -92,6 +92,26 @@ It will fire the following functions on your `infiniteDelegate`
     -(BOOL)weekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
 ```
 
+##### Unavailable Hours
+The standard `weekView` comes with an optional delegate function to display unavailable hours in gray (customizable class of course)
+
+just do something like this:
+
+
+```
+//This one is optional
+    -(NSArray*)weekView:(id)sender unavailableHoursPeriods:(NSDate*)date{
+        if(!unavailableHours){
+            unavailableHours = @[
+                [MSHourPerdiod make:@"00:00" end:@"09:00"],
+                [MSHourPerdiod make:@"18:30" end:@"21:00"],
+            ];
+        }
+        return unavailableHours;
+    }
+```
+
+
 ##### Pinchable 
 **This doesn't work really well yet**  
 You just need to add the  `MSPinchableFeature` in the `[MSWeekViewDecoratorFactory  make:...]`

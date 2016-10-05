@@ -90,6 +90,7 @@
     self.horizontalGridlineClass        = MSGridline.class;
     self.timeRowHeaderBackgroundClass   = MSTimeRowHeaderBackground.class;
     self.dayColumnHeaderBackgroundClass = MSDayColumnHeaderBackground.class;
+    self.unavailableHourClass           = MSUnavailableHour.class;
 }
 
 -(void)registerSupplementaryViewClasses{
@@ -105,7 +106,7 @@
     [self.weekFlowLayout registerClass:self.timeRowHeaderBackgroundClass forDecorationViewOfKind:MSCollectionElementKindTimeRowHeaderBackground];
     [self.weekFlowLayout registerClass:self.dayColumnHeaderBackgroundClass forDecorationViewOfKind:MSCollectionElementKindDayColumnHeaderBackground];
     
-    [self.weekFlowLayout registerClass:MSUnavailableHour.class forDecorationViewOfKind:MSCollectionElementKindUnavailableHour];
+    [self.weekFlowLayout registerClass:self.unavailableHourClass forDecorationViewOfKind:MSCollectionElementKindUnavailableHour];
 }
 
 
