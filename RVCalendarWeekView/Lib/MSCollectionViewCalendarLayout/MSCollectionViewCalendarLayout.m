@@ -362,7 +362,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 //====================================================
 #pragma mark - Layout attributes
 //====================================================
--(void)layoutUnavailableAttributes:(int)section sectionX:(CGFloat)sectionX calendarStartY:(CGFloat)calendarStartY{
+-(void)layoutUnavailableAttributes:(NSUInteger)section sectionX:(CGFloat)sectionX calendarStartY:(CGFloat)calendarStartY{
     NSArray* unavailableHoursPeriods = [self.delegate unavailableHoursPeriods:self.collectionView layout:self section:section];
     
     for(int i = 0; i < unavailableHoursPeriods.count; i++){
@@ -386,7 +386,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
 }
 
--(void)layoutWeekendBackgroundAttributes:(int)section sectionX:(CGFloat)sectionX calendarStartY:(CGFloat)calendarStartY sectionHeight:(CGFloat)sectionHeight currentTimeDateComponents:(NSDateComponents*)currentTimeDateComponents{
+-(void)layoutWeekendBackgroundAttributes:(NSUInteger)section sectionX:(CGFloat)sectionX calendarStartY:(CGFloat)calendarStartY sectionHeight:(CGFloat)sectionHeight currentTimeDateComponents:(NSDateComponents*)currentTimeDateComponents{
     
     
     int weekDay = (currentTimeDateComponents.weekday + section) % 7;
@@ -398,7 +398,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     }
 }
 
--(void)layoutItemsAttributes:(int)section earliestHour:(int)earliestHour sectionX:(CGFloat)sectionX calendarStartY:(CGFloat)calendarStartY{
+-(void)layoutItemsAttributes:(NSUInteger)section earliestHour:(NSInteger)earliestHour sectionX:(CGFloat)sectionX calendarStartY:(CGFloat)calendarStartY{
     NSMutableArray *sectionItemAttributes = [NSMutableArray new];
     for (NSInteger item = 0; item < [self.collectionView numberOfItemsInSection:section]; item++) {
         
@@ -432,7 +432,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
    
 }
 
--(void)layoutVerticalGridLinesAttributes:(int)section sectionX:(CGFloat)sectionX calendarGridMinY:(CGFloat)calendarGridMinY sectionHeight:(CGFloat)sectionHeight{
+-(void)layoutVerticalGridLinesAttributes:(NSUInteger)section sectionX:(CGFloat)sectionX calendarGridMinY:(CGFloat)calendarGridMinY sectionHeight:(CGFloat)sectionHeight{
 
     // Vertical Gridline
     NSIndexPath *verticalGridlineIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
@@ -442,7 +442,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     verticalGridLineAttribute.frame  = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.verticalGridlineWidth, sectionHeight);
 }
 
--(void)layoutHorizontalGridLinesAttributes:(int)earliestHour latestHour:(int)latestHour calendarStartX:(CGFloat)calendarStartX calendarStartY:(CGFloat)calendarStartY{
+-(void)layoutHorizontalGridLinesAttributes:(NSInteger)earliestHour latestHour:(NSInteger)latestHour calendarStartX:(CGFloat)calendarStartX calendarStartY:(CGFloat)calendarStartY{
     NSUInteger horizontalGridlineIndex = 0;
     CGFloat calendarGridWidth = (self.collectionViewContentSize.width - self.timeRowHeaderWidth - self.contentMargin.left - self.contentMargin.right);
     
