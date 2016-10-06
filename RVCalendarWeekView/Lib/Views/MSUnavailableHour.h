@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+/**
+ * Calendar flow layout will draw this class (or any used as unavailable hour) with a 0.7 alpha value
+ *
+ */
 @interface MSUnavailableHour : UICollectionReusableView
+
 
 @end

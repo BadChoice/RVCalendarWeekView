@@ -40,6 +40,7 @@ NSString * const MSCollectionElementKindCurrentTimeHorizontalGridline = @"MSColl
 NSString * const MSCollectionElementKindVerticalGridline            = @"MSCollectionElementKindVerticalGridline";
 NSString * const MSCollectionElementKindHorizontalGridline          = @"MSCollectionElementKindHorizontalGridline";
 NSString * const MSCollectionElementKindUnavailableHour             = @"MSCollect0ionElementKindUnavailableHour";
+NSString * const MSCollectionElementKindWeekendBackground           = @"MSCollectionElementKindWeekendBackground";
 
 NSUInteger const MSCollectionMinOverlayZ    = 1000.0; // Allows for 900 items in a section without z overlap issues
 NSUInteger const MSCollectionMinCellZ       = 100.0;  // Allows for 100 items in a section's background
@@ -111,6 +112,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 @property (nonatomic, strong) NSMutableDictionary *currentTimeIndicatorAttributes;
 @property (nonatomic, strong) NSMutableDictionary *currentTimeHorizontalGridlineAttributes;
 @property (nonatomic, strong) NSMutableDictionary *unavailableHoursAttributes;
+@property (nonatomic, strong) NSMutableDictionary *weekendBackgroundAttributes;
 
 - (void)initialize;
 // Minute Updates
@@ -224,6 +226,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         [self.allAttributes addObjectsFromArray:self.currentTimeIndicatorAttributes         .allValues];
         [self.allAttributes addObjectsFromArray:self.currentTimeHorizontalGridlineAttributes.allValues];
         [self.allAttributes addObjectsFromArray:self.unavailableHoursAttributes             .allValues];
+        [self.allAttributes addObjectsFromArray:self.weekendBackgroundAttributes            .allValues];
     }
 }
 
@@ -252,7 +255,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     NSInteger latestHour = [self latestHour];
     
     CGFloat sectionWidth = (self.sectionMargin.left + self.sectionWidth + self.sectionMargin.right);
-    //CGFloat sectionHeight = nearbyintf((self.hourHeight * (latestHour - earliestHour)) + (self.sectionMargin.top + self.sectionMargin.bottom));
+    CGFloat sectionHeight = nearbyintf((self.hourHeight * (latestHour - earliestHour)) + (self.sectionMargin.top + self.sectionMargin.bottom));
     CGFloat calendarGridMinX = (self.timeRowHeaderWidth + self.contentMargin.left);
     CGFloat calendarGridMinY = (self.dayColumnHeaderHeight + self.contentMargin.top);
     CGFloat calendarContentMinX = (self.timeRowHeaderWidth + self.contentMargin.left + self.sectionMargin.left);
@@ -344,7 +347,8 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         
         if(needsToPopulateVerticalGridlineAttributes){
             [self layoutUnavailableAttributes:section sectionX:sectionMinX calendarStartY:calendarContentMinY];
-            [self layoutVerticalGridLinesAttributes:section sectionX:sectionMinX earliestHour:earliestHour latestHour:latestHour currentTimeDateComponents:currentTimeDateComponents calendarGridMinY:calendarGridMinY];
+            [self layoutWeekendBackgroundAttributes:section sectionX:sectionMinX calendarStartY:calendarGridMinY sectionHeight:sectionHeight currentTimeDateComponents:currentTimeDateComponents];
+            [self layoutVerticalGridLinesAttributes:section sectionX:sectionMinX calendarGridMinY:calendarGridMinY sectionHeight:sectionHeight ];
         }
         
         if (needsToPopulateItemAttributes) {
@@ -376,8 +380,21 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             y  = 0;
             h += calendarStartY;
         }
-        unavailableAttributes.frame = CGRectMake(x, y , w, h);
-        unavailableAttributes.zIndex = [self zIndexForElementKind:MSCollectionElementKindUnavailableHour floating:NO];
+        unavailableAttributes.frame     = CGRectMake(x, y , w, h);
+        unavailableAttributes.zIndex    = [self zIndexForElementKind:MSCollectionElementKindUnavailableHour floating:NO];
+        unavailableAttributes.alpha     = 0.7;
+    }
+}
+
+-(void)layoutWeekendBackgroundAttributes:(int)section sectionX:(CGFloat)sectionX calendarStartY:(CGFloat)calendarStartY sectionHeight:(CGFloat)sectionHeight currentTimeDateComponents:(NSDateComponents*)currentTimeDateComponents{
+    
+    
+    int weekDay = (currentTimeDateComponents.weekday + section) % 7;
+    if( weekDay == 0 || weekDay == 1){  //0 Saturday //1 sunday //2 Monday...
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+        UICollectionViewLayoutAttributes *weekendBackgroundAttribute = [self layoutAttributesForDecorationViewAtIndexPath:indexPath ofKind:MSCollectionElementKindWeekendBackground withItemCache:self.weekendBackgroundAttributes];
+        weekendBackgroundAttribute.frame  = CGRectMake(sectionX, 0, self.sectionWidth, + sectionHeight + calendarStartY);
+        weekendBackgroundAttribute.zIndex = [self zIndexForElementKind:MSCollectionElementKindWeekendBackground floating:NO];
     }
 }
 
@@ -415,22 +432,14 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
    
 }
 
--(void)layoutVerticalGridLinesAttributes:(int)section sectionX:(CGFloat)sectionX earliestHour:(int)earliestHour latestHour:(int)latestHour currentTimeDateComponents:(NSDateComponents*)currentTimeDateComponents calendarGridMinY:(CGFloat)calendarGridMinY{
+-(void)layoutVerticalGridLinesAttributes:(int)section sectionX:(CGFloat)sectionX calendarGridMinY:(CGFloat)calendarGridMinY sectionHeight:(CGFloat)sectionHeight{
+
     // Vertical Gridline
-    float sectionHeight = nearbyintf((self.hourHeight * (latestHour - earliestHour)) + (self.sectionMargin.top + self.sectionMargin.bottom));
-    
     NSIndexPath *verticalGridlineIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
     UICollectionViewLayoutAttributes *verticalGridLineAttribute = [self layoutAttributesForDecorationViewAtIndexPath:verticalGridlineIndexPath ofKind:MSCollectionElementKindVerticalGridline withItemCache:self.verticalGridlineAttributes];
     CGFloat horizontalGridlineMinX   = nearbyintf(sectionX - self.sectionMargin.left - (self.verticalGridlineWidth / 2.0));
     verticalGridLineAttribute.zIndex = [self zIndexForElementKind:MSCollectionElementKindVerticalGridline floating:NO];
-    //Weekends
-    int weekDay = (currentTimeDateComponents.weekday + section) % 7;
-    if( weekDay == 0 || weekDay == 1){  //0 Saturday //1 sunday //2 Monday...
-        verticalGridLineAttribute.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.sectionWidth, sectionHeight);
-    }
-    else{
-        verticalGridLineAttribute.frame = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.verticalGridlineWidth, sectionHeight);
-    }
+    verticalGridLineAttribute.frame  = CGRectMake(horizontalGridlineMinX, calendarGridMinY, self.verticalGridlineWidth, sectionHeight);
 }
 
 -(void)layoutHorizontalGridLinesAttributes:(int)earliestHour latestHour:(int)latestHour calendarStartX:(CGFloat)calendarStartX calendarStartY:(CGFloat)calendarStartY{
@@ -737,6 +746,9 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     else if(decorationViewKind == MSCollectionElementKindUnavailableHour){
         return self.unavailableHoursAttributes[indexPath];
     }
+    else if(decorationViewKind == MSCollectionElementKindWeekendBackground){
+        return self.weekendBackgroundAttributes[indexPath];
+    }
     return nil;
 }
 
@@ -795,6 +807,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     self.currentTimeIndicatorAttributes             = [NSMutableDictionary new];
     self.currentTimeHorizontalGridlineAttributes    = [NSMutableDictionary new];
     self.unavailableHoursAttributes                 = [NSMutableDictionary new];
+    self.weekendBackgroundAttributes                = [NSMutableDictionary new];
     
     
     self.hourHeight             = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 80.0 : 80.0);
@@ -1149,18 +1162,22 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             }
             // Current Time Horizontal Gridline
             else if (elementKind == MSCollectionElementKindCurrentTimeHorizontalGridline) {
-                return (MSCollectionMinBackgroundZ + 3.0);
+                return (MSCollectionMinBackgroundZ + 4.0);
             }
             // Vertical Gridline
             else if (elementKind == MSCollectionElementKindVerticalGridline) {
-                return (MSCollectionMinBackgroundZ + 1.0);
+                return (MSCollectionMinBackgroundZ + 2.0);
             }
             // Horizontal Gridline
             else if (elementKind == MSCollectionElementKindHorizontalGridline) {
-                return (MSCollectionMinBackgroundZ + 2.0);
+                return (MSCollectionMinBackgroundZ + 3.0);
             }
             // Unavailable hours
             else if(elementKind == MSCollectionElementKindUnavailableHour){
+                return (MSCollectionMinBackgroundZ + 1.0);
+            }
+            // Weekend background
+            else if(elementKind == MSCollectionElementKindWeekendBackground){
                 return (MSCollectionMinBackgroundZ + 0.0);
             }
         }
@@ -1191,18 +1208,22 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
             }
             // Current Time Horizontal Gridline
             else if (elementKind == MSCollectionElementKindCurrentTimeHorizontalGridline) {
-                return (MSCollectionMinBackgroundZ + 3.0);
+                return (MSCollectionMinBackgroundZ + 4.0);
             }
             // Vertical Gridline
             else if (elementKind == MSCollectionElementKindVerticalGridline) {
-                return (MSCollectionMinBackgroundZ + 1.0);
+                return (MSCollectionMinBackgroundZ + 2.0);
             }
             // Horizontal Gridline
             else if (elementKind == MSCollectionElementKindHorizontalGridline) {
-                return (MSCollectionMinBackgroundZ + 2.0);
+                return (MSCollectionMinBackgroundZ + 3.0);
             }
             // Unavailable hours
             else if(elementKind == MSCollectionElementKindUnavailableHour){
+                return (MSCollectionMinBackgroundZ + 1.0);
+            }
+            // Weekend background
+            else if(elementKind == MSCollectionElementKindWeekendBackground){
                 return (MSCollectionMinBackgroundZ + 0.0);
             }
         }

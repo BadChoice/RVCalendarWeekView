@@ -24,6 +24,7 @@
 #import "MSCurrentTimeIndicator.h"
 #import "MSCurrentTimeGridline.h"
 #import "MSUnavailableHour.h"
+#import "MSWeekendBackground.h"
 
 #define MSEventCellReuseIdentifier        @"MSEventCellReuseIdentifier"
 #define MSDayColumnHeaderReuseIdentifier  @"MSDayColumnHeaderReuseIdentifier"
@@ -91,6 +92,7 @@
     self.timeRowHeaderBackgroundClass   = MSTimeRowHeaderBackground.class;
     self.dayColumnHeaderBackgroundClass = MSDayColumnHeaderBackground.class;
     self.unavailableHourClass           = MSUnavailableHour.class;
+    self.weekendBackgroundClass         = MSWeekendBackground.class;
 }
 
 -(void)registerSupplementaryViewClasses{
@@ -99,14 +101,15 @@
     [self.collectionView registerClass:self.timeRowHeaderClass forSupplementaryViewOfKind:MSCollectionElementKindTimeRowHeader withReuseIdentifier:MSTimeRowHeaderReuseIdentifier];
     
     // These are optional. If you don't want any of the decoration views, just don't register a class for them.
-    [self.weekFlowLayout registerClass:self.currentTimeIndicatorClass forDecorationViewOfKind:MSCollectionElementKindCurrentTimeIndicator];
-    [self.weekFlowLayout registerClass:self.currentTimeGridlineClass forDecorationViewOfKind:MSCollectionElementKindCurrentTimeHorizontalGridline];
-    [self.weekFlowLayout registerClass:self.verticalGridlineClass forDecorationViewOfKind:MSCollectionElementKindVerticalGridline];
-    [self.weekFlowLayout registerClass:self.horizontalGridlineClass forDecorationViewOfKind:MSCollectionElementKindHorizontalGridline];
-    [self.weekFlowLayout registerClass:self.timeRowHeaderBackgroundClass forDecorationViewOfKind:MSCollectionElementKindTimeRowHeaderBackground];
-    [self.weekFlowLayout registerClass:self.dayColumnHeaderBackgroundClass forDecorationViewOfKind:MSCollectionElementKindDayColumnHeaderBackground];
+    [self.weekFlowLayout registerClass:self.currentTimeIndicatorClass       forDecorationViewOfKind:MSCollectionElementKindCurrentTimeIndicator];
+    [self.weekFlowLayout registerClass:self.currentTimeGridlineClass        forDecorationViewOfKind:MSCollectionElementKindCurrentTimeHorizontalGridline];
+    [self.weekFlowLayout registerClass:self.verticalGridlineClass           forDecorationViewOfKind:MSCollectionElementKindVerticalGridline];
+    [self.weekFlowLayout registerClass:self.horizontalGridlineClass         forDecorationViewOfKind:MSCollectionElementKindHorizontalGridline];
+    [self.weekFlowLayout registerClass:self.timeRowHeaderBackgroundClass    forDecorationViewOfKind:MSCollectionElementKindTimeRowHeaderBackground];
+    [self.weekFlowLayout registerClass:self.dayColumnHeaderBackgroundClass  forDecorationViewOfKind:MSCollectionElementKindDayColumnHeaderBackground];
     
-    [self.weekFlowLayout registerClass:self.unavailableHourClass forDecorationViewOfKind:MSCollectionElementKindUnavailableHour];
+    [self.weekFlowLayout registerClass:self.unavailableHourClass            forDecorationViewOfKind:MSCollectionElementKindUnavailableHour];
+    [self.weekFlowLayout registerClass:self.weekendBackgroundClass          forDecorationViewOfKind:MSCollectionElementKindWeekendBackground];
 }
 
 

@@ -15,11 +15,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithHexString:@"F1F1F1"];
+        self.backgroundColor = [UIColor colorWithHexString:@"FaFaFa"];
     }
     return self;
 }
-
 
 //http://stackoverflow.com/questions/39182041/how-to-fill-a-uiview-with-an-alternating-stripe-pattern-programmatically-using-s
 /*-(void)drawRect:(CGRect)rect{

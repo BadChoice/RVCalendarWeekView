@@ -58,6 +58,7 @@
 @property(nonatomic) Class timeRowHeaderBackgroundClass;
 @property(nonatomic) Class dayColumnHeaderBackgroundClass;
 @property(nonatomic) Class unavailableHourClass;
+@property(nonatomic) Class weekendBackgroundClass;
 
 /**
  * Override this function to customize the views you want to use
