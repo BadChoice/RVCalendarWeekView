@@ -134,6 +134,16 @@ _weekView.daysToShow                    = 31;  //How many days to display (Inini
 ![iPad](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/ipad.png?raw=true)   
 
 
+This is a complex example on how you can customize it.   
+- In this one we are displaying just one day, with each employee as worker.   
+- Unavailable hours class with pattern image background.   
+- Custom Event Cell.
+- Custom header section view   
+- Custom header background
+
+![complex](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/complex.png?raw=true)
+
+
 ### Contributors
 · Jordi Puigdellívol - https://github.com/badchoice   
 · Eric Horacek - https://github.com/erichoracek      
