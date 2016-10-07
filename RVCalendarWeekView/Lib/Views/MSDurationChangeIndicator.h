@@ -18,10 +18,15 @@
     BOOL mIsStart;
 }
 
-+(MSDurationChangeIndicator*)makeForStartWithCell:(MSEventCell*)cell andDelegate:(id<MSDurationIndicatorDelegate>)delegate;
-+(MSDurationChangeIndicator*)makeForEndWithCell:(MSEventCell*)cell andDelegate:(id<MSDurationIndicatorDelegate>)delegate;
 
 @property(weak,nonatomic) id<MSDurationIndicatorDelegate>delegate;
 @property(weak,nonatomic) MSEventCell* eventCell;
+
+
++(MSDurationChangeIndicator*)makeForStartWithCell:(MSEventCell*)cell andDelegate:(id<MSDurationIndicatorDelegate>)delegate;
++(MSDurationChangeIndicator*)makeForEndWithCell:(MSEventCell*)cell andDelegate:(id<MSDurationIndicatorDelegate>)delegate;
+
+-(void)updatePosition;
+
 
 @end

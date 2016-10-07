@@ -17,6 +17,9 @@
 @interface MSWeekViewDecoratorChangeDuration : MSWeekViewDecorator <MSDurationIndicatorDelegate>{
     CGFloat mStartY;
     CGFloat mStartHeight;
+    
+    MSDurationChangeIndicator* mStartIndicator;
+    MSDurationChangeIndicator* mEndIndicator;
 }
 
 

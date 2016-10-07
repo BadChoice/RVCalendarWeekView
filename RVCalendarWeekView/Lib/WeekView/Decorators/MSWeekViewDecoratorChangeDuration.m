@@ -27,8 +27,8 @@
         MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
         mStartY         = cell.frame.origin.y;
         mStartHeight    = cell.frame.size.height;
-        [MSDurationChangeIndicator makeForStartWithCell:cell andDelegate:self];
-        [MSDurationChangeIndicator makeForEndWithCell:cell andDelegate:self];
+        mStartIndicator = [MSDurationChangeIndicator makeForStartWithCell:cell andDelegate:self];
+        mEndIndicator = [MSDurationChangeIndicator makeForEndWithCell:cell andDelegate:self];
     }
 }
 
@@ -38,6 +38,8 @@
                         sender.eventCell.frame.origin.y + y,
                         sender.eventCell.frame.size.width,
                         sender.eventCell.frame.size.height - y);
+    
+    [mEndIndicator updatePosition];
 }
 
 -(void)durationIndicatorEndUpdated:(MSDurationChangeIndicator*)sender y:(int)y{
