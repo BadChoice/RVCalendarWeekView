@@ -34,7 +34,7 @@ you can now use storyboard to create a simple UIView extending the RVCalendarVie
 
 Easy right?
 
-#### Features
+### Features
 To add features to the WeekView I'm using a decorator pattern, this way we can extend the `weekView` with diferent features without the need of multiple inhertance and to have a expressive modular design
 However, this adds the need to have a `strong` reference to the `decorator` that will have the features.
 
@@ -42,7 +42,7 @@ So we can add features to the `weekView` with the following code:
 
 ```
     self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
-                                                     features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature)
+                                                     features:(MSDragableEventFeature|MSNewEventFeature|MSInfiniteFeature|MSChangeDurationFeature)
                                                   andDelegate:self];
 ```
 
@@ -65,7 +65,7 @@ There is a function to easily set the minutes precicion to all decorators in cas
     [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:decoratedView minutesPrecision:15];
 ```
 
-##### Drag and drop
+#### Drag and drop
 You can get a dragable events calendar using `RVWeekViewDragable` instead.
 
 it will fire the following functions on your `dragDelegate`
@@ -77,7 +77,7 @@ it will fire the following functions on your `dragDelegate`
 
 ```
 
-##### Change duration
+#### Change duration
 You can get the feature to change the event duration with `MSChangeDurationFeature`
 
 ```
@@ -86,14 +86,14 @@ You can get the feature to change the event duration with `MSChangeDurationFeatu
     -(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event durationChanged:(NSDate*)startDate endDate:(NSDate*)endDate;
 ```
 
-##### Create new event on long press
+#### Create new event on long press
 it will fire the following functions on your `createEventDelegate`
 
 ```
     -(void)weekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date
 ```
 
-##### Infinite scroll
+#### Infinite scroll
 
 It will fire the following functions on your `infiniteDelegate`
 
@@ -101,7 +101,7 @@ It will fire the following functions on your `infiniteDelegate`
     -(BOOL)weekView:(MSWeekView*)weekView newDaysLoaded:(NSDate*)startDate to:(NSDate*)endDate;
 ```
 
-##### Unavailable Hours
+#### Unavailable Hours
 The standard `weekView` comes with an optional delegate function to display unavailable hours in gray (customizable class of course)
 
 just do something like this:
@@ -121,11 +121,11 @@ just do something like this:
 ```
 
 
-##### Pinchable 
+#### Pinchable 
 **This doesn't work really well yet**  
 You just need to add the  `MSPinchableFeature` in the `[MSWeekViewDecoratorFactory  make:...]`
 
-##### Options
+#### Options
 You can even customize some options (they all have defaults values so you just need to modify them if you want to work differently)
 
 ```
