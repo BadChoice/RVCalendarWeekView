@@ -51,8 +51,11 @@
 }
 
 -(void)durationIndicatorEnded:(MSDurationChangeIndicator*)sender{
-    NSDate* startDate = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x + 5, sender.eventCell.frame.origin.y)];
-    NSDate* endDate   = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x + 5, sender.eventCell.frame.origin.y + sender.eventCell.frame.size.height)];
+    NSDate* startDate = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x - self.collectionView.contentOffset.x + 5,
+                                                       sender.eventCell.frame.origin.y - self.collectionView.contentOffset.y)];
+    
+    NSDate* endDate   = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x - self.collectionView.contentOffset.x + 5,
+                                                       sender.eventCell.frame.origin.y - self.collectionView.contentOffset.y + sender.eventCell.frame.size.height )];
     
     sender.eventCell.event.StartDate = startDate;
     sender.eventCell.event.EndDate   = endDate;

@@ -28,13 +28,13 @@
 +(CGRect)getFrameFor:(MSEventCell*)cell start:(BOOL)start{
     if(start){
         return CGRectMake(Y_MARGIN,
-                          -Y_MARGIN,
+                          Y_MARGIN,
                           INDICATOR_TOUCH_SIZE,
                           INDICATOR_TOUCH_SIZE);
     }
     else{
-        return CGRectMake(  cell.frame.size.width  - INDICATOR_TOUCH_SIZE - Y_MARGIN,
-                            cell.frame.size.height - INDICATOR_TOUCH_SIZE + Y_MARGIN,
+        return CGRectMake(  cell.frame.size.width  - INDICATOR_TOUCH_SIZE - Y_MARGIN * 2,
+                            cell.frame.size.height - INDICATOR_TOUCH_SIZE - Y_MARGIN,
                             INDICATOR_TOUCH_SIZE,
                             INDICATOR_TOUCH_SIZE);
     }
@@ -85,7 +85,7 @@
         }
         else{
             CGPoint cp = [gestureRecognizer locationInView:self.superview];
-            self.frame = CGRectMake(self.frame.origin.x, cp.y - INDICATOR_TOUCH_SIZE + Y_MARGIN, INDICATOR_TOUCH_SIZE, INDICATOR_TOUCH_SIZE);
+            self.frame = CGRectMake(self.frame.origin.x, cp.y - INDICATOR_TOUCH_SIZE - Y_MARGIN, INDICATOR_TOUCH_SIZE, INDICATOR_TOUCH_SIZE);
             [self.delegate durationIndicatorEndUpdated:self y:cp.y];
         }
     }
