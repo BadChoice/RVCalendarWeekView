@@ -27,13 +27,13 @@
 
 +(CGRect)getFrameFor:(MSEventCell*)cell start:(BOOL)start{
     if(start){
-        return CGRectMake(INDICATOR_TOUCH_SIZE *0.5,
+        return CGRectMake(Y_MARGIN,
                           -Y_MARGIN,
                           INDICATOR_TOUCH_SIZE,
                           INDICATOR_TOUCH_SIZE);
     }
     else{
-        return CGRectMake(  cell.frame.size.width  - INDICATOR_TOUCH_SIZE * 1.5,
+        return CGRectMake(  cell.frame.size.width  - INDICATOR_TOUCH_SIZE - Y_MARGIN,
                             cell.frame.size.height - INDICATOR_TOUCH_SIZE + Y_MARGIN,
                             INDICATOR_TOUCH_SIZE,
                             INDICATOR_TOUCH_SIZE);
@@ -64,28 +64,33 @@
     ball.backgroundColor      = [UIColor whiteColor];
     ball.layer.masksToBounds  = YES;
     ball.layer.cornerRadius   = ball.frame.size.width * 0.5;
+    ball.layer.borderColor    = [UIColor darkGrayColor].CGColor;
+    ball.layer.borderWidth    = 1.0;
     [self addSubview:ball];
 }
 
 -(void)addDragGestureRecognizer{
     UILongPressGestureRecognizer* lpgr  = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onPress:)];
-    lpgr.minimumPressDuration = 0.2;
+    lpgr.minimumPressDuration = 0.01;
     [self addGestureRecognizer:lpgr];
 }
 
 -(void)onPress:(UIGestureRecognizer*)gestureRecognizer{
+    if(!self.delegate) return;
+    
     if(gestureRecognizer.state == UIGestureRecognizerStateChanged){
-        if(self.delegate){
-            if(mIsStart){
-                CGPoint cp = [gestureRecognizer locationInView:self];
-                [self.delegate durationIndicatorStartUpdated:self y:cp.y];
-            }
-            else{
-                CGPoint cp = [gestureRecognizer locationInView:self.superview];
-                self.frame = CGRectMake(self.frame.origin.x, cp.y - INDICATOR_TOUCH_SIZE + Y_MARGIN, INDICATOR_TOUCH_SIZE, INDICATOR_TOUCH_SIZE);
-                [self.delegate durationIndicatorEndUpdated:self y:cp.y];
-            }
+        if(mIsStart){
+            CGPoint cp = [gestureRecognizer locationInView:self];
+            [self.delegate durationIndicatorStartUpdated:self y:cp.y];
         }
+        else{
+            CGPoint cp = [gestureRecognizer locationInView:self.superview];
+            self.frame = CGRectMake(self.frame.origin.x, cp.y - INDICATOR_TOUCH_SIZE + Y_MARGIN, INDICATOR_TOUCH_SIZE, INDICATOR_TOUCH_SIZE);
+            [self.delegate durationIndicatorEndUpdated:self y:cp.y];
+        }
+    }
+    else if(gestureRecognizer.state == UIGestureRecognizerStateEnded){
+        [self.delegate durationIndicatorEnded:self];
     }
 }
 @end

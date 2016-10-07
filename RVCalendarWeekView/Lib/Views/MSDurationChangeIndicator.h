@@ -12,6 +12,7 @@
 @protocol MSDurationIndicatorDelegate <NSObject>
 -(void)durationIndicatorStartUpdated:(id)sender y:(int)y;
 -(void)durationIndicatorEndUpdated:(id)sender y:(int)y;
+-(void)durationIndicatorEnded:(id)sender;
 @end
 
 @interface MSDurationChangeIndicator : UIView{

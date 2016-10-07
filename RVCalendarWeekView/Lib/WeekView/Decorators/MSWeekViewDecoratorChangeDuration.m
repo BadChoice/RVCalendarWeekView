@@ -43,12 +43,23 @@
 }
 
 -(void)durationIndicatorEndUpdated:(MSDurationChangeIndicator*)sender y:(int)y{
-    NSLog(@"Y : %d",y);
     sender.eventCell.frame = CGRectMake(
                         sender.eventCell.frame.origin.x,
                         sender.eventCell.frame.origin.y,
                         sender.eventCell.frame.size.width,
                         y);
+}
+
+-(void)durationIndicatorEnded:(MSDurationChangeIndicator*)sender{
+    NSDate* startDate = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x + 5, sender.eventCell.frame.origin.y)];
+    NSDate* endDate   = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x + 5, sender.eventCell.frame.origin.y + sender.eventCell.frame.size.height)];
+    
+    sender.eventCell.event.StartDate = startDate;
+    sender.eventCell.event.EndDate   = endDate;
+    [self.baseWeekView forceReload:YES];
+    if(self.changeDurationDelegate){
+        [self.changeDurationDelegate weekView:self.weekView event:sender.eventCell.event durationChanged:startDate endDate:endDate];
+    }
 }
 
 @end

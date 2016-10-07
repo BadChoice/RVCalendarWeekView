@@ -167,7 +167,7 @@
 }
 
 -(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event durationChanged:(NSDate*)startDate endDate:(NSDate*)endDate{
-    
+    NSLog(@"Changed event duration");
 }
 
 @end
