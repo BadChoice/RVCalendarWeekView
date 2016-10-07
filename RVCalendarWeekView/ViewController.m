@@ -24,9 +24,9 @@
     [self setupWeekData];
 }
 
--(void)viewDidLayoutSubviews:(BOOL)animated{
+/*-(void)viewDidAppear:(BOOL)animated{
     [self.weekView.weekFlowLayout scrollCollectionViewToCurrentTime:YES];
-}
+}*/
 
 - (void)setupWeekData{
     

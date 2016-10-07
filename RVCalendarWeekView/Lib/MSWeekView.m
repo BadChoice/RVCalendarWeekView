@@ -167,8 +167,9 @@
     //TODO : Improve this to make it faster
     _eventsBySection = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
     
-    NSDate* date = [NSDate today:@"device"];    //Why does it crash on some configurations?
-    //NSDate*date = [NSDate date];              //If it crashes here, comment the previous line and uncomment this one
+    
+    //NSDate* date = [NSDate today:@"device"];                                      //Why does it crash on some configurations?
+    NSDate* date = [NSDate parse:NSDate.today.toDateTimeString timezone:@"device"];  //If it crashes here, comment the previous line and uncomment this one
     if(self.daysToShow == 1 && _eventsBySection.count == 1){
         date = [NSDate parse:_eventsBySection.allKeys.firstObject];
     }
