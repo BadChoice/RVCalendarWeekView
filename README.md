@@ -14,16 +14,16 @@ or just copy the files inside the `lib` folder by now
 
 
 ### Usage
-you can now use storyboard to create a simple UIView extending the RVCalendarView and then just do this:
+you can now use storyboard to create a simple UIView extending the MSWeekView and then just do this:
 
 
 ```
     -(void)viewDidLoad{
-        MSEvent* event1 = [AKEvent make:NSDate.now
+        MSEvent* event1 = [MSEvent make:NSDate.now
         title:@"Title"
         location:@"Central perk"];
 
-        MSEvent* event2 = [AKEvent make:[NSDate.now addMinutes:10]  //AddMinutes comes from EasyDate pod
+        MSEvent* event2 = [MSEvent make:[NSDate.now addMinutes:10]  //AddMinutes comes from EasyDate pod
         duration:60*3
         title:@"Title 2"
         location:@"Central perk"];
@@ -36,7 +36,7 @@ Easy right?
 
 ### Features
 To add features to the WeekView I'm using a decorator pattern, this way we can extend the `weekView` with diferent features without the need of multiple inhertance and to have a expressive modular design
-However, this adds the need to have a `strong` reference to the `decorator` that will have the features.
+However, this adds the need to have a `strong` reference to the `decorator` that will hold the features.
 
 So we can add features to the `weekView` with the following code:
 
@@ -59,16 +59,16 @@ The long way is something more like the standard `decorator` pattern in case you
 
 ```
 
-There is a function to easily set the minutes precicion to all decorators in case you need something diferent than the default 5 minutes.
+There is a function to easily set the minutes precision to all decorators in case you need something diferent than the default 5 minutes.
 
 ```
     [MSWeekViewDecoratorFactory setMinutesPrecisionToAllDecorators:decoratedView minutesPrecision:15];
 ```
 
 #### Drag and drop
-You can get a dragable events calendar using `RVWeekViewDragable` instead.
+You can get the feature to change the event duration with `MSDragableEventFeature`
 
-it will fire the following functions on your `dragDelegate`
+It will fire the following functions on your `dragDelegate`
 
 ``` 
     -(BOOL)weekView:(MSWeekView*)weekView canMoveEvent:(MSEvent*)event to:(NSDate*)date;
@@ -94,7 +94,6 @@ it will fire the following functions on your `createEventDelegate`
 ```
 
 #### Infinite scroll
-
 It will fire the following functions on your `infiniteDelegate`
 
 ```
@@ -124,6 +123,7 @@ just do something like this:
 #### Pinchable 
 **This doesn't work really well yet**  
 You just need to add the  `MSPinchableFeature` in the `[MSWeekViewDecoratorFactory  make:...]`
+
 
 #### Options
 You can even customize some options (they all have defaults values so you just need to modify them if you want to work differently)

@@ -22,7 +22,8 @@
 }
 
 -(void)onPinch:(UIPinchGestureRecognizer*)gestureRecognizer{
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    //if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
         
         CGFloat newHourHeight = MIN(50* gestureRecognizer.scale, MAX_HOUR_HEIGHT);
         newHourHeight         = MAX(newHourHeight, MIN_HOUR_HEIGHT);
