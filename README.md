@@ -55,6 +55,7 @@ The long way is something more like the standard `decorator` pattern in case you
     decoratedView = [MSWeekViewDecoratorInfinite makeWith:decoratedView andDelegate:infiniteDelegate];
     decoratedView = [MSWeekViewDecoratorNewEvent makeWith:decoratedView andDelegate:newEventDelegate];
     decoratedView = [MSWeekViewDecoratorDragable makeWith:decoratedView andDelegate:dragableDelegate];
+    decoratedView = [MSWeekViewDecoratorChangeDuration makeWith:decoratedView andDelegate:durationDelegate];
 
 ```
 
@@ -76,6 +77,14 @@ it will fire the following functions on your `dragDelegate`
 
 ```
 
+##### Change duration
+You can get the feature to change the event duration with `MSChangeDurationFeature`
+
+```
+    -(BOOL)weekView:(MSWeekView*)weekView canChangeDuration:(MSEvent*)event startDate:(NSDate*)startDate endDate:(NSDate*)endDate;
+
+    -(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event durationChanged:(NSDate*)startDate endDate:(NSDate*)endDate;
+```
 
 ##### Create new event on long press
 it will fire the following functions on your `createEventDelegate`
@@ -126,6 +135,7 @@ _weekView.daysToShowOnScreen            = 7;   //How many days visible at the sa
 _weekView.daysToShow                    = 31;  //How many days to display (Ininite scroll feature pending)
 ```
 
+![full demo](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/full_demo.gif?raw=true)
 
 ![drag and drop](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/drag_n_drop.gif?raw=true)   
 

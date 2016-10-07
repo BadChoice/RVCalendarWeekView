@@ -79,12 +79,14 @@
     NSDate* startDate = [self startDateFor:sender.eventCell];
     NSDate* endDate   = [self endDateFor:sender.eventCell];
     
-    sender.eventCell.event.StartDate = startDate;
-    sender.eventCell.event.EndDate   = endDate;
-    [self.baseWeekView forceReload:YES];
-    if(self.changeDurationDelegate){
-        [self.changeDurationDelegate weekView:self.weekView event:sender.eventCell.event durationChanged:startDate endDate:endDate];
+    if([self canChangeDuration:sender.eventCell.event startDate:startDate endDate:endDate]){
+        sender.eventCell.event.StartDate = startDate;
+        sender.eventCell.event.EndDate   = endDate;
+        if(self.changeDurationDelegate){
+            [self.changeDurationDelegate weekView:self.weekView event:sender.eventCell.event durationChanged:startDate endDate:endDate];
+        }
     }
+    [self.baseWeekView forceReload:YES];
 }
 
 -(NSDate*)startDateFor:(MSEventCell*)eventCell{
@@ -97,6 +99,14 @@
     return [self dateForPoint:CGPointMake(
                                     eventCell.frame.origin.x - self.collectionView.contentOffset.x + 5,
                                     eventCell.frame.origin.y - self.collectionView.contentOffset.y + eventCell.frame.size.height )];
+}
+
+//=========================================================
+#pragma mark - Can move to new date?
+//=========================================================
+-(BOOL)canChangeDuration:(MSEvent*)event startDate:(NSDate*)startDate endDate:(NSDate*)endDate{
+    if (! self.changeDurationDelegate) return true;
+    return [self.changeDurationDelegate weekView:self canChangeDuration:event startDate:startDate endDate:endDate];
 }
 
 //=========================================================

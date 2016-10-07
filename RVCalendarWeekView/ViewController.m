@@ -162,10 +162,9 @@
 //=========================================
 #pragma mark - Week View Decorator Change duration delegate
 //=========================================
--(BOOL)weekView:(MSWeekView*)weekView canChangeDuration:(MSEvent*)event to:(NSDate*)date{
+-(BOOL)weekView:(MSWeekView*)weekView canChangeDuration:(MSEvent*)event startDate:(NSDate*)startDate endDate:(NSDate*)endDate{
     return YES;
 }
-
 -(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event durationChanged:(NSDate*)startDate endDate:(NSDate*)endDate{
     NSLog(@"Changed event duration");
 }

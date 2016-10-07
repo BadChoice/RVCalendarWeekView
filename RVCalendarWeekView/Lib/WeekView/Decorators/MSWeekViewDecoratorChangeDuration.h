@@ -10,7 +10,7 @@
 #import "MSDurationChangeIndicator.h"
 
 @protocol MSWeekViewChangeDurationDelegate <NSObject>
--(BOOL)weekView:(MSWeekView*)weekView canChangeDuration:(MSEvent*)event to:(NSDate*)date;
+-(BOOL)weekView:(MSWeekView*)weekView canChangeDuration:(MSEvent*)event startDate:(NSDate*)startDate endDate:(NSDate*)endDate;
 -(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event durationChanged:(NSDate*)startDate endDate:(NSDate*)endDate;
 @end
 
