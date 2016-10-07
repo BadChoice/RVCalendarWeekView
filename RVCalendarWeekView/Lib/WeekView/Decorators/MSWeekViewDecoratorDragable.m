@@ -29,9 +29,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MSEventCell *cell                   = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    UILongPressGestureRecognizer* lpgr  = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
-    lpgr.delegate                       = self;
-    [cell addGestureRecognizer:lpgr];
+    
+    if(![self isGestureAlreadyAdded:cell]){
+        UILongPressGestureRecognizer* lpgr  = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
+        lpgr.delegate                       = self;
+        [cell addGestureRecognizer:lpgr];
+    }
     
     return cell;
 }
@@ -121,9 +124,9 @@
 //=========================================================
 #pragma mark - Gesture Recongnizer Delegate
 //=========================================================
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
-    //return ([otherGestureRecognizer isKindOfClass:UILongPressGestureRecognizer.class]);
-    return NO;
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer  shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer  *)otherGestureRecognizer
+{
+    return otherGestureRecognizer.view == gestureRecognizer.view;
 }
 
 @end

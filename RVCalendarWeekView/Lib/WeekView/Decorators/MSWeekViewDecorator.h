@@ -36,4 +36,12 @@
 -(int)getDayIndexForX:(float)x;
 -(CGFloat)round:(float)number toNearest:(float)pivot;
 -(CGFloat)round:(float)number toLowest:(float)pivot;
+
+//=========================================================
+#pragma mark -
+//=========================================================
+/**
+ * Checks if there is any GR using as delegate the class itself
+ */
+-(BOOL)isGestureAlreadyAdded:(UIView*)cell;
 @end

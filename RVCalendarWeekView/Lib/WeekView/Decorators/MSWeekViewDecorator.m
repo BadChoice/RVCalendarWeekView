@@ -9,6 +9,7 @@
 #import "MSWeekViewDecorator.h"
 #import "NSDate+Easy.h"
 #import "NSDate+DateTools.h"
+#import "RVCollection.h"
 
 @implementation MSWeekViewDecorator
 
@@ -144,5 +145,12 @@
 -(CGFloat)round:(float)number toLowest:(float)pivot{
     return pivot * floor(number/pivot);
 }
+
+-(BOOL)isGestureAlreadyAdded:(UIView*)cell{
+    return [cell.gestureRecognizers contains:^BOOL(UIGestureRecognizer* recognizer) {
+        return recognizer.delegate == (id<UIGestureRecognizerDelegate>)self;
+    }];
+}
+
 
 @end

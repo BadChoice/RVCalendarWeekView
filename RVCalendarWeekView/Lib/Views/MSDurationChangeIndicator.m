@@ -27,16 +27,16 @@
 
 +(CGRect)getFrameFor:(MSEventCell*)cell start:(BOOL)start{
     if(start){
-        return CGRectMake(Y_MARGIN,
+        return CGRectMake(cell.frame.size.width  - INDICATOR_TOUCH_SIZE - Y_MARGIN * 2,
                           Y_MARGIN,
                           INDICATOR_TOUCH_SIZE,
                           INDICATOR_TOUCH_SIZE);
     }
     else{
-        return CGRectMake(  cell.frame.size.width  - INDICATOR_TOUCH_SIZE - Y_MARGIN * 2,
-                            cell.frame.size.height - INDICATOR_TOUCH_SIZE - Y_MARGIN,
-                            INDICATOR_TOUCH_SIZE,
-                            INDICATOR_TOUCH_SIZE);
+        return CGRectMake(Y_MARGIN,
+                          cell.frame.size.height - INDICATOR_TOUCH_SIZE - Y_MARGIN,
+                          INDICATOR_TOUCH_SIZE,
+                          INDICATOR_TOUCH_SIZE);
     }
 }
 
@@ -52,14 +52,15 @@
     [eventCell addSubview:self];
     [self addWhiteBall];
     [self addDragGestureRecognizer];
+    //[self addTimeLabel];
 }
 
 -(void)addWhiteBall{
     UIView* ball;
     if(mIsStart){
-        ball = [[UIView alloc] initWithFrame:CGRectMake(0, 0, INDICATOR_SIZE, INDICATOR_SIZE)];
+        ball = [[UIView alloc] initWithFrame:CGRectMake(20, 0, INDICATOR_SIZE, INDICATOR_SIZE)];
     }else{
-        ball = [[UIView alloc] initWithFrame:CGRectMake(20, 16, INDICATOR_SIZE, INDICATOR_SIZE)];
+        ball = [[UIView alloc] initWithFrame:CGRectMake(0, 16, INDICATOR_SIZE, INDICATOR_SIZE)];
     }
     ball.backgroundColor      = [UIColor whiteColor];
     ball.layer.masksToBounds  = YES;
@@ -67,6 +68,12 @@
     ball.layer.borderColor    = [UIColor darkGrayColor].CGColor;
     ball.layer.borderWidth    = 1.0;
     [self addSubview:ball];
+}
+
+-(void)addTimeLabel{
+    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+    self.timeLabel.text = @"--";
+    [self addSubview:_timeLabel];
 }
 
 -(void)addDragGestureRecognizer{

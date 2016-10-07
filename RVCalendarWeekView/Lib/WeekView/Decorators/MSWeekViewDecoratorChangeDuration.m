@@ -10,7 +10,9 @@
 #import "MSEventCell.h"
 #import "RVCollection.h"
 
+@interface MSWeekViewDecoratorChangeDuration () <UIGestureRecognizerDelegate>
 
+@end
 
 @implementation MSWeekViewDecoratorChangeDuration
 
@@ -20,7 +22,40 @@
     return weekViewDecorator;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+//=========================================================
+#pragma mark - Add long press gesture recognizer
+//=========================================================
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MSEventCell *cell                   = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    if(![self isGestureAlreadyAdded:cell]){
+        UILongPressGestureRecognizer* lpgr  = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
+        
+        lpgr.minimumPressDuration = 0.2;
+        lpgr.delegate             = self;
+        [cell addGestureRecognizer:lpgr];
+    }
+    
+    return cell;
+}
+
+-(void)onEventCellLongPress:(UIGestureRecognizer*)gestureRecognizer{
+    if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        NSLog(@"Change Duration start");
+        MSEventCell* cell   = (MSEventCell*)gestureRecognizer.view;
+        mStartY             = cell.frame.origin.y;
+        mStartHeight        = cell.frame.size.height;
+        mStartIndicator     = [MSDurationChangeIndicator makeForStartWithCell:cell  andDelegate:self];
+        mEndIndicator       = [MSDurationChangeIndicator makeForEndWithCell:cell    andDelegate:self];
+    }
+}
+
+
+//=========================================================
+#pragma mark - On select
+//=========================================================
+/*-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     [super collectionView:collectionView didSelectItemAtIndexPath:indexPath];
     if(self.changeDurationDelegate){
@@ -30,7 +65,7 @@
         mStartIndicator     = [MSDurationChangeIndicator makeForStartWithCell:cell andDelegate:self];
         mEndIndicator       = [MSDurationChangeIndicator makeForEndWithCell:cell andDelegate:self];
     }
-}
+}*/
 
 -(void)durationIndicatorStartUpdated:(MSDurationChangeIndicator*)sender y:(int)y{
     sender.eventCell.frame = CGRectMake(
@@ -38,7 +73,6 @@
                         sender.eventCell.frame.origin.y + y,
                         sender.eventCell.frame.size.width,
                         sender.eventCell.frame.size.height - y);
-    
     [mEndIndicator updatePosition];
 }
 
@@ -63,6 +97,11 @@
     if(self.changeDurationDelegate){
         [self.changeDurationDelegate weekView:self.weekView event:sender.eventCell.event durationChanged:startDate endDate:endDate];
     }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer  shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer  *)otherGestureRecognizer
+{
+    return otherGestureRecognizer.view == gestureRecognizer.view;
 }
 
 @end

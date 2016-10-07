@@ -22,7 +22,7 @@
 
 @property(weak,nonatomic) id<MSDurationIndicatorDelegate>delegate;
 @property(weak,nonatomic) MSEventCell* eventCell;
-
+@property(strong,nonatomic) UILabel* timeLabel;
 
 +(MSDurationChangeIndicator*)makeForStartWithCell:(MSEventCell*)cell andDelegate:(id<MSDurationIndicatorDelegate>)delegate;
 +(MSDurationChangeIndicator*)makeForEndWithCell:(MSEventCell*)cell andDelegate:(id<MSDurationIndicatorDelegate>)delegate;
