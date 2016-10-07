@@ -135,14 +135,9 @@ _weekView.daysToShowOnScreen            = 7;   //How many days visible at the sa
 _weekView.daysToShow                    = 31;  //How many days to display (Ininite scroll feature pending)
 ```
 
-![full demo](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/full_demo.gif?raw=true)
+![full demo](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/full_demo.gif?raw=true)   
 
-![drag and drop](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/drag_n_drop.gif?raw=true)   
-
-![iPhone](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/iphone.png?raw=true)   
-
-![iPad](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/ipad.png?raw=true)   
-
+![iPhone](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/iphone.png?raw=true)      
 
 This is a complex example on how you can customize it.   
 - In this one we are displaying just one day, with each employee as worker.   
