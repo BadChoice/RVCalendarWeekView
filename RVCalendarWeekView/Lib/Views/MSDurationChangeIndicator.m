@@ -52,13 +52,12 @@
     [eventCell addSubview:self];
     [self addWhiteBall];
     [self addDragGestureRecognizer];
-    //[self addTimeLabel];
+    [self addTimeLabel];
 }
 
 -(void)addWhiteBall{
     UIView* ball;
-    if(mIsStart){
-        ball = [[UIView alloc] initWithFrame:CGRectMake(20, 0, INDICATOR_SIZE, INDICATOR_SIZE)];
+    if(mIsStart){        ball = [[UIView alloc] initWithFrame:CGRectMake(20, 0, INDICATOR_SIZE, INDICATOR_SIZE)];
     }else{
         ball = [[UIView alloc] initWithFrame:CGRectMake(0, 16, INDICATOR_SIZE, INDICATOR_SIZE)];
     }
@@ -71,8 +70,15 @@
 }
 
 -(void)addTimeLabel{
-    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
-    self.timeLabel.text = @"--";
+    if(mIsStart){
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -25, 80, 20)];
+    }
+    else{
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 80, 20)];
+    }
+    self.timeLabel.text      = @"";
+    self.timeLabel.font      = [UIFont systemFontOfSize:12];
+    self.timeLabel.textColor = [UIColor blackColor];
     [self addSubview:_timeLabel];
 }
 

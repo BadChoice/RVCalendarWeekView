@@ -9,6 +9,7 @@
 #import "MSWeekViewDecoratorChangeDuration.h"
 #import "MSEventCell.h"
 #import "RVCollection.h"
+#import "NSDate+Easy.h"
 
 @interface MSWeekViewDecoratorChangeDuration () <UIGestureRecognizerDelegate>
 
@@ -51,22 +52,9 @@
     }
 }
 
-
 //=========================================================
-#pragma mark - On select
+#pragma mark - On indicators dragged
 //=========================================================
-/*-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [super collectionView:collectionView didSelectItemAtIndexPath:indexPath];
-    if(self.changeDurationDelegate){
-        MSEventCell* cell   = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        mStartY             = cell.frame.origin.y;
-        mStartHeight        = cell.frame.size.height;
-        mStartIndicator     = [MSDurationChangeIndicator makeForStartWithCell:cell andDelegate:self];
-        mEndIndicator       = [MSDurationChangeIndicator makeForEndWithCell:cell andDelegate:self];
-    }
-}*/
-
 -(void)durationIndicatorStartUpdated:(MSDurationChangeIndicator*)sender y:(int)y{
     sender.eventCell.frame = CGRectMake(
                         sender.eventCell.frame.origin.x,
@@ -74,6 +62,7 @@
                         sender.eventCell.frame.size.width,
                         sender.eventCell.frame.size.height - y);
     [mEndIndicator updatePosition];
+    mStartIndicator.timeLabel.text = [[self startDateFor:sender.eventCell] format:@"HH:mm" timezone:@"device"];
 }
 
 -(void)durationIndicatorEndUpdated:(MSDurationChangeIndicator*)sender y:(int)y{
@@ -82,14 +71,13 @@
                         sender.eventCell.frame.origin.y,
                         sender.eventCell.frame.size.width,
                         y);
+    
+    mEndIndicator.timeLabel.text = [[self endDateFor:sender.eventCell] format:@"HH:mm" timezone:@"device"];
 }
 
 -(void)durationIndicatorEnded:(MSDurationChangeIndicator*)sender{
-    NSDate* startDate = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x - self.collectionView.contentOffset.x + 5,
-                                                       sender.eventCell.frame.origin.y - self.collectionView.contentOffset.y)];
-    
-    NSDate* endDate   = [self dateForPoint:CGPointMake(sender.eventCell.frame.origin.x - self.collectionView.contentOffset.x + 5,
-                                                       sender.eventCell.frame.origin.y - self.collectionView.contentOffset.y + sender.eventCell.frame.size.height )];
+    NSDate* startDate = [self startDateFor:sender.eventCell];
+    NSDate* endDate   = [self endDateFor:sender.eventCell];
     
     sender.eventCell.event.StartDate = startDate;
     sender.eventCell.event.EndDate   = endDate;
@@ -99,6 +87,21 @@
     }
 }
 
+-(NSDate*)startDateFor:(MSEventCell*)eventCell{
+    return [self dateForPoint:CGPointMake(
+                                    eventCell.frame.origin.x - self.collectionView.contentOffset.x + 5,
+                                    eventCell.frame.origin.y - self.collectionView.contentOffset.y)];
+}
+
+-(NSDate*)endDateFor:(MSEventCell*)eventCell{
+    return [self dateForPoint:CGPointMake(
+                                    eventCell.frame.origin.x - self.collectionView.contentOffset.x + 5,
+                                    eventCell.frame.origin.y - self.collectionView.contentOffset.y + eventCell.frame.size.height )];
+}
+
+//=========================================================
+#pragma mark - Indicator stop dragged
+//=========================================================
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer  shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer  *)otherGestureRecognizer
 {
     return otherGestureRecognizer.view == gestureRecognizer.view;
