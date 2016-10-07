@@ -28,9 +28,9 @@
 //=========================================================
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MSEventCell *cell         = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    UIGestureRecognizer* lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
-    lpgr.delegate = self;
+    MSEventCell *cell                   = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    UILongPressGestureRecognizer* lpgr  = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
+    lpgr.delegate                       = self;
     [cell addGestureRecognizer:lpgr];
     
     return cell;
@@ -51,7 +51,7 @@
     MSEventCell* eventCell = (MSEventCell*)gestureRecognizer.view;
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        //NSLog(@"Long press began: %@",eventCell.akEvent.title);
+        NSLog(@"Star drag: %@",eventCell.event.title);
         CGPoint touchOffsetInCell = [gestureRecognizer locationInView:gestureRecognizer.view];
         mDragableEvent = [MSDragableEvent makeWithEventCell:eventCell andOffset:self.weekView.collectionView.contentOffset touchOffset:touchOffsetInCell];
         [self.baseWeekView addSubview:mDragableEvent];
@@ -118,5 +118,12 @@
     return (UIDevice.currentDevice.orientation == UIDeviceOrientationPortrait || UIDevice.currentDevice.orientation == UIDeviceOrientationFaceUp);
 }
 
+//=========================================================
+#pragma mark - Gesture Recongnizer Delegate
+//=========================================================
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    //return ([otherGestureRecognizer isKindOfClass:UILongPressGestureRecognizer.class]);
+    return NO;
+}
 
 @end

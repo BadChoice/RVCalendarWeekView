@@ -19,10 +19,6 @@
     return weekViewDecorator;
 }
 
--(void)setup{
-    [super setup];
-}
-
 -(void)setShortPress:(BOOL)shortPress{
     _shortPress = shortPress;
     UIGestureRecognizer* gr;

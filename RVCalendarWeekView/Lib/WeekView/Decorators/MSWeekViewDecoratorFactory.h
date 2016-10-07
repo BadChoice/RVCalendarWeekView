@@ -11,7 +11,7 @@
 #import "MSWeekViewDecoratorNewEvent.h"
 #import "MSWeekViewDecoratorInfinite.h"
 #import "MSWeekViewDecoratorPinchable.h"
-#import "MSWeekViewDecoratorUnavailableHours.h"
+#import "MSWeekViewDecoratorChangeDuration.h"
 
 
 typedef NS_OPTIONS(NSUInteger, MSWeekViewFeatures) {
@@ -20,7 +20,7 @@ typedef NS_OPTIONS(NSUInteger, MSWeekViewFeatures) {
     MSInfiniteFeature               = (1 << 2), // => 00000100
     MSPinchableFeature              = (1 << 3), // => 00001000
     MSShortPressNewEventFeature     = (1 << 4), // => 00010000
-    MSUnavailableHoursFeature       = (1 << 5), // => 00100000
+    MSChangeDurationFeature       = (1 << 5), // => 00100000
 };
 
 @interface MSWeekViewDecoratorFactory : NSObject

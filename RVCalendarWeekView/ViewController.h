@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MSWeekViewDecoratorFactory.h"
 
-@interface ViewController : UIViewController <MSWeekViewDelegate, MSWeekViewDragableDelegate,MSWeekViewNewEventDelegate, MSWeekViewInfiniteDelegate>{
+@interface ViewController : UIViewController <MSWeekViewDelegate, MSWeekViewDragableDelegate,MSWeekViewNewEventDelegate, MSWeekViewInfiniteDelegate, MSWeekViewChangeDurationDelegate>{
     NSArray* unavailableHours;
 }
 

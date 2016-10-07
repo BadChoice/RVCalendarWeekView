@@ -31,7 +31,7 @@
 - (void)setupWeekData{
     
     self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
-                                                      features:(MSDragableEventFeature | MSNewEventFeature | MSInfiniteFeature | MSPinchableFeature |MSShortPressNewEventFeature | MSUnavailableHoursFeature)
+                                                      features:(MSDragableEventFeature | MSNewEventFeature | MSInfiniteFeature | MSPinchableFeature |MSShortPressNewEventFeature | MSChangeDurationFeature)
                                                   andDelegate:self];
     
     //Optional, set minutes precision for drag and new event (by default it is already set to 5)
@@ -159,5 +159,15 @@
     return YES;
 }
 
+//=========================================
+#pragma mark - Week View Decorator Change duration delegate
+//=========================================
+-(BOOL)weekView:(MSWeekView*)weekView canChangeDuration:(MSEvent*)event to:(NSDate*)date{
+    return YES;
+}
+
+-(void)weekView:(MSWeekView*)weekView event:(MSEvent*)event durationChanged:(NSDate*)startDate endDate:(NSDate*)endDate{
+    
+}
 
 @end
