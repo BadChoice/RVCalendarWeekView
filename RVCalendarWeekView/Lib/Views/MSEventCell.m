@@ -11,6 +11,8 @@
 #define MAS_SHORTHAND
 #import "Masonry.h"
 #import "UIColor+HexString.h"
+#import "RVCollection.h"
+#import "MSDurationChangeIndicator.h"
 
 @interface MSEventCell ()
 
@@ -86,8 +88,6 @@
             make.right.equalTo(self.right).offset(-contentPadding.right);
             make.bottom.lessThanOrEqualTo(self.bottom).offset(-contentPadding.bottom);
         }];
-        
-        
     }
     return self;
 }
@@ -110,7 +110,8 @@
         self.layer.shadowOpacity = 0.0;
     }
     [super setSelected:selected]; // Must be here for animation to fire
-    [self updateColors];
+    [self updateColors];    
+    [self removeIndicators];
 }
 
 
@@ -130,6 +131,14 @@
     self.borderView.backgroundColor  = [self borderColor];
     self.title.textColor             = [self textColorHighlighted:self.selected];
     self.location.textColor          = [self textColorHighlighted:self.selected];
+}
+
+-(void)removeIndicators{
+    [self.subviews each:^(UIView* subview) {
+        if([subview isKindOfClass:MSDurationChangeIndicator.class]){
+            [subview removeFromSuperview];
+        }
+    }];
 }
 
 - (NSDictionary *)titleAttributesHighlighted:(BOOL)highlighted

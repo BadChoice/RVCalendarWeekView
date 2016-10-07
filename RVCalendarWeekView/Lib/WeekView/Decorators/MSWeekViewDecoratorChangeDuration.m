@@ -24,11 +24,11 @@
     
     [super collectionView:collectionView didSelectItemAtIndexPath:indexPath];
     if(self.changeDurationDelegate){
-        MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        mStartY         = cell.frame.origin.y;
-        mStartHeight    = cell.frame.size.height;
-        mStartIndicator = [MSDurationChangeIndicator makeForStartWithCell:cell andDelegate:self];
-        mEndIndicator = [MSDurationChangeIndicator makeForEndWithCell:cell andDelegate:self];
+        MSEventCell* cell   = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        mStartY             = cell.frame.origin.y;
+        mStartHeight        = cell.frame.size.height;
+        mStartIndicator     = [MSDurationChangeIndicator makeForStartWithCell:cell andDelegate:self];
+        mEndIndicator       = [MSDurationChangeIndicator makeForEndWithCell:cell andDelegate:self];
     }
 }
 

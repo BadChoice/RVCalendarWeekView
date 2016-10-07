@@ -7,7 +7,9 @@
 //
 
 #import "MSDurationChangeIndicator.h"
+#define INDICATOR_TOUCH_SIZE 30
 #define INDICATOR_SIZE 10
+#define Y_MARGIN 5
 
 @implementation MSDurationChangeIndicator
 
@@ -25,17 +27,16 @@
 
 +(CGRect)getFrameFor:(MSEventCell*)cell start:(BOOL)start{
     if(start){
-        return CGRectMake(INDICATOR_SIZE*0.5,
-                                -INDICATOR_SIZE*0.5,
-                                INDICATOR_SIZE,
-                                INDICATOR_SIZE);
+        return CGRectMake(INDICATOR_TOUCH_SIZE *0.5,
+                          -Y_MARGIN,
+                          INDICATOR_TOUCH_SIZE,
+                          INDICATOR_TOUCH_SIZE);
     }
     else{
-        return CGRectMake(
-                                cell.frame.size.width  - INDICATOR_SIZE * 2,
-                                cell.frame.size.height - INDICATOR_SIZE,
-                                INDICATOR_SIZE,
-                                INDICATOR_SIZE);
+        return CGRectMake(  cell.frame.size.width  - INDICATOR_TOUCH_SIZE * 1.5,
+                            cell.frame.size.height - INDICATOR_TOUCH_SIZE + Y_MARGIN,
+                            INDICATOR_TOUCH_SIZE,
+                            INDICATOR_TOUCH_SIZE);
     }
 }
 
@@ -45,13 +46,25 @@
 
 -(void)setup:(BOOL)isStart eventCell:(MSEventCell*)eventCell andDelegate:(id<MSDurationIndicatorDelegate>)delegate{
     mIsStart = isStart;
-    self.backgroundColor      = [UIColor whiteColor];
-    self.layer.masksToBounds  = YES;
-    self.layer.cornerRadius   = self.frame.size.width * 0.5;
+    self.backgroundColor      = [UIColor clearColor];
     self.delegate             = delegate;
     self.eventCell            = eventCell;
     [eventCell addSubview:self];
+    [self addWhiteBall];
     [self addDragGestureRecognizer];
+}
+
+-(void)addWhiteBall{
+    UIView* ball;
+    if(mIsStart){
+        ball = [[UIView alloc] initWithFrame:CGRectMake(0, 0, INDICATOR_SIZE, INDICATOR_SIZE)];
+    }else{
+        ball = [[UIView alloc] initWithFrame:CGRectMake(20, 16, INDICATOR_SIZE, INDICATOR_SIZE)];
+    }
+    ball.backgroundColor      = [UIColor whiteColor];
+    ball.layer.masksToBounds  = YES;
+    ball.layer.cornerRadius   = ball.frame.size.width * 0.5;
+    [self addSubview:ball];
 }
 
 -(void)addDragGestureRecognizer{
@@ -69,8 +82,8 @@
             }
             else{
                 CGPoint cp = [gestureRecognizer locationInView:self.superview];
-                self.frame = CGRectMake(self.frame.origin.x, cp.y, INDICATOR_SIZE, INDICATOR_SIZE);
-                [self.delegate durationIndicatorEndUpdated:self   y:cp.y + INDICATOR_SIZE*0.5];
+                self.frame = CGRectMake(self.frame.origin.x, cp.y - INDICATOR_TOUCH_SIZE + Y_MARGIN, INDICATOR_TOUCH_SIZE, INDICATOR_TOUCH_SIZE);
+                [self.delegate durationIndicatorEndUpdated:self y:cp.y];
             }
         }
     }
