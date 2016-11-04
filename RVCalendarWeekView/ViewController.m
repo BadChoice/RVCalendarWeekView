@@ -60,7 +60,7 @@
     
     _weekView.delegate								= self;
     _weekView.weekFlowLayout.show24Hours			= YES;
-	_weekView.weekFlowLayout.hourGridDivisionValue	= MSHourGridDivision_20_Minutes;
+	_weekView.weekFlowLayout.hourGridDivisionValue	= MSHourGridDivision_15_Minutes;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         _weekView.daysToShowOnScreen        = 7;
