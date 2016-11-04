@@ -49,6 +49,15 @@ typedef NS_ENUM(NSUInteger, MSHeaderLayoutType) {
     MSHeaderLayoutTypeDayColumnAboveTimeRow
 };
 
+typedef NS_ENUM(NSUInteger, MSHourGridDivision) {
+	MSHourGridDivision_NONE			= 0,
+	MSHourGridDivision_05_Minutes	= 5,
+	MSHourGridDivision_10_Minutes	= 10,
+	MSHourGridDivision_15_Minutes	= 15,
+	MSHourGridDivision_20_Minutes	= 20,
+	MSHourGridDivision_30_Minutes	= 30,
+};
+
 @class MSCollectionViewCalendarLayout;
 @protocol MSCollectionViewDelegateCalendarLayout;
 
@@ -65,6 +74,7 @@ typedef NS_ENUM(NSUInteger, MSHeaderLayoutType) {
 @property (nonatomic) CGFloat horizontalGridlineHeight;
 @property (nonatomic) CGFloat verticalGridlineWidth;
 @property (nonatomic) CGFloat currentTimeHorizontalGridlineHeight;
+@property (nonatomic) MSHourGridDivision hourGridDivisionValue;
 @property (nonatomic) UIEdgeInsets sectionMargin;
 @property (nonatomic) UIEdgeInsets contentMargin;
 @property (nonatomic) UIEdgeInsets cellMargin;
