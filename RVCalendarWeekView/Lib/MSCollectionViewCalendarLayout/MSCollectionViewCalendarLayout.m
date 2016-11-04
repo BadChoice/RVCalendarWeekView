@@ -457,7 +457,34 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         horizontalGridlineAttributes.frame  = CGRectMake(horizontalGridlineMinX, horizontalGridlineMinY, horizontalGridlineWidth, self.horizontalGridlineHeight);
         horizontalGridlineAttributes.zIndex = [self zIndexForElementKind:MSCollectionElementKindHorizontalGridline floating:NO];
         horizontalGridlineIndex++;
+		
+		if (self.hourGridDivisionValue > 0) {
+			if (hour == latestHour)
+				continue;
+			horizontalGridlineIndex = [self drawHourDividersAtGridLineIndex:horizontalGridlineIndex andHour:hour startY:calendarStartY startX:horizontalGridlineMinX earliestHour:earliestHour gridlineWidth:horizontalGridlineWidth];
+		}
     }
+}
+
+-(NSUInteger) drawHourDividersAtGridLineIndex:(NSUInteger) gridlineIndex andHour:(NSUInteger) hour startY:(CGFloat) calendarStartY startX:(CGFloat) calendarStartX earliestHour:(CGFloat) earliestHour gridlineWidth:(CGFloat) calendarGridWidth{
+	
+	int numberOfDivisions = 60/self.hourGridDivisionValue;
+	
+	CGFloat divisionHeight = self.hourHeight/numberOfDivisions;
+	
+	for (int division=1; division<numberOfDivisions; division++) {
+		NSIndexPath *horizontalGridlineIndexPath = [NSIndexPath indexPathForItem:gridlineIndex inSection:0];
+		UICollectionViewLayoutAttributes *horizontalGridlineAttributes = [self layoutAttributesForDecorationViewAtIndexPath:horizontalGridlineIndexPath ofKind:MSCollectionElementKindHorizontalGridline withItemCache:self.horizontalGridlineAttributes];
+		CGFloat horizontalGridlineMinY		= nearbyintf(calendarStartY + (divisionHeight*division) + (self.hourHeight * (hour - earliestHour))) - (self.horizontalGridlineHeight / 2.0);
+		CGFloat horizontalGridlineWidth     = fminf(calendarGridWidth, self.collectionView.frame.size.width);
+		horizontalGridlineAttributes.frame  = CGRectMake(calendarStartX, horizontalGridlineMinY, horizontalGridlineWidth, self.horizontalGridlineHeight);
+		horizontalGridlineAttributes.alpha	= 0.5f;
+		horizontalGridlineAttributes.zIndex = [self zIndexForElementKind:MSCollectionElementKindHorizontalGridline floating:NO];
+		
+		gridlineIndex++;
+	}
+	
+	return gridlineIndex;
 }
 
 //====================================================
@@ -593,6 +620,8 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
                 horizontalGridlineAttributes.frame = CGRectMake(calendarGridMinX, horizontalGridlineMinY, calendarGridWidth, self.horizontalGridlineHeight);
                 horizontalGridlineAttributes.zIndex = [self zIndexForElementKind:MSCollectionElementKindHorizontalGridline];
                 horizontalGridlineIndex++;
+				
+				[self drawHourDividersAtGridLineIndex:horizontalGridlineIndex andHour:hour startY:calendarGridMinY startX:calendarGridMinX earliestHour:earliestHour gridlineWidth:calendarGridWidth];
             }
         }
     }];
@@ -782,6 +811,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 - (void)initialize
 {
     self.show24Hours                                = NO;
+	self.hourGridDivisionValue						= MSHourGridDivision_NONE;
     self.needsToPopulateAttributesForAllSections    = YES;
     self.cachedDayDateComponents                    = [NSCache new];
     self.cachedStartTimeDateComponents              = [NSCache new];
