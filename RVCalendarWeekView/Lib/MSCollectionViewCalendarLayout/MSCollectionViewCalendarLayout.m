@@ -458,25 +458,21 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
         horizontalGridlineAttributes.zIndex = [self zIndexForElementKind:MSCollectionElementKindHorizontalGridline floating:NO];
         horizontalGridlineIndex++;
 		
-		if (self.hourGridDivisionValue > 0) {
-			if (hour == latestHour)
-				continue;
-			horizontalGridlineIndex = [self drawHourDividersAtGridLineIndex:horizontalGridlineIndex andHour:hour startY:calendarStartY startX:horizontalGridlineMinX earliestHour:earliestHour gridlineWidth:horizontalGridlineWidth];
+		if (self.hourGridDivisionValue > 0 && hour < latestHour) {
+			horizontalGridlineIndex = [self drawHourDividersAtGridLineIndex:horizontalGridlineIndex andHour:hour startY:horizontalGridlineMinY startX:horizontalGridlineMinX earliestHour:earliestHour gridlineWidth:horizontalGridlineWidth];
 		}
     }
 }
 
--(NSUInteger) drawHourDividersAtGridLineIndex:(NSUInteger) gridlineIndex andHour:(NSUInteger) hour startY:(CGFloat) calendarStartY startX:(CGFloat) calendarStartX earliestHour:(CGFloat) earliestHour gridlineWidth:(CGFloat) calendarGridWidth{
+-(NSUInteger) drawHourDividersAtGridLineIndex:(NSUInteger) gridlineIndex andHour:(NSUInteger) hour startY:(CGFloat) calendarStartY startX:(CGFloat) calendarStartX earliestHour:(CGFloat) earliestHour gridlineWidth:(CGFloat) horizontalGridlineWidth{
 	
 	int numberOfDivisions = 60/self.hourGridDivisionValue;
-	
 	CGFloat divisionHeight = self.hourHeight/numberOfDivisions;
 	
 	for (int division=1; division<numberOfDivisions; division++) {
 		NSIndexPath *horizontalGridlineIndexPath = [NSIndexPath indexPathForItem:gridlineIndex inSection:0];
 		UICollectionViewLayoutAttributes *horizontalGridlineAttributes = [self layoutAttributesForDecorationViewAtIndexPath:horizontalGridlineIndexPath ofKind:MSCollectionElementKindHorizontalGridline withItemCache:self.horizontalGridlineAttributes];
-		CGFloat horizontalGridlineMinY		= nearbyintf(calendarStartY + (divisionHeight*division) + (self.hourHeight * (hour - earliestHour))) - (self.horizontalGridlineHeight / 2.0);
-		CGFloat horizontalGridlineWidth     = fminf(calendarGridWidth, self.collectionView.frame.size.width);
+		CGFloat horizontalGridlineMinY		= nearbyintf(calendarStartY + (divisionHeight*division) - (self.horizontalGridlineHeight / 2.0));
 		horizontalGridlineAttributes.frame  = CGRectMake(calendarStartX, horizontalGridlineMinY, horizontalGridlineWidth, self.horizontalGridlineHeight);
 		horizontalGridlineAttributes.alpha	= 0.5f;
 		horizontalGridlineAttributes.zIndex = [self zIndexForElementKind:MSCollectionElementKindHorizontalGridline floating:NO];
