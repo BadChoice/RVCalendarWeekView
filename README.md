@@ -133,6 +133,7 @@ _weekView.weekFlowLayout.show24Hours    = YES; //Show All hours or just the min 
 _weekView.weekFlowLayout.hourHeight     = 50;  //Define the hour height
 _weekView.daysToShowOnScreen            = 7;   //How many days visible at the same time
 _weekView.daysToShow                    = 31;  //How many days to display (Ininite scroll feature pending)
+_weekView.weekFlowLayout.hourGridDivisionValue	= MSHourGridDivision_15_Minutes; // Show hour division lines (at lower alpha) each X minutes, by default its NONE so they are not shown.
 ```
 
 ![full demo](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/full_demo.gif?raw=true)   

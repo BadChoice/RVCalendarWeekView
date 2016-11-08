@@ -474,7 +474,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
 		UICollectionViewLayoutAttributes *horizontalGridlineAttributes = [self layoutAttributesForDecorationViewAtIndexPath:horizontalGridlineIndexPath ofKind:MSCollectionElementKindHorizontalGridline withItemCache:self.horizontalGridlineAttributes];
 		CGFloat horizontalGridlineMinY		= nearbyintf(calendarStartY + (divisionHeight*division) - (self.horizontalGridlineHeight / 2.0));
 		horizontalGridlineAttributes.frame  = CGRectMake(calendarStartX, horizontalGridlineMinY, horizontalGridlineWidth, self.horizontalGridlineHeight);
-		horizontalGridlineAttributes.alpha	= 0.5f;
+		horizontalGridlineAttributes.alpha	= 0.3f;
 		horizontalGridlineAttributes.zIndex = [self zIndexForElementKind:MSCollectionElementKindHorizontalGridline floating:NO];
 		
 		gridlineIndex++;
