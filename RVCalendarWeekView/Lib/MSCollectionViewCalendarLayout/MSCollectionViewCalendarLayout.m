@@ -173,6 +173,34 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     return self;
 }
 
+#pragma mark - Pagination
+//TO Enable pagging
+
+/*- (CGFloat)pageWidth {
+    return self.sectionWidth;
+}
+
+- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
+{
+    CGFloat rawPageValue    = self.collectionView.contentOffset.x / self.pageWidth;
+    CGFloat currentPage     = (velocity.x > 0.0) ? floor(rawPageValue) : ceil(rawPageValue);
+    CGFloat nextPage        = (velocity.x > 0.0) ? ceil(rawPageValue) : floor(rawPageValue);
+    
+    BOOL pannedLessThanAPage    = fabs(1 + currentPage - rawPageValue) > 0.5;
+    BOOL flicked                = fabs(velocity.x) > [self flickVelocity];
+    if (pannedLessThanAPage && flicked) {
+        proposedContentOffset.x = nextPage * self.pageWidth;
+    } else {
+        proposedContentOffset.x = round(rawPageValue) * self.pageWidth;
+    }
+    return proposedContentOffset;
+}
+    
+- (CGFloat)flickVelocity {
+    return 0.3;
+}*/
+
+
 #pragma mark - UICollectionViewLayout
 - (void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
