@@ -8,7 +8,7 @@ I created this library simplifing its usage and adding some interesting features
 
 ### Installation
 
-`pod RVCalendarWeekView`
+`pod 'RVCalendarWeekView'`
 
 or just copy the files inside the `lib` folder by now
 
