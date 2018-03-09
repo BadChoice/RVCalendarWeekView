@@ -49,7 +49,7 @@
                            subtitle:@"Central perk"];
     
     MSEvent* event3 = [MSEvent make:[NSDate.tomorrow addMinutes:10]
-                           duration:60*3
+                           duration:60*26
                               title:@"Title 3"
                            subtitle:@"Central perk"];
     
