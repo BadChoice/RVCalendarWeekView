@@ -1,9 +1,9 @@
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'RVCalendarWeekView' do
 
 pod 'Collection'
-pod 'EasyDate', '~> 0.9'
+pod 'EasyDate'
 pod 'UIColor-HexString'
 pod 'Masonry'
 
