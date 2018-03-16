@@ -240,7 +240,7 @@
     NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
     MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
 
-    if ([ev.StartDate.toDateString isEqualToString:day])
+    if ([ev.StartDate.toDeviceTimezoneDateString isEqualToString:day])
         return ev.StartDate;
 
     else return [ev.StartDate setTime:@"00:00:00" timezone:@"device"];
@@ -250,7 +250,7 @@
     NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
     MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
 
-    if ([ev.EndDate.toDateString isEqualToString:day])
+    if ([ev.EndDate.toDeviceTimezoneDateString isEqualToString:day])
         return ev.EndDate;
 
     else return [ev.EndDate setTime:@"23:59:59" timezone:@"device"];
