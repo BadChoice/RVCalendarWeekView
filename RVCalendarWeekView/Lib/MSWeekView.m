@@ -243,7 +243,7 @@
     if ([ev.StartDate.toDeviceTimezoneDateString isEqualToString:day])
         return ev.StartDate;
 
-    else return [ev.StartDate setTime:@"00:00:00" timezone:@"device"];
+    else return [NSDate parse:str(@"%@ 00:00:00", day) timezone:@"device"];
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -253,7 +253,7 @@
     if ([ev.EndDate.toDeviceTimezoneDateString isEqualToString:day])
         return ev.EndDate;
 
-    else return [ev.EndDate setTime:@"23:59:59" timezone:@"device"];
+    else return [NSDate parse:str(@"%@ 23:59:59", day) timezone:@"device"];
 }
 
 -(NSArray*)unavailableHoursPeriods:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
