@@ -447,6 +447,7 @@
 				TargetAttributes = {
 					76276EB11D6B81D4002C1D39 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = F2VSE3YKKD;
 					};
 					76276ECA1D6B81D4002C1D39 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -522,10 +523,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RVCalendarWeekView/Pods-RVCalendarWeekView-resources.sh",
 				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
+				"${PODS_ROOT}/RVUtils/RVUtils/storyboards/RVPin.storyboard",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RVPin.storyboardc",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -699,10 +702,12 @@
 			baseConfigurationReference = 55A9198AF6C016D51B48E4CB /* Pods-RVCalendarWeekView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F2VSE3YKKD;
 				INFOPLIST_FILE = RVCalendarWeekView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = works.revo.RVCalendarWeekView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../Pods\"/** \"${PROJECT_DIR}/../Pods\"/**";
 			};
 			name = Debug;
 		};
@@ -711,10 +716,12 @@
 			baseConfigurationReference = 016043077DD4C904B6A3A6BE /* Pods-RVCalendarWeekView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F2VSE3YKKD;
 				INFOPLIST_FILE = RVCalendarWeekView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = works.revo.RVCalendarWeekView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../Pods\"/** \"${PROJECT_DIR}/../Pods\"/**";
 			};
 			name = Release;
 		};

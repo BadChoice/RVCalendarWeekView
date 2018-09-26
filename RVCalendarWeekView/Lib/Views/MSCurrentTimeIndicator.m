@@ -34,7 +34,7 @@
         self.time.textColor     = [UIColor colorWithHexString:@"fd3935"];
         [self addSubview:self.time];
         
-        [self.time makeConstraints:^(MASConstraintMaker *make) {
+        [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.centerY);
             make.right  .equalTo(self.right).offset(-5.0);
         }];

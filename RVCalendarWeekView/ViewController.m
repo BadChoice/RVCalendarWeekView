@@ -11,6 +11,7 @@
 #import "NSDate+Easy.h"
 #import "NSArray+Collection.h"
 #import "MSHourPerdiod.h"
+#import "RVHelpers.h"
 
 
 @interface ViewController ()
@@ -24,9 +25,18 @@
     [self setupWeekData];
 }
 
-/*-(void)viewDidAppear:(BOOL)animated{
-    [self.weekView.weekFlowLayout scrollCollectionViewToCurrentTime:YES];
-}*/
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    run_on_ui(^{
+        [self.weekView.weekFlowLayout invalidateLayout];
+    });
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+//    [self.weekView.weekFlowLayout scrollCollectionViewToCurrentTime:YES];
+    [self.weekView.weekFlowLayout invalidateLayout];
+}
 
 - (void)setupWeekData{
     
@@ -47,12 +57,12 @@
                            duration:60*3
                               title:@"Title 2"
                            subtitle:@"Central perk"];
-    
+
     MSEvent* event3 = [MSEvent make:[NSDate.tomorrow addMinutes:10]
                            duration:60*26
                               title:@"Title 3"
                            subtitle:@"Central perk"];
-    
+
     MSEvent* event4 = [MSEvent make:[NSDate.nextWeek addHours:7]
                            duration:60*3
                               title:@"Title 4"

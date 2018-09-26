@@ -24,7 +24,7 @@
         self.title.textColor = [UIColor colorWithHexString:@"a7a7a7"];
         [self addSubview:self.title];
         
-        [self.title makeConstraints:^(MASConstraintMaker *make) {
+        [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.centerY);
             make.right.equalTo(self.right).offset(-5.0);
         }];
