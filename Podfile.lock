@@ -1,0 +1,32 @@
+PODS:
+  - Collection (1.10.3)
+  - DateTools (2.0.0)
+  - EasyDate (0.12):
+    - DateTools
+  - Masonry (1.1.0)
+  - UIColor-HexString (1.3.0)
+
+DEPENDENCIES:
+  - Collection
+  - EasyDate
+  - Masonry
+  - UIColor-HexString
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Collection
+    - DateTools
+    - EasyDate
+    - Masonry
+    - UIColor-HexString
+
+SPEC CHECKSUMS:
+  Collection: ea0d410a38b1988d20298e49ea0c008e1ee7fa5e
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  EasyDate: ae4fe5df42a810d2bf1aa40d96cb40e7618e7d77
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  UIColor-HexString: fadc2e1389db19147ac99dee92222d3bd8bfec4a
+
+PODFILE CHECKSUM: 37e456f3f90d69521638793fa812c53f35e99b55
+
+COCOAPODS: 1.5.3

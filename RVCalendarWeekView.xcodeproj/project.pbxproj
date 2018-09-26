@@ -407,7 +407,6 @@
 				76276EAE1D6B81D4002C1D39 /* Sources */,
 				76276EAF1D6B81D4002C1D39 /* Frameworks */,
 				76276EB01D6B81D4002C1D39 /* Resources */,
-				E28A4F5523BBAC554B15DB4F /* [CP] Embed Pods Frameworks */,
 				5A14EB676F95966CC7FC0790 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -531,21 +530,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RVCalendarWeekView/Pods-RVCalendarWeekView-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E28A4F5523BBAC554B15DB4F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RVCalendarWeekView/Pods-RVCalendarWeekView-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

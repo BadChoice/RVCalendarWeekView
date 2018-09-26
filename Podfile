@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '9.3'
 
 target 'RVCalendarWeekView' do
 
