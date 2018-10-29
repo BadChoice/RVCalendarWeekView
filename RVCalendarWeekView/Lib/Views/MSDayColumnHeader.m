@@ -35,11 +35,11 @@
         [self addSubview:self.title];
         
         [self.titleBackground mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.title).with.insets(UIEdgeInsetsMake(-6.0, -12.0, -4.0, -12.0));
+            make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(8.0, 4.0, 8.0, 4.0));
         }];
         
-        [self.titleBackground mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self);
+        [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.titleBackground).with.insets(UIEdgeInsetsMake(4.0, 4.0, 4.0, 4.0));
         }];
     }
     return self;
@@ -52,10 +52,11 @@
     static NSDateFormatter *dateFormatter;
     if (!dateFormatter) {
         dateFormatter = [NSDateFormatter new];
-        //dateFormatter.dateFormat = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"EEE MMM d" : @"EEEE MMMM d, YYYY");
-        dateFormatter.dateFormat = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"EEE d" : @"EEE MMMM d, YYYY");
+//        dateFormatter.dateFormat = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"EEE MMMM d, YYYY" : @"EEE d");
+        dateFormatter.dateFormat = @"EEE MMMM d, YYYY";
     }
     self.title.text = [dateFormatter stringFromDate:day];
+    self.title.adjustsFontSizeToFitWidth = YES;
     [self setNeedsLayout];
 }
 

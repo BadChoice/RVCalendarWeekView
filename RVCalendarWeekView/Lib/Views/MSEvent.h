@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <DateTools/DTTimePeriod.h>
+#import "DateTools.h"
 
 @interface MSEvent : DTTimePeriod
+
 
 @property (nonatomic, strong) NSString  *title;
 @property (nonatomic, strong) NSString  *location;
@@ -20,5 +21,6 @@
 +(instancetype)make:(NSDate*)start duration:(int)minutes title:(NSString*)title subtitle:(NSString*)subtitle;
 
 - (NSDate *)day;
+- (BOOL)isInDay:(NSDate *)date;
 
 @end
