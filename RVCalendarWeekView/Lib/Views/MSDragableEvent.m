@@ -47,10 +47,10 @@
         self.timeLabel.textAlignment    = NSTextAlignmentRight;
         [self addSubview:self.timeLabel];
         
-        [self.timeLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo    (self.top)  .offset(-15);
-            make.left.equalTo   (self.left) .offset(contentPadding.left);
-            make.right.equalTo  (self.right).offset(-contentPadding.right);
+        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo    (self.mas_top)  .offset(-15);
+            make.left.equalTo   (self.mas_left) .offset(contentPadding.left);
+            make.right.equalTo  (self.mas_right).offset(-contentPadding.right);
         }];
         
         self.timeLabel.text = @"--";

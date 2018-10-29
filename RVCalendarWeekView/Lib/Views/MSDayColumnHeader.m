@@ -34,11 +34,11 @@
         self.title.backgroundColor  = [UIColor clearColor];
         [self addSubview:self.title];
         
-        [self.titleBackground makeConstraints:^(MASConstraintMaker *make) {
+        [self.titleBackground mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(8.0, 4.0, 8.0, 4.0));
         }];
         
-        [self.title makeConstraints:^(MASConstraintMaker *make) {
+        [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.titleBackground).with.insets(UIEdgeInsetsMake(4.0, 4.0, 4.0, 4.0));
         }];
     }

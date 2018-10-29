@@ -61,32 +61,32 @@
         CGFloat contentMargin = 2.0;
         UIEdgeInsets contentPadding = UIEdgeInsetsMake(4.0, (borderWidth + 4.0), 1.0, 4.0);
         
-        [self.borderView makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(self.height);
+        [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(self.mas_height);
             make.width.equalTo(@(borderWidth));
-            make.left.equalTo(self.left);
-            make.top.equalTo(self.top);
+            make.left.equalTo(self.mas_left);
+            make.top.equalTo(self.mas_top);
         }];
         
-        [self.topBorderView makeConstraints:^(MASConstraintMaker *make) {
+        [self.topBorderView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(borderWidth));
-            make.width.equalTo(self.width);
-            make.top.equalTo(self.top);
-            make.left.equalTo(self.left);
-            make.right.equalTo(self.right);
+            make.width.equalTo(self.mas_width);
+            make.top.equalTo(self.mas_top);
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
         }];
         
-        [self.title makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.top).offset(contentPadding.top);
-            make.left.equalTo(self.left).offset(contentPadding.left);
-            make.right.equalTo(self.right).offset(-contentPadding.right);
+        [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top).offset(contentPadding.top);
+            make.left.equalTo(self.mas_left).offset(contentPadding.left);
+            make.right.equalTo(self.mas_right).offset(-contentPadding.right);
         }];
         
-        [self.location makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.title.bottom).offset(contentMargin);
-            make.left.equalTo(self.left).offset(contentPadding.left);
-            make.right.equalTo(self.right).offset(-contentPadding.right);
-            make.bottom.lessThanOrEqualTo(self.bottom).offset(-contentPadding.bottom);
+        [self.location mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.title.mas_bottom).offset(contentMargin);
+            make.left.equalTo(self.mas_left).offset(contentPadding.left);
+            make.right.equalTo(self.mas_right).offset(-contentPadding.right);
+            make.bottom.lessThanOrEqualTo(self.mas_bottom).offset(-contentPadding.bottom);
         }];
     }
     return self;
