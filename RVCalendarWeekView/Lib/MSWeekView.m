@@ -66,11 +66,11 @@
     }*/
     
     [self addSubview:self.collectionView];
-    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(self.height);
-        make.width.equalTo(self.width);
-        make.left.equalTo(self.left);
-        make.top.equalTo(self.top);
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(self.mas_height);
+        make.width.equalTo(self.mas_width);
+        make.left.equalTo(self.mas_left);
+        make.top.equalTo(self.mas_top);
     }];
     
     self.weekFlowLayout.sectionLayoutType = MSSectionLayoutTypeHorizontalTile;
@@ -162,22 +162,23 @@
 /**
  * Note that in the standard calendar, each section is a day"
  */
-- (void)groupEventsBySection {
-
-//    NSDate* date = [NSDate today:@"device"];                                      //Why does it crash on some configurations?
-    NSDate *date =
-        [NSDate parse:NSDate.today.toDateTimeString timezone:@"device"];  //If it crashes here, comment the previous line and uncomment this one
-
-    _eventsBySection = NSMutableDictionary.new;
-
-    for (int i = 0; i < self.daysToShow; i++) {
-        [_eventsBySection setObject:[self eventsByDate:date] forKey:date.toDeviceTimezoneDateString];
-        date = [date addDay];
+-(void)groupEventsBySection{
+    
+    //TODO : Improve this to make it faster
+    _eventsBySection = [mEvents groupBy:@"StartDate.toDeviceTimezoneDateString"].mutableCopy;
+    
+    
+    //NSDate* date = [NSDate today:@"device"];                                      //Why does it crash on some configurations?
+    NSDate* date = [NSDate parse:NSDate.today.toDateTimeString timezone:@"device"];  //If it crashes here, comment the previous line and uncomment this one
+    if(self.daysToShow == 1 && _eventsBySection.count == 1){
+        date = [NSDate parse:_eventsBySection.allKeys.firstObject];
     }
-}
-
-- (NSArray *)eventsByDate:(NSDate *)date {
-    return [mEvents filter_:@selector(isInDay:) withObject:date];
+    for(int i = 0; i< self.daysToShow; i++){
+        if(![_eventsBySection.allKeys containsObject:date.toDeviceTimezoneDateString]){
+            [_eventsBySection setObject:@[] forKey:date.toDeviceTimezoneDateString];
+        }
+        date = [date addDay];
+    }    
 }
 
 //================================================
@@ -236,24 +237,18 @@
     return [NSDate parse:day timezone:@"device"];
 }
 
-- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
-    MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
-
-    if ([ev.StartDate.toDeviceTimezoneDateString isEqualToString:day])
-        return ev.StartDate;
-
-    else return [NSDate parse:str(@"%@ 00:00:00", day) timezone:@"device"];
+- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* day   = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
+    MSEvent* ev     = [_eventsBySection[day] objectAtIndex:indexPath.row];
+    return ev.StartDate;
 }
 
-- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
-    MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
-
-    if ([ev.EndDate.toDeviceTimezoneDateString isEqualToString:day])
-        return ev.EndDate;
-
-    else return [NSDate parse:str(@"%@ 23:59:59", day) timezone:@"device"];
+- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* day   = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
+    MSEvent* ev     = [_eventsBySection[day] objectAtIndex:indexPath.row];
+    return ev.EndDate;
 }
 
 -(NSArray*)unavailableHoursPeriods:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{

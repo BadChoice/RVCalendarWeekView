@@ -36,9 +36,4 @@
 - (NSDate *)day{
     return [NSCalendar.currentCalendar startOfDayForDate:self.StartDate];
 }
-
-- (BOOL)isInDay:(NSDate *)date {
-    return [self containsDate:[date setTime:[self.EndDate format:@"HH:mm:ss"]] interval:DTTimePeriodIntervalClosed];
-}
-
 @end
