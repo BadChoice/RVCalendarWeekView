@@ -7,15 +7,14 @@
 //
 
 #import "MSWeekViewDecoratorFactory.h"
+#import "MSWeekViewDecoratorChangeDurationAndDragable.h"
 
 @implementation MSWeekViewDecoratorFactory
 
 +(MSWeekView*)make:(MSWeekView*)baseView features:(NSUInteger)features andDelegate:(id)delegate{
     
     MSWeekView* decoratedView = baseView;
-    
 
-    
     if ( (features & MSInfiniteFeature) != 0 ){ // => true
         decoratedView = [MSWeekViewDecoratorInfinite makeWith:decoratedView andDelegate:delegate];
     }
@@ -38,6 +37,10 @@
     
     if ( (features & MSChangeDurationFeature) != 0 ){    // => true
         decoratedView = [MSWeekViewDecoratorChangeDuration makeWith:decoratedView andDelegate:delegate];
+    }
+
+    if ( (features & MSChangeDurationAndDragableFeature) != 0 ){    // => true
+        decoratedView = [MSWeekViewDecoratorChangeDurationAndDragable makeWith:decoratedView andDelegate:delegate];
     }
     
     return decoratedView;

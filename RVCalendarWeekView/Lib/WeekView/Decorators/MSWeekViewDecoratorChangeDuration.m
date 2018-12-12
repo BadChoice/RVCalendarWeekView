@@ -26,13 +26,11 @@
 //=========================================================
 #pragma mark - Add long press gesture recognizer
 //=========================================================
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MSEventCell *cell                   = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    if(![self isGestureAlreadyAdded:cell]){
+    if (! [self isGestureAlreadyAdded:cell]) {
         UILongPressGestureRecognizer* lpgr  = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onEventCellLongPress:)];
-        
         lpgr.minimumPressDuration = 0.2;
         lpgr.delegate             = self;
         [cell addGestureRecognizer:lpgr];
@@ -45,11 +43,15 @@
     if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
         NSLog(@"Change Duration start");
         MSEventCell* cell   = (MSEventCell*)gestureRecognizer.view;
-        mStartY             = cell.frame.origin.y;
-        mStartHeight        = cell.frame.size.height;
-        mStartIndicator     = [MSDurationChangeIndicator makeForStartWithCell:cell  andDelegate:self];
-        mEndIndicator       = [MSDurationChangeIndicator makeForEndWithCell:cell    andDelegate:self];
+        [self addDurationIndicators:cell];
     }
+}
+
+- (void)addDurationIndicators:(MSEventCell *)cell {
+    mStartY = cell.frame.origin.y;
+    mStartHeight = cell.frame.size.height;
+    mStartIndicator = [MSDurationChangeIndicator makeForStartWithCell:cell andDelegate:self];
+    mEndIndicator = [MSDurationChangeIndicator makeForEndWithCell:cell andDelegate:self];
 }
 
 //=========================================================

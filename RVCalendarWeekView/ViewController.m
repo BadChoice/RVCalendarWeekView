@@ -41,7 +41,7 @@
 - (void)setupWeekData{
     
     self.decoratedWeekView = [MSWeekViewDecoratorFactory make:self.weekView
-                                                      features:(MSDragableEventFeature | MSNewEventFeature | MSInfiniteFeature | MSPinchableFeature |MSShortPressNewEventFeature | MSChangeDurationFeature)
+                                                      features:(/*MSDragableEventFeature |*/ MSChangeDurationAndDragableFeature | MSNewEventFeature | MSInfiniteFeature | MSPinchableFeature |MSShortPressNewEventFeature /*| MSChangeDurationFeature*/)
                                                   andDelegate:self];
     
     //Optional, set minutes precision for drag and new event (by default it is already set to 5)

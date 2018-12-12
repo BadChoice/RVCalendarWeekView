@@ -26,8 +26,7 @@
 //=========================================================
 #pragma mark - Collection view datasource
 //=========================================================
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MSEventCell *cell                   = (MSEventCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     if(![self isGestureAlreadyAdded:cell]){
@@ -85,15 +84,13 @@
 }
 
 -(void)onDragEnded:(MSEventCell*)eventCell{
-    
     NSDate* newStartDate = [self dateForDragable];
-    
-    if([self canMoveToNewDate:eventCell.event newDate:newStartDate]){
+    if ([self canMoveToNewDate:eventCell.event newDate:newStartDate]){
         int duration = eventCell.event.durationInSeconds;
         eventCell.event.StartDate = newStartDate;
         eventCell.event.EndDate = [eventCell.event.StartDate dateByAddingSeconds:duration];
         [self.baseWeekView forceReload:YES];
-        if(self.dragDelegate){
+        if (self.dragDelegate){
             [self.dragDelegate weekView:self.baseWeekView event:eventCell.event moved:newStartDate];
         }
     }
@@ -124,8 +121,7 @@
 //=========================================================
 #pragma mark - Gesture Recongnizer Delegate
 //=========================================================
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer  shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer  *)otherGestureRecognizer
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer  shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer  *)otherGestureRecognizer {
     return otherGestureRecognizer.view == gestureRecognizer.view;
 }
 

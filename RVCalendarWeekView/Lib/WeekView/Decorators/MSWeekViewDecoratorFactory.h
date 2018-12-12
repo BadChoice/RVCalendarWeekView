@@ -21,6 +21,7 @@ typedef NS_OPTIONS(NSUInteger, MSWeekViewFeatures) {
     MSPinchableFeature              = (1 << 3), // => 00001000
     MSShortPressNewEventFeature     = (1 << 4), // => 00010000
     MSChangeDurationFeature       = (1 << 5), // => 00100000
+    MSChangeDurationAndDragableFeature  = (1 << 6), // => 01000000
 };
 
 @interface MSWeekViewDecoratorFactory : NSObject

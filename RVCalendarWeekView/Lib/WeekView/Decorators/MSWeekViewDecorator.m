@@ -32,7 +32,7 @@
 }
 
 -(MSWeekView*)baseWeekView{
-   if( [self.weekView isKindOfClass:MSWeekViewDecorator.class])
+   if ([self.weekView isKindOfClass:MSWeekViewDecorator.class])
     return [(MSWeekViewDecorator*)self.weekView baseWeekView];
    else
     return self.weekView;
@@ -47,6 +47,21 @@
 
 -(MSCollectionViewCalendarLayout*)weekFlowLayout{
     return self.baseWeekView.weekFlowLayout;
+}
+
+-(MSEventCell *)cellForEvent:(MSEvent*)event{
+    //This does add more cells.. :(
+    int sections = [self.weekView numberOfSectionsInCollectionView:self.collectionView];
+    for (int i = 0; i < sections; i++) {
+        int rows = [self.weekView collectionView:self.collectionView numberOfItemsInSection:i];
+        for (int j = 0; j < rows; j++) {
+            MSEventCell * cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:j inSection:i]];
+            if (cell.event == event) {
+                return cell;
+            }
+        }
+    }
+    return nil;
 }
 
 //=========================================================
