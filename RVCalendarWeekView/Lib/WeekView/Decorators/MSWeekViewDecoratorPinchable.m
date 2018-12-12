@@ -6,6 +6,7 @@
 //  Copyright © 2016 revo. All rights reserved.
 //
 
+#import "NSDate+Easy.h"
 #import "MSWeekViewDecoratorPinchable.h"
 #define MAX_HOUR_HEIGHT 250
 #define MIN_HOUR_HEIGHT 20
@@ -30,6 +31,8 @@
         
         self.baseWeekView.weekFlowLayout.hourHeight = newHourHeight;
         [self.baseWeekView forceReload:NO];
+
+        //[self.baseWeekView.weekFlowLayout scrollCollectionViewToClosetSectionToTime:[NSDate parse:@"2018-10-10 20:00:00"] animated:YES];
     }
 }
 
