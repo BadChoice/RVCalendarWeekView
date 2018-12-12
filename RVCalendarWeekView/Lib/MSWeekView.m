@@ -66,11 +66,11 @@
     }*/
     
     [self addSubview:self.collectionView];
-    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(self.height);
-        make.width.equalTo(self.width);
-        make.left.equalTo(self.left);
-        make.top.equalTo(self.top);
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(self.mas_height);
+        make.width.equalTo(self.mas_width);
+        make.left.equalTo(self.mas_left);
+        make.top.equalTo(self.mas_top);
     }];
     
     self.weekFlowLayout.sectionLayoutType = MSSectionLayoutTypeHorizontalTile;

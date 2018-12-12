@@ -8,7 +8,7 @@ I created this library simplifing its usage and adding some interesting features
 
 ### Installation
 
-`pod RVCalendarWeekView`
+`pod 'RVCalendarWeekView'`
 
 or just copy the files inside the `lib` folder by now
 
@@ -149,6 +149,25 @@ This is a complex example on how you can customize it.
 
 ![complex](https://github.com/BadChoice/RVCalendarWeekView/blob/master/readme_images/complex.png?raw=true)
 
+
+### Issues
+Feel free to report any issue you find in github issues 
+
+#### Masonry pod error
+
+looks like this can solve it in your pods file
+
+```
+#To fix the masonry preprocessor definition
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
+            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'MAS_SHORTHAND=1'
+        end
+    end
+end
+```
 
 ### Contributors
 · Jordi Puigdellívol - https://github.com/badchoice   
