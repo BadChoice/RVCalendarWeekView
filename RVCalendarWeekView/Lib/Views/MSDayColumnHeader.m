@@ -52,8 +52,7 @@
     static NSDateFormatter *dateFormatter;
     if (!dateFormatter) {
         dateFormatter = [NSDateFormatter new];
-//        dateFormatter.dateFormat = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"EEE MMMM d, YYYY" : @"EEE d");
-        dateFormatter.dateFormat = @"EEE MMMM d, YYYY";
+        dateFormatter.dateFormat = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"EEE MMMM d, YYYY" : @"EEE d");
     }
     self.title.text = [dateFormatter stringFromDate:day];
     self.title.adjustsFontSizeToFitWidth = YES;

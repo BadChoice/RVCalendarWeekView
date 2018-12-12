@@ -13,6 +13,7 @@
 #import "UIColor+HexString.h"
 #import "RVCollection.h"
 #import "MSDurationChangeIndicator.h"
+#import "RVHelpers.h"
 
 @interface MSEventCell ()
 
@@ -59,7 +60,7 @@
         
         CGFloat borderWidth = 2.0;
         CGFloat contentMargin = 2.0;
-        UIEdgeInsets contentPadding = UIEdgeInsetsMake(4.0, (borderWidth + 4.0), 1.0, 4.0);
+        UIEdgeInsets contentPadding = UIEdgeInsetsMake(8.0, (borderWidth + 4.0), 1.0, 4.0);
         
         [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(self.mas_height);
@@ -88,9 +89,17 @@
             make.right.equalTo(self.mas_right).offset(-contentPadding.right);
             make.bottom.lessThanOrEqualTo(self.mas_bottom).offset(-contentPadding.bottom);
         }];
+
+        [self.contentView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.top);
+            make.bottom.equalTo(self.bottom);
+            make.left.equalTo(self.left);
+            make.right.equalTo(self.right);
+        }];
     }
     return self;
 }
+
 
 #pragma mark - UICollectionViewCell
 - (void)setSelected:(BOOL)selected
@@ -127,10 +136,12 @@
 
 - (void)updateColors
 {
-    self.contentView.backgroundColor = [self backgroundColorHighlighted:self.selected];
-    self.borderView.backgroundColor  = [self borderColor];
-    self.title.textColor             = [self textColorHighlighted:self.selected];
-    self.location.textColor          = [self textColorHighlighted:self.selected];
+    run_on_ui(^{
+        self.contentView.backgroundColor = [self backgroundColorHighlighted:self.selected];
+        self.borderView.backgroundColor = [self borderColor];
+        self.title.textColor = [self textColorHighlighted:self.selected];
+        self.location.textColor = [self textColorHighlighted:self.selected];
+    });
 }
 
 -(void)removeIndicators{

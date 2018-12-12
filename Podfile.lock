@@ -1,0 +1,47 @@
+PODS:
+  - AESCrypt (0.0.1)
+  - Collection (1.10.3)
+  - DateTools (2.0.0)
+  - EasyDate (0.12):
+    - DateTools
+  - Masonry (1.1.0)
+  - RVHttp (1.2.3):
+    - Collection
+  - RVUtils (1.9.16):
+    - AESCrypt
+    - Collection
+    - RVHttp
+  - UIColor-HexString (1.3.0)
+
+DEPENDENCIES:
+  - Collection
+  - EasyDate
+  - Masonry
+  - RVUtils
+  - UIColor-HexString
+
+SPEC REPOS:
+  "git@bitbucket.org:revo-pos/rvpods.git":
+    - RVUtils
+  https://github.com/cocoapods/specs.git:
+    - AESCrypt
+    - Collection
+    - DateTools
+    - EasyDate
+    - Masonry
+    - RVHttp
+    - UIColor-HexString
+
+SPEC CHECKSUMS:
+  AESCrypt: 1d89bf8b0789cf274ab2205ea461adbe9321d5f8
+  Collection: ea0d410a38b1988d20298e49ea0c008e1ee7fa5e
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  EasyDate: ae4fe5df42a810d2bf1aa40d96cb40e7618e7d77
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  RVHttp: c5089fea436cc827083032d8beda293e49f21e51
+  RVUtils: 1f5cd9629a4730c5f694de8bc9594ad1b33a732b
+  UIColor-HexString: fadc2e1389db19147ac99dee92222d3bd8bfec4a
+
+PODFILE CHECKSUM: 19148ec2b3d04726ef2078c6f4d606c6e18b0f91
+
+COCOAPODS: 1.5.3
