@@ -60,7 +60,7 @@
         
         CGFloat borderWidth = 2.0;
         CGFloat contentMargin = 2.0;
-        UIEdgeInsets contentPadding = UIEdgeInsetsMake(4.0, (borderWidth + 4.0), 1.0, 4.0);
+        UIEdgeInsets contentPadding = UIEdgeInsetsMake(8.0, (borderWidth + 4.0), 1.0, 4.0);
 
         [self.borderView makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(self.height);
