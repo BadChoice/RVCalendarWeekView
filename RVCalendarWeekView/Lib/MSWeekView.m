@@ -50,7 +50,6 @@
 }
 
 -(void)setup{
-    
     self.daysToShowOnScreen = 6;
     self.daysToShow         = 30;
     self.weekFlowLayout     = [MSCollectionViewCalendarLayout new];
@@ -120,7 +119,7 @@
 
 -(void)forceReload:(BOOL)reloadEvents{
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(reloadEvents)
+        if (reloadEvents)
             [self groupEventsBySection];
         [self.weekFlowLayout invalidateLayoutCache];
         [self.collectionView reloadData];
@@ -163,15 +162,13 @@
  * Note that in the standard calendar, each section is a day"
  */
 - (void)groupEventsBySection {
-
 //    NSDate* date = [NSDate today:@"device"];                                      //Why does it crash on some configurations?
-    NSDate *date =
-        [NSDate parse:NSDate.today.toDateTimeString timezone:@"device"];  //If it crashes here, comment the previous line and uncomment this one
+    NSDate *date = [NSDate parse:NSDate.today.toDateTimeString timezone:@"device"];  //If it crashes here, comment the previous line and uncomment this one
 
     _eventsBySection = NSMutableDictionary.new;
 
     for (int i = 0; i < self.daysToShow; i++) {
-        [_eventsBySection setObject:[self eventsByDate:date] forKey:date.toDeviceTimezoneDateString];
+        _eventsBySection[date.toDeviceTimezoneDateString] = [self eventsByDate:date];
         date = [date addDay];
     }
 }
@@ -183,28 +180,24 @@
 //================================================
 #pragma mark - CollectionView Datasource
 //================================================
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{   
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return _eventsBySection.count;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    NSString* day = [_eventsBySection.allKeys.sort objectAtIndex:section];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSString* day = _eventsBySection.allKeys.sort[section];
     return [_eventsBySection[day] count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MSEventCell *cell  = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
-    NSString* day      = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
-    cell.event         = [_eventsBySection[day] objectAtIndex:indexPath.row];
+    NSString* day      = _eventsBySection.allKeys.sort[indexPath.section];
+    cell.event         = _eventsBySection[day][indexPath.row];
 
     return cell;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     UICollectionReusableView *view;
     if (kind == MSCollectionElementKindDayColumnHeader) {
         MSDayColumnHeader *dayColumnHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:MSDayColumnHeaderReuseIdentifier forIndexPath:indexPath];
@@ -230,15 +223,14 @@
 //================================================
 #pragma mark - Week Flow Delegate
 //================================================
-- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section
-{
-    NSString* day = [_eventsBySection.allKeys.sort objectAtIndex:section];
+- (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout dayForSection:(NSInteger)section {
+    NSString* day = _eventsBySection.allKeys.sort[section];
     return [NSDate parse:day timezone:@"device"];
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
-    MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
+    NSString *day = _eventsBySection.allKeys.sort[indexPath.section];
+    MSEvent *ev = _eventsBySection[day][indexPath.row];
 
     if ([ev.StartDate.toDeviceTimezoneDateString isEqualToString:day])
         return ev.StartDate;
@@ -247,8 +239,8 @@
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
-    MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
+    NSString *day = _eventsBySection.allKeys.sort[indexPath.section];
+    MSEvent *ev = _eventsBySection[day][indexPath.row];
 
     if ([ev.EndDate.toDeviceTimezoneDateString isEqualToString:day])
         return ev.EndDate;
@@ -257,24 +249,22 @@
 }
 
 -(NSArray*)unavailableHoursPeriods:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewLayout section:(int)section{
-    if([self.delegate respondsToSelector:@selector(weekView:unavailableHoursPeriods:)]){
+    if ([self.delegate respondsToSelector:@selector(weekView:unavailableHoursPeriods:)]) {
         NSDate* date = [self collectionView:collectionView layout:collectionViewLayout dayForSection:section];
         return [self.delegate weekView:self unavailableHoursPeriods:date];
     }
     return @[];
 }
 
-- (NSDate *)currentTimeComponentsForCollectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout
-{
+- (NSDate *)currentTimeComponentsForCollectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout {
     return NSDate.date;
 }
-
 
 //================================================
 #pragma mark - Collection view delegate
 //================================================
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.delegate){
+    if (self.delegate) {
         MSEventCell* cell = (MSEventCell*)[collectionView cellForItemAtIndexPath:indexPath];
         [self.delegate weekView:self eventSelected:cell];
     }
