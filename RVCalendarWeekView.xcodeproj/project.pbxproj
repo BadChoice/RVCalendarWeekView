@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		609E9956FEDBFD979D0E769A /* MSWeekViewDecoratorChangeDurationAndDragable.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E963212494090C9F4E995 /* MSWeekViewDecoratorChangeDurationAndDragable.m */; };
+		609E91FDC500BF0231C2C658 /* MSWeekViewDecoratorChangeDurationAndDragable.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E90F40B98F26B08CE45F4 /* MSWeekViewDecoratorChangeDurationAndDragable.m */; };
 		76276EB71D6B81D4002C1D39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EB61D6B81D4002C1D39 /* main.m */; };
 		76276EBA1D6B81D4002C1D39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EB91D6B81D4002C1D39 /* AppDelegate.m */; };
 		76276EBD1D6B81D4002C1D39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EBC1D6B81D4002C1D39 /* ViewController.m */; };
@@ -57,8 +57,8 @@
 		016043077DD4C904B6A3A6BE /* Pods-RVCalendarWeekView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVCalendarWeekView.release.xcconfig"; path = "Pods/Target Support Files/Pods-RVCalendarWeekView/Pods-RVCalendarWeekView.release.xcconfig"; sourceTree = "<group>"; };
 		1A43A252421A63E1655B8A38 /* libPods-RVCalendarWeekView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RVCalendarWeekView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A9198AF6C016D51B48E4CB /* Pods-RVCalendarWeekView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVCalendarWeekView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RVCalendarWeekView/Pods-RVCalendarWeekView.debug.xcconfig"; sourceTree = "<group>"; };
-		609E91B878072558E179109A /* MSWeekViewDecoratorChangeDurationAndDragable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWeekViewDecoratorChangeDurationAndDragable.h; sourceTree = "<group>"; };
-		609E963212494090C9F4E995 /* MSWeekViewDecoratorChangeDurationAndDragable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWeekViewDecoratorChangeDurationAndDragable.m; sourceTree = "<group>"; };
+		609E90F40B98F26B08CE45F4 /* MSWeekViewDecoratorChangeDurationAndDragable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorChangeDurationAndDragable.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorChangeDurationAndDragable.m; sourceTree = "<group>"; };
+		609E9ECB1435CA79CB6CCF28 /* MSWeekViewDecoratorChangeDurationAndDragable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorChangeDurationAndDragable.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorChangeDurationAndDragable.h; sourceTree = "<group>"; };
 		76276EB21D6B81D4002C1D39 /* RVCalendarWeekView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVCalendarWeekView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76276EB61D6B81D4002C1D39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		76276EB81D6B81D4002C1D39 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -153,8 +153,8 @@
 		609E9C0A7253BDE145B7D87B /* ChangeDurationAndDragable */ = {
 			isa = PBXGroup;
 			children = (
-				609E963212494090C9F4E995 /* MSWeekViewDecoratorChangeDurationAndDragable.m */,
-				609E91B878072558E179109A /* MSWeekViewDecoratorChangeDurationAndDragable.h */,
+				609E9ECB1435CA79CB6CCF28 /* MSWeekViewDecoratorChangeDurationAndDragable.h */,
+				609E90F40B98F26B08CE45F4 /* MSWeekViewDecoratorChangeDurationAndDragable.m */,
 			);
 			name = ChangeDurationAndDragable;
 			sourceTree = "<group>";
@@ -581,7 +581,7 @@
 				76276EFE1D6B826B002C1D39 /* MSTimeRowHeaderBackground.m in Sources */,
 				76276EF91D6B826B002C1D39 /* MSDayColumnHeaderBackground.m in Sources */,
 				7684582C1D7961350080A27A /* MSWeekViewDecoratorPinchable.m in Sources */,
-				609E9956FEDBFD979D0E769A /* MSWeekViewDecoratorChangeDurationAndDragable.m in Sources */,
+				609E91FDC500BF0231C2C658 /* MSWeekViewDecoratorChangeDurationAndDragable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
