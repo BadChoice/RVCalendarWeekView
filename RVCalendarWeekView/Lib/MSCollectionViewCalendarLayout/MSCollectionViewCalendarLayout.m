@@ -974,6 +974,7 @@ NSUInteger const MSCollectionMinBackgroundZ = 0.0;
     [self.timeRowHeaderAttributes               removeAllObjects];
     [self.timeRowHeaderBackgroundAttributes     removeAllObjects];
     [self.allAttributes                         removeAllObjects];
+    [self.unavailableHoursAttributes            removeAllObjects];
 }
 
 #pragma mark Dates
