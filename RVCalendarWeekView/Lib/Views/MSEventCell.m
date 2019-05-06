@@ -13,7 +13,6 @@
 #import "UIColor+HexString.h"
 #import "RVCollection.h"
 #import "MSDurationChangeIndicator.h"
-#import "RVHelpers.h"
 
 @interface MSEventCell ()
 
@@ -90,11 +89,11 @@
             make.bottom.lessThanOrEqualTo(self.mas_bottom).offset(-contentPadding.bottom);
         }];
 
-        [self.contentView makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.top);
-            make.bottom.equalTo(self.bottom);
-            make.left.equalTo(self.left);
-            make.right.equalTo(self.right);
+        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top);
+            make.bottom.equalTo(self.mas_bottom);
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
         }];
     }
     return self;
@@ -136,12 +135,15 @@
 
 - (void)updateColors
 {
-    run_on_ui(^{
-        self.contentView.backgroundColor = [self backgroundColorHighlighted:self.selected];
-        self.borderView.backgroundColor = [self borderColor];
-        self.title.textColor = [self textColorHighlighted:self.selected];
-        self.location.textColor = [self textColorHighlighted:self.selected];
-    });
+    [self performSelectorOnMainThread:@selector(updateColorsSelector) withObject:nil waitUntilDone:true];
+}
+    
+- (void)updateColorsSelector
+{
+    self.contentView.backgroundColor = [self backgroundColorHighlighted:self.selected];
+    self.borderView.backgroundColor = [self borderColor];
+    self.title.textColor = [self textColorHighlighted:self.selected];
+    self.location.textColor = [self textColorHighlighted:self.selected];
 }
 
 -(void)removeIndicators{
